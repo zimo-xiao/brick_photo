@@ -1,0 +1,5 @@
+redRequest['admin'] = {
+  uploadValidationCode: () => {
+
+  }
+}
