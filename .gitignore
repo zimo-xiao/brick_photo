@@ -7,4 +7,9 @@ Homestead.yaml
 jpush.log
 /storage/logs/*.log
 /storage/logs/*.pid
-/public/docs
+/public/storage/images/cache/*
+/public/storage/images/raw/*
+/public/storage/images/tmp/*
+!/public/storage/images/cache/.gitkeep
+!/public/storage/images/raw/.gitkeep
+!/public/storage/images/tmp/.gitkeep

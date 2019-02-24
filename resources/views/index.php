@@ -44,7 +44,7 @@
 
             <!-- INFO -->
             <div class="col l4 m6 s12 gallery-item gallery-filter all">
-                <div class="card">
+                <div class="card brick-red">
                     <div class="card-content white-text">
                         <span class="card-title">关于我们</span>
                         <p>
