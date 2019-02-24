@@ -16,71 +16,74 @@ layui.use(['layer', 'form', 'element', 'upload'], function () {
   layer = layui.layer;
   element = layui.element;
   var upload = layui.upload;
-  //首页拖拽上传
-  upload.render({
-    elem: '#upimg',
-    url: '',
-    auto: false,
-    bindAction: "#none",
-    size: 5000000, //限制上传大小为2M
-    choose: function (obj) {
-      var vf = obj.pushFile();
-      obj.preview(function (index, file, result) {
-        try {
-          photoCompress(file, {
-              quality: 0.9,
-            }, function (base64Codes) {
-              // 压缩图片并且将两张图的base64放在一起
-              var temp = file.name.split('.');
-              var filename = SparkMD5.hash(base64Codes);
-              var flag = true;
-              for (var i in files) {
-                if (files[i].name == filename) {
-                  flag = false;
-                }
-              }
-              if (flag) {
-                files.push({
-                  file: base64Codes.match(/.{1,748576}/g),
-                  name: filename,
-                  end: temp[temp.length - 1]
-                });
-                $('#submit').text('已选择' + files.length + '张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）');
-              }
-            },
-            result);
-        } catch (e) {
-          console.log('error');
-        }
-        delete vf[index];
-      });
-    },
-    accept: 'images',
-    exts: 'jpg|jpeg|png',
-    multiple: true,
-    number: 40
-  });
 
-  //admin
-  upload.render({
-    elem: '#up-validation-code',
-    bindAction: "#code_submit",
-    url: URL + '/validation-code',
-    headers: {
-      'Authorization': 'Bearer ' + TOKEN
-    },
-    auto: false,
-    size: 20, //限制上传大小为2M
-    accept: 'file',
-    exts: 'xlsx',
-    multiple: false,
-    number: 1,
-    done: function (res) {
-      layer.msg('上传成功', {
-        time: 2000
-      });
-    }
-  });
+  if (URI === 'upload') {
+    //首页拖拽上传
+    upload.render({
+      elem: '#upimg',
+      url: '',
+      auto: false,
+      bindAction: "#none",
+      size: 5000000, //限制上传大小为2M
+      choose: function (obj) {
+        var vf = obj.pushFile();
+        obj.preview(function (index, file, result) {
+          try {
+            photoCompress(file, {
+                quality: 0.9,
+              }, function (base64Codes) {
+                // 压缩图片并且将两张图的base64放在一起
+                var temp = file.name.split('.');
+                var filename = SparkMD5.hash(base64Codes);
+                var flag = true;
+                for (var i in files) {
+                  if (files[i].name == filename) {
+                    flag = false;
+                  }
+                }
+                if (flag) {
+                  files.push({
+                    file: base64Codes.match(/.{1,748576}/g),
+                    name: filename,
+                    end: temp[temp.length - 1]
+                  });
+                  $('#submit').text('已选择' + files.length + '张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）');
+                }
+              },
+              result);
+          } catch (e) {
+            console.log('error');
+          }
+          delete vf[index];
+        });
+      },
+      accept: 'images',
+      exts: 'jpg|jpeg|png',
+      multiple: true,
+      number: 40
+    });
+  } else if (URI === 'admin/upload-validation-code') {
+    //admin
+    upload.render({
+      elem: '#up-validation-code',
+      bindAction: "#code_submit",
+      url: URL + '/validation-code',
+      headers: {
+        'Authorization': 'Bearer ' + TOKEN
+      },
+      auto: false,
+      size: 20, //限制上传大小为2M
+      accept: 'file',
+      exts: 'xlsx',
+      multiple: false,
+      number: 1,
+      done: function (res) {
+        layer.msg('上传成功', {
+          time: 2000
+        });
+      }
+    });
+  }
 });
 
 /**

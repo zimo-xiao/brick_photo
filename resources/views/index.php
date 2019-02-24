@@ -85,20 +85,15 @@
         <!-- 使用 Vue 来进行渲染 END -->
 
         <!-- 分页 -->
-        <div class="gallery row">
-            <ul class="pagination" style="margin: 0px auto;">
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>
+        <div id="pagination"
+            style="float:left;text-align:center;margin-top:15px;margin-bottom:15px;width:82vw;height:60px">
         </div>
         <!-- 分页END -->
     </div>
 </div>
+<style>
+
+</style>
 <script>
 var app_images = new Vue({
     el: '#index_images',
@@ -115,5 +110,21 @@ function renderImages() {
 }
 $(document).ready(function() {
     renderImages();
+});
+
+layui.use(['laypage'], function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    layui.laypage.render({
+        elem: 'pagination',
+        count: <?=$count;?>,
+        limit: 40,
+        curr: urlParams.get('page'),
+        layout: ['prev', 'page', 'next'],
+        jump: function(obj, first) {
+            if (!first) {
+                window.location.href = URL + '?page=' + obj.curr;
+            }
+        }
+    });
 });
 </script>

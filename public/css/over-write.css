@@ -6,6 +6,10 @@ nav {
 	background-color: #EA5662;
 }
 
+.pagination li.active {
+	background-color: #EA5662;
+}
+
 .card p {
 	line-height: 190%
 }

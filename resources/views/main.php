@@ -12,6 +12,7 @@
     <script>
     const URL = "<?=$url;?>";
     const TOKEN = "<?=$token;?>";
+    const URI = "<?=$uri;?>";
     var userInfo = [];
     </script>
 

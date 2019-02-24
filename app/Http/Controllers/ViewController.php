@@ -23,7 +23,8 @@ class ViewController extends Controller
             'images' => $this->images($request),
             'url' => $request->root(),
             'tags' => app(Tag::class)->all(),
-            'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get()
+            'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
+            'count' => app(Image::class)->count()
         ]));
     }
 
@@ -62,6 +63,7 @@ class ViewController extends Controller
     {
         return view('main', [
             'url' => $request->root(),
+            'uri' => $request->path(),
             'token' => $request->session()->get('token'),
             'permission' => $request->session()->get('permission'),
             'login' => $this->login($request),
