@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Imports\ValidationCodeImport;
 use App\Models\ValidationCode;
 use App\Models\User;
+use App\Jobs\SendValidationCodeJob;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ValidationCodeController extends Controller
@@ -22,20 +23,24 @@ class ValidationCodeController extends Controller
             ], 401);
         }
 
-        dispatch(new StoreNewValidationCodeJob($request->file('file')));
-    }
+        try {
+            Excel::load($request->file('file'), function ($reader) {
+                foreach ($reader->toArray() as $row) {
+                    if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
+                        $row['code'] = app(ValidationCode::class)->generateCode();
+                        app(ValidationCode::class)->insert($row);
+                        dispatch(new SendValidationCodeJob($row));
+                    }
+                }
+            });
+        } catch (\Exception $e) {
+            return response()->json([
+                'error_msg' => 'Excel格式错误',
+            ], 401);
+        }
 
-    /**
-     * Store code in queue from excel
-     *
-     * @return [response] view
-     */
-    public function store($file)
-    {
-        Excel::load($file, function ($reader) {
-            foreach ($reader->toArray() as $row) {
-                app(ValidationCode::class)->insert($row);
-            }
-        });
+        return response()->json([
+            'code' => 0
+        ]);
     }
 }

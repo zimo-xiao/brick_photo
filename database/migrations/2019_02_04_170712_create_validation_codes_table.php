@@ -15,6 +15,7 @@ class CreateValidationCodesTable extends Migration
     {
         Schema::create('validation_codes', function (Blueprint $table) {
             $table->string('code')->unique();
+            $table->string('name');
             $table->string('usin')->unique();
             $table->string('email')->unique();
             $table->unsignedInteger('created_by')->nullable($value = true);

@@ -41,7 +41,7 @@ class AuthController extends Controller
         $credentials = [
             'usin' => $usin,
             'password' => $this->encrypt($password),
-            'name' => '肖子墨',
+            'name' => $validation[0]['name'],
             'permission' => User::PERMISSION_READ,
             'email' => $validation[0]['email']
         ];

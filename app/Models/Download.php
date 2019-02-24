@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Image extends BaseModel
+class Download extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

@@ -98,6 +98,11 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(App\Providers\QueryBuilderMacroProvider::class);
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->configure('mail');
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
 /*
 |--------------------------------------------------------------------------

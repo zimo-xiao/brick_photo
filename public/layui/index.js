@@ -60,6 +60,27 @@ layui.use(['layer', 'form', 'element', 'upload'], function () {
     multiple: true,
     number: 40
   });
+
+  //admin
+  upload.render({
+    elem: '#up-validation-code',
+    bindAction: "#code_submit",
+    url: URL + '/validation-code',
+    headers: {
+      'Authorization': 'Bearer ' + TOKEN
+    },
+    auto: false,
+    size: 20, //限制上传大小为2M
+    accept: 'file',
+    exts: 'xlsx',
+    multiple: false,
+    number: 1,
+    done: function (res) {
+      layer.msg('上传成功', {
+        time: 2000
+      });
+    }
+  });
 });
 
 /**
