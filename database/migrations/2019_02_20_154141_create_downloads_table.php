@@ -16,7 +16,9 @@ class CreateDownloadsTable extends Migration
         Schema::create('downloads', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('downloader_id');
+            $table->string('downloader_name');
             $table->unsignedInteger('image_id');
+            $table->longText('usage');
             $table->unsignedInteger('created_by')->nullable($value = true);
             $table->unsignedInteger('updated_by')->nullable($value = true);
             $table->timestamps();

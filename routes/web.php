@@ -16,8 +16,9 @@ $router->group(['prefix' => 'auth'], function ($router) {
 
 $router->group(['prefix' => 'download'], function ($router) {
     $router->group(['middleware' => ['auth']], function ($router) {
-        $router->get('{image}', 'DownloadController@view');
+        $router->post('{image}', 'DownloadController@view');
     });
+    $router->get('action/{id}', 'DownloadController@action');
 });
 
 $router->group(['prefix' => 'image'], function ($router) {

@@ -1,8 +1,21 @@
+<?php
+    $expandClass = 'gallery-expand';
+    $expand = true;
+    $replaceShadow = '';
+    if (!$is_expand) {
+        $expandClass = '';
+        $expand = false;
+        $replaceShadow = 'box-shadow: 0 1px 4px rgba(0,0,0,0.1);';
+    } else {
+        echo $download_box;
+    }
+?>
+
 <!-- 左边导航栏 -->
 <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test"
     style="position:fixed;display:inline-block;vertical-align:top;top:64px;border-radius:0px;left:0px;bottom:0px;width:15vw;overflow:auto">
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="#" onclick="<?=$url;?>">全部</a>
+        <a href="<?=$url;?>" onclick="<?=$url;?>">全部</a>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
         <a href="">标签</a>
@@ -10,10 +23,10 @@
             <?php
                 foreach ($tags as $tag) {
                     $on = '';
-                    // if ($value == $tag) {
-                    //     $on = 'layui-this';
-                    // }
-                    echo '<dd class="'.$on.'"><a href="#" onclick="">'.$tag['name'].'</a></dd>';
+                    if ($query['tag'] == $tag['name']) {
+                        $on = 'layui-this';
+                    }
+                    echo '<dd class="'.$on.'"><a href="'.$url.'/?tag='.$tag['name'].'#anchor">'.$tag['name'].'</a></dd>';
                 }
             ?>
         </dl>
@@ -24,10 +37,10 @@
             <?php
                 foreach ($authors as $author) {
                     $on = '';
-                    // if ($value == $tag) {
-                    //     $on = 'layui-this';
-                    // }
-                    echo '<dd class="'.$on.'"><a href="#" onclick="">'.$author['name'].'</a></dd>';
+                    if ($query['author'] == $author['id']) {
+                        $on = 'layui-this';
+                    }
+                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$author['id'].'#anchor">'.$author['name'].'</a></dd>';
                 }
             ?>
         </dl>
@@ -59,26 +72,42 @@
             </div>
             <!-- INFO END -->
 
-            <div v-for="image in images" class="col l4 m6 s12 gallery-item gallery-expand gallery-filter">
-                <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper">
+            <div v-for="image in images" class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
+                <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper" style="<?=$replaceShadow;?>">
                     <a class="gallery-cover gray">
                         <img class="responsive-img"
                             v-bind:lay-src="url + '/storage/images/cache/' + image.file_name + '.jpg'">
                     </a>
                     <div class="gallery-header">
-                        <span>作者：{{image.author_name}}</span>
+                        <span>作品编号：{{image.id}}</span>
                     </div>
+                    <?php if ($expand) {
+                ?>
                     <div class="gallery-body">
                         <div class="title-wrapper">
-                            <h3>红砖编号：{{image.id}}</h3>
-                            <span class="price">{{image.author_name}}</span>
+                            <h3>作品编号：{{image.id}}</h3>
+                            <span class="price">作者：{{image.author_name}}</span>
                         </div>
-                        <p class="description">{{image.description}}</p>
+                        <p class="description" style="line-height:90%;">
+                            <a class="waves-effect waves-light btn light-blue darken-1"><i
+                                    class="material-icons left">thumb_up</i>30点赞</a>
+                            <br><br>
+                        </p>
+                        <!-- description -->
+                        <p v-if="image.description != null" class="description">{{image.description}}</p>
+                        <p v-else class="description">
+                            暂时没有作品简介哦
+                        </p>
+                        <!-- description END -->
                     </div>
                     <div class="gallery-action">
-                        <a class="btn-floating btn-large waves-effect waves-light"><i
-                                class="material-icons">file_download</i></a>
+                        <span
+                            v-bind:onclick='"$(\"#download_box\").show();$(\"#download_box_image_id\").val(\""+image.id+"\")"'
+                            class="btn-floating btn-large waves-effect waves-light"><i
+                                class="material-icons">file_download</i></span>
                     </div>
+                    <?php
+            }?>
                 </div>
             </div>
         </div>
@@ -86,7 +115,7 @@
 
         <!-- 分页 -->
         <div id="pagination"
-            style="float:left;text-align:center;margin-top:15px;margin-bottom:15px;width:82vw;height:60px">
+            style="float:left;text-align:center;margin-top:15px;margin-bottom:900px;width:82vw;height:60px">
         </div>
         <!-- 分页END -->
     </div>
@@ -113,6 +142,8 @@ $(document).ready(function() {
 });
 
 layui.use(['laypage'], function() {
+    var author = "<?=$query['author'];?>";
+    var tag = "<?=$query['tag'];?>";
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',
@@ -122,7 +153,8 @@ layui.use(['laypage'], function() {
         layout: ['prev', 'page', 'next'],
         jump: function(obj, first) {
             if (!first) {
-                window.location.href = URL + '?page=' + obj.curr;
+                window.location.href = URL + '?page=' + obj.curr + '&author=' + author + '&tag=' +
+                    tag + '#anchor';
             }
         }
     });

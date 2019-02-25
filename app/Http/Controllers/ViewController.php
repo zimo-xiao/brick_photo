@@ -19,12 +19,27 @@ class ViewController extends Controller
      */
     public function index(Request $request)
     {
+        $images = $this->images($request);
+        
+        $authors = app(User::class)
+            ->where(['permission' => User::PERMISSION_WRITE])
+            ->orWhere(['permission' => User::PERMISSION_ADMIN])
+            ->get();
+        
         return $this->main($request, view('index', [
-            'images' => $this->images($request),
+            'is_expand' => $request->session()->has('token'),
+            'is_admin' => $request->session()->get('permission') === User::PERMISSION_ADMIN,
+            'is_write' => $request->session()->get('permission') === User::PERMISSION_WRITE,
+            'query' => [
+                'tag' => $request->input('tag'),
+                'author' => $request->input('author')
+            ],
+            'images' => $images['data'],
+            'count' => $images['count'],
             'url' => $request->root(),
             'tags' => app(Tag::class)->all(),
-            'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
-            'count' => app(Image::class)->count()
+            'authors' => $authors,
+            'download_box' => $this->downloadBox($request)
         ]));
     }
 
@@ -131,6 +146,18 @@ class ViewController extends Controller
             return app(ImageController::class)->visitorView($request);
         } else {
             return app(ImageController::class)->userView($request);
+        }
+    }
+
+    /**
+     * Render download image card
+     *
+     * @return [response] view
+     */
+    private function downloadBox($request)
+    {
+        if ($request->session()->get('token') != null) {
+            return view('component/download_box', []);
         }
     }
 }

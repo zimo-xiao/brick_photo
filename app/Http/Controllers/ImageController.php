@@ -124,7 +124,12 @@ class ImageController extends Controller
      */
     public function visitorView(Request $request)
     {
-        return $this->view(1, 9999999, $author = null, $tag = null);
+        $page = 1;
+        $perPage = 40;
+        if ($request->has('page')) {
+            $page = $request->input('page');
+        }
+        return $this->view($page, $perPage, $author = null, $tag = '编辑推荐');
     }
 
     /**
@@ -135,11 +140,26 @@ class ImageController extends Controller
     private function view($page, $perPage, $author = null, $tag = null)
     {
         $skip = ($page - 1) * $perPage;
-        
+        return [
+            'data' => $this->initModel($author, $tag)->orderBy('updated_at', 'desc')->skip($skip)->take($perPage)->get(),
+            'count' => $this->initModel($author, $tag)->count()
+        ];
+    }
+
+    /**
+     * Init image model
+     *
+     * @return
+     */
+    private function initModel($author, $tag)
+    {
         $image = app(Image::class);
         if ($author != null) {
-            $image->where('author', 'LIKE', $author);
+            $image = $image->where(['author_id' => $author]);
         }
-        return $image->orderBy('updated_at', 'desc')->skip($skip)->take($perPage)->get();
+        if ($tag != null) {
+            $image = $image->where('tags', 'LIKE', '%'.$tag.'%');
+        }
+        return $image;
     }
 }

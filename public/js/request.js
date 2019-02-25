@@ -137,7 +137,6 @@ var redRequest = {
   //   // if (TOKEN == '') {
   //   redRequest.token().get(URL + '/image/visitor')
   //     .then(function (response) {
-  //       console.log(22);
   //       app_images.images = response.data;
   //     })
   //     .catch(function (error) {
@@ -147,6 +146,32 @@ var redRequest = {
   //     });
   //   // }
   // },
+
+  download: () => {
+    if (TOKEN != '') {
+      var id = $("#download_box_image_id").val();
+      var usage = $("#download_usage").val();
+
+      if (usage != '' && id != '') {
+        redRequest.token().post(URL + '/download/' + id, {
+            usage: usage
+          })
+          .then(function (response) {
+            var code = response.data['code'];
+            window.open(URL + '/download/action/' + code);
+          })
+          .catch(function (error) {
+            layer.msg(error.response.data['error_msg'], {
+              time: 2000
+            });
+          });
+      } else {
+        layer.msg('请填写下载用途', {
+          time: 2000
+        });
+      }
+    }
+  },
 
   token: () => {
     return axios.create({

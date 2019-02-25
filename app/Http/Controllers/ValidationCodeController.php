@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Imports\ValidationCodeImport;
 use App\Models\ValidationCode;
 use App\Models\User;
-use App\Jobs\SendValidationCodeJob;
+use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ValidationCodeController extends Controller
@@ -29,7 +29,7 @@ class ValidationCodeController extends Controller
                     if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
                         $row['code'] = app(ValidationCode::class)->generateCode();
                         app(ValidationCode::class)->insert($row);
-                        dispatch(new SendValidationCodeJob($row));
+                        dispatch(new SendMailJob($row['email'], $this->emailText($row)));
                     }
                 }
             });
@@ -42,5 +42,14 @@ class ValidationCodeController extends Controller
         return response()->json([
             'code' => 0
         ]);
+    }
+
+    private function emailText($row)
+    {
+        return [
+            'name' => $row['name'],
+            'description' => '您的激活码是：**'.$row['code'].'**',
+            'title' => '发送激活码'
+        ];
     }
 }

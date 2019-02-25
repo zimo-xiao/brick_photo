@@ -75,3 +75,7 @@ nav {
 .up-box p {
 	margin-bottom: 20px;
 }
+
+.description {
+	line-height: 180%;
+}

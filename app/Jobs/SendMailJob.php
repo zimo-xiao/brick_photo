@@ -3,20 +3,23 @@
 namespace App\Jobs;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendValidationCode;
+use App\Mail\SendMail;
 
-class SendValidationCodeJob extends Job
+class SendMailJob extends Job
 {
-    protected $code;
+    protected $tmp;
+
+    protected $to;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($code)
+    public function __construct($to, $tmp)
     {
-        $this->code = $code;
+        $this->to = $to;
+        $this->tmp = $tmp;
     }
 
     /**
@@ -26,6 +29,6 @@ class SendValidationCodeJob extends Job
      */
     public function handle()
     {
-        Mail::to($this->code['email'])->send(new SendValidationCode($this->code));
+        Mail::to($this->to)->send(new SendMail($this->tmp));
     }
 }

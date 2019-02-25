@@ -14,7 +14,7 @@
                     <label for="login_password">密码</label>
                 </div>
                 <div class="input-field col s12">
-                    <button onclick="redRequest.login()" class="btn waves-effect waves-light"
+                    <button onclick="$('#login').hide();redRequest.login()" class="btn waves-effect waves-light"
                         style="background-color: #EA5662" type="button" name="action">登录</button>
                 </div>
             </div>

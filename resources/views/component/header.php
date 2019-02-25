@@ -6,7 +6,7 @@
     </div>
     <div class="nav-wrapper container">
         <a href="<?=$url;?>">
-            <img src="<?=$url;?>/image/logo.png" class="brand-logo" style="top:15px;width:80px" />
+            <img src="<?=$url;?>/image/logo.png" class="brand-logo" style="top:20px;width:80px" />
         </a>
         <ul class="right hide-on-med-and-down">
             <?php
@@ -33,7 +33,7 @@
     </div>
 
     <!-- Fixed Masonry Filters -->
-    <div class="categories-wrapper lighten-1">
+    <div id="anchor" class="categories-wrapper lighten-1">
         <div class="categories-container">
             <ul class="categories container">
                 <?php

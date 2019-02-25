@@ -22,7 +22,7 @@
                     <label for="register_reenter_password">重复输入密码</label>
                 </div>
                 <div class="input-field col s12">
-                    <button onclick="redRequest.register()" class="btn waves-effect waves-light"
+                    <button onclick="$('#register').hide();redRequest.register()" class="btn waves-effect waves-light"
                         style="background-color: #EA5662" type="button" name="action">注册</button>
                 </div>
             </div>
