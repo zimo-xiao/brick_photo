@@ -13,3 +13,5 @@ jpush.log
 !/public/storage/images/cache/.gitkeep
 !/public/storage/images/raw/.gitkeep
 !/public/storage/images/tmp/.gitkeep
+/storage/upload/*
+!/storage/upload/.gitkeep
