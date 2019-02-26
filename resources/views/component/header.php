@@ -13,7 +13,7 @@
                 if ($token != null) {
                     echo "<li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>".$user->name."</a></li>";
                 } else {
-                    echo "<li><a onclick='$(\"#login\").show()'>登录</a></li><li><a onclick='$(\"#register\").show()'>注册</a></li>";
+                    echo "<li><a onclick='$(\"#login\").show()'>登录</a></li><li><a onclick='$(\"#register\").show()'>注册</a></li><li><a onclick='$(\"#find_password\").show()'>找回密码</a></li>";
                 }
             ?>
         </ul>

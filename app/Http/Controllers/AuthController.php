@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ValidationCode;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendMailJob;
+use Keygen\Keygen;
 
 class AuthController extends Controller
 {
@@ -120,28 +122,12 @@ class AuthController extends Controller
      *
      * @return [string] message
      */
-    public function update(Request $request)
-    {
-        // 封死
-        // $update = [];
-        // if ($request->has('password')) {
-        //     $update['password'] = $this->encrypt($request->input('password'));
-        // }
-
-        // $request->user()->updateTs($update);
-
-        // return response()->json([
-        //     'message' => 'Successfully updated'
-        // ]);
-    }
-
-    /**
-     * Update user info
-     *
-     * @return [string] message
-     */
     public function updateByUsin(Request $request, $id)
     {
+        $this->validate($request, [
+            'permission' => 'required'
+        ]);
+
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             $user = app(User::class)->where(['usin' => $id])->get();
             if (count($user) > 0) {
@@ -170,6 +156,61 @@ class AuthController extends Controller
     public function view(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    /**
+     * Get the authenticated User
+     *
+     * @return [response] user
+     */
+    public function findPassword(Request $request)
+    {
+        $this->validate($request, [
+            'usin' => 'required'
+        ]);
+
+        $usin = $request->input('usin');
+        $user = app(User::class)->where(['usin' => $usin])->limit(1)->get();
+        if (count($user) > 0) {
+            $user = $user[0];
+
+            $code = 'pass_'.$this->generateNumericKey();
+            while (\Cache::store('redis')->has($code)) {
+                $code = 'pass_'.$this->generateNumericKey();
+            }
+            \Cache::store('redis')->put($code, $user['id'], 60);
+
+            dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, $request->root())));
+        } else {
+            return response()->json([
+                'error_msg' => '该用户不存在'
+            ], 401);
+        }
+    }
+
+    /**
+     * Render upload view
+     *
+     * @return [response] view
+     */
+    public function resetPassword(Request $request, $code)
+    {
+        $this->validate($request, [
+            'password' => 'required'
+        ]);
+
+        if (\Cache::store('redis')->has($code)) {
+            $id = \Cache::store('redis')->get($code);
+            $user = app(User::class)->find($id);
+            $password = $request->input('password');
+            $user->password = $this->encrypt($password);
+            $user->save();
+            \Cache::store('redis')->delete($code);
+        } else {
+            return response()->json([
+                'error_msg' => '验证出错'
+            ], 401);
+        }
     }
 
     /**
@@ -223,5 +264,19 @@ class AuthController extends Controller
     private function encrypt($password)
     {
         return md5($password);
+    }
+
+    private function emailText($name, $code, $url)
+    {
+        return [
+            'name' => $name,
+            'description' => '请点击以下链接找回密码（50分钟内有效）：'.$url.'/reset-password/'.$code,
+            'title' => '找回密码邮件'
+        ];
+    }
+
+    private function generateNumericKey()
+    {
+        return Keygen::numeric(8)->prefix(mt_rand(1, 9))->generate(true);
     }
 }

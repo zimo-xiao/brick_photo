@@ -74,6 +74,22 @@ class ViewController extends Controller
     }
 
     /**
+     * Render upload view
+     *
+     * @return [response] view
+     */
+    public function resetPassword(Request $request, $code)
+    {
+        if (\Cache::store('redis')->has($code)) {
+            return $this->main($request, view('reset_password', [
+                'code' => $code
+            ]));
+        } else {
+            return redirect()->route('index');
+        }
+    }
+
+    /**
      * Render main
      *
      * @return [response] view
@@ -90,6 +106,7 @@ class ViewController extends Controller
             'add_tags' => $this->addTags($request),
             'add_description' => $this->addDescription($request),
             'login' => $this->login($request),
+            'find_password' => $this->findPassword($request),
             'register' => $this->register($request),
             'header' => $this->header($request),
             'custom' => $view
@@ -126,6 +143,18 @@ class ViewController extends Controller
             return view('component/login', [
                 'url' => $request->root()
             ]);
+        }
+    }
+
+    /**
+     * Render login
+     *
+     * @return [response] view
+     */
+    private function findPassword($request)
+    {
+        if ($request->session()->get('token') === null) {
+            return view('component/find_password', []);
         }
     }
 

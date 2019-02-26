@@ -23,6 +23,30 @@ var redRequest = {
     }
   },
 
+  findPassword: () => {
+    var usin = $("#find_password_usin").val();
+
+    if (usin != '') {
+      axios.post(URL + '/auth/find-password', {
+          usin: usin
+        })
+        .then(function (response) {
+          layer.msg('验证邮箱已发到该学号所绑定的邮箱中，请查收', {
+            time: 2000
+          });
+        })
+        .catch(function (error) {
+          layer.msg(error.response.data['error_msg'], {
+            time: 2000
+          });
+        });
+    } else {
+      layer.msg('请不要留空', {
+        time: 2000
+      });
+    }
+  },
+
   addTags: () => {
     var tags = [];
     var id = $("#tags_box_image_id").val();
@@ -108,6 +132,34 @@ var redRequest = {
         })
         .then(function (response) {
           location.reload();
+        })
+        .catch(function (error) {
+          layer.msg(error.response.data['error_msg'], {
+            time: 2000
+          });
+        });
+    } else {
+      layer.msg('请不要留空', {
+        time: 2000
+      });
+    }
+  },
+
+  resetPassword: () => {
+    var password = $("#reset_password_password").val();
+    var reenterPassword = $("#reset_password_reenter_password").val();
+
+    if (password != reenterPassword) {
+      layer.msg('重复输入密码要和原密码一致哦', {
+        time: 2000
+      });
+    } else if (password != '') {
+      axios.post(URL + '/auth/reset-password/' + CODE, {
+          password: password
+        })
+        .then(function (response) {
+          alert('密码重置成功！请输入新密码重新登录');
+          window.location = URL;
         })
         .catch(function (error) {
           layer.msg(error.response.data['error_msg'], {

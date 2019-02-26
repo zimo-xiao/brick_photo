@@ -5,6 +5,10 @@ $router->group(['prefix' => 'auth'], function ($router) {
 
     $router->post('login', 'AuthController@login');
 
+    $router->post('find-password', 'AuthController@findPassword');
+
+    $router->post('reset-password/{code}', 'AuthController@resetPassword');
+
     $router->group(['middleware' => ['auth']], function ($router) {
         $router->put('', 'AuthController@update');
 
@@ -44,9 +48,11 @@ $router->group(['prefix' => 'validation-code'], function ($router) {
 
 // 视觉
 
-$router->get('', 'ViewController@index');
+$router->get('', ['as' => 'index', 'uses' => 'ViewController@index']);
 
 $router->get('upload', 'ViewController@upload');
+
+$router->get('reset-password/{id}', 'ViewController@resetPassword');
 
 $router->group(['prefix' => 'admin'], function ($router) {
     $router->get('upload-validation-code', 'ViewController@adminUploadValidationCode');

@@ -13,6 +13,10 @@ class DownloadController extends Controller
 {
     public function view(Request $request, $id)
     {
+        $this->validate($request, [
+            'usage' => 'required'
+        ]);
+
         $usage = $request->input('usage');
         $image = app(Image::class)->find($id);
         if (!$image) {

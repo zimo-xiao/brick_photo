@@ -39,7 +39,7 @@
 <body>
 
     <!-- Login/Register Box -->
-    <?=$login.$register;?>
+    <?=$login.$register.$find_password;?>
 
     <!-- Tags -->
     <?=$add_tags.$add_description;?>

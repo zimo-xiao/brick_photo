@@ -18,6 +18,14 @@ class ImageController extends Controller
      */
     public function upload(Request $request)
     {
+        $this->validate($request, [
+            'end' => 'required',
+            'file' => 'required',
+            'total' => 'required',
+            'index' => 'required',
+            'name' => 'required'
+        ]);
+
         // 图片片段信息
         $end = $request->input('end');
         $file = $request->input('file');
