@@ -23,6 +23,61 @@ var redRequest = {
     }
   },
 
+  addTags: () => {
+    var tags = [];
+    var id = $("#tags_box_image_id").val();
+    $(".tags_box_select:checked").each(
+      function () {
+        tags.push($(this).val());
+      }
+    );
+
+    if (tags.length > 0 && TOKEN != '') {
+      redRequest.token().put(URL + '/image/' + id, {
+          tags: tags
+        })
+        .then(function (response) {
+          layer.msg('添加成功，请刷新查看', {
+            time: 2000
+          });
+        })
+        .catch(function (error) {
+          layer.msg(error.response.data['error_msg'], {
+            time: 2000
+          });
+        });
+    } else {
+      layer.msg('请不要留空', {
+        time: 2000
+      });
+    }
+  },
+
+  addDescription: () => {
+    var description = $("#description_box_input").val();
+    var id = $("#description_box_image_id").val();
+
+    if (description != null && TOKEN != '') {
+      redRequest.token().put(URL + '/image/' + id, {
+          description: description
+        })
+        .then(function (response) {
+          layer.msg('添加成功，请刷新查看', {
+            time: 2000
+          });
+        })
+        .catch(function (error) {
+          layer.msg(error.response.data['error_msg'], {
+            time: 2000
+          });
+        });
+    } else {
+      layer.msg('请不要留空', {
+        time: 2000
+      });
+    }
+  },
+
   logout: () => {
     redRequest.token().delete(URL + '/auth/logout', {})
       .then(function (response) {
@@ -63,21 +118,6 @@ var redRequest = {
       layer.msg('请不要留空', {
         time: 2000
       });
-    }
-  },
-
-  user: () => {
-    if (TOKEN != '') {
-      redRequest.token().get(URL + '/auth')
-        .then(function (response) {
-          userInfo = response.data;
-          updateUserInfoOnPage();
-        })
-        .catch(function (error) {
-          layer.msg(error.response.data['error_msg'], {
-            time: 2000
-          });
-        });
     }
   },
 
@@ -180,9 +220,4 @@ var redRequest = {
       }
     });
   }
-}
-
-function updateUserInfoOnPage() {
-  // header中的名字
-  $('#header_user_name').text(userInfo['name']);
 }

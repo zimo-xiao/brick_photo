@@ -11,6 +11,8 @@ $router->group(['prefix' => 'auth'], function ($router) {
         $router->delete('logout', 'AuthController@logout');
 
         $router->get('', 'AuthController@view');
+
+        $router->put('usin/{id}', 'AuthController@updateByUsin');
     });
 });
 
@@ -24,6 +26,10 @@ $router->group(['prefix' => 'download'], function ($router) {
 $router->group(['prefix' => 'image'], function ($router) {
     $router->group(['middleware' => ['auth']], function ($router) {
         $router->post('', 'ImageController@upload');
+
+        $router->put('{id}', 'ImageController@update');
+
+        $router->delete('{id}', 'ImageController@delete');
         
         $router->get('', 'ImageController@userView');
     });

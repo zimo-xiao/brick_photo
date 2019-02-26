@@ -79,3 +79,34 @@ nav {
 .description {
 	line-height: 180%;
 }
+
+.br {
+	white-space: pre-wrap;
+}
+
+.msg {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #EA5662;
+	background-color: #FFFFFF;
+	line-height: 1em;
+	padding: 12px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	color: #EA5662;
+}
+
+.tag {
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #EA5662;
+	background-color: #FFFFFF;
+	line-height: 1em;
+	padding: 12px;
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	color: #EA5662;
+}

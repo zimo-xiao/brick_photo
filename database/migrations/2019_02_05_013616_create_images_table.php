@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('author_id');
             $table->string('author_name');
-            $table->string('tags')->nullable($value = true);
+            $table->json('tags');
             $table->longText('description')->nullable($value = true);
             $table->string('file_name')->unique();
             $table->string('file_format');

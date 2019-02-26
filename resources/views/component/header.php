@@ -11,7 +11,7 @@
         <ul class="right hide-on-med-and-down">
             <?php
                 if ($token != null) {
-                    echo "<li><a id='header_user_name' class='dropdown-trigger' href='#' data-target='feature-dropdown'></a></li>";
+                    echo "<li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>".$user->name."</a></li>";
                 } else {
                     echo "<li><a onclick='$(\"#login\").show()'>登录</a></li><li><a onclick='$(\"#register\").show()'>注册</a></li>";
                 }
@@ -50,13 +50,14 @@
                 ?>
                 <li class="<?=$indexUnderline;?>"><a href="<?=$url;?>">首页</a></li>
                 <?php 
-                if ($token != null && $permission != 1) {
+                if ($token != null && $user->permission != 1) {
                     echo '<li class="'.$uploadUnderline.'"><a href="'.$url.'/upload">上传图片</a></li>';
                 }
                 ?>
                 <?php 
-                if ($token != null && $permission === 3) {
+                if ($token != null && $user->permission === 3) {
                     echo '<li class="'.$adminUploadValidationCode.'"><a href="'.$url.'/admin/upload-validation-code">上传激活码</a></li>';
+                    echo '<li><a href="#" onclick="$(\'#change_permission\').show()">修改用户权限</a></li>';
                 }
                 ?>
                 <li><a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e" target="_black">协议</a></li>

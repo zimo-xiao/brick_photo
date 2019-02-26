@@ -97,7 +97,6 @@ class AuthController extends Controller
         
         $token = $this->createAccessToken($user);
         $request->session()->put('token', $token['access_token']);
-        $request->session()->put('permission', $user->permission);
     }
   
     /**
@@ -107,9 +106,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
+        $token = $request->session()->get('token');
+        \Cache::store('redis')->delete($token);
         $request->user()->token()->revoke();
         $request->session()->forget('token');
-        $request->session()->forget('permission');
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
@@ -122,16 +122,44 @@ class AuthController extends Controller
      */
     public function update(Request $request)
     {
-        $update = [];
-        if ($request->has('password')) {
-            $update['password'] = $this->encrypt($request->input('password'));
+        // 封死
+        // $update = [];
+        // if ($request->has('password')) {
+        //     $update['password'] = $this->encrypt($request->input('password'));
+        // }
+
+        // $request->user()->updateTs($update);
+
+        // return response()->json([
+        //     'message' => 'Successfully updated'
+        // ]);
+    }
+
+    /**
+     * Update user info
+     *
+     * @return [string] message
+     */
+    public function updateByUsin(Request $request, $id)
+    {
+        if ($request->user()->permission === User::PERMISSION_ADMIN) {
+            $user = app(User::class)->where(['usin' => $id])->get();
+            if (count($user) > 0) {
+                $update = [];
+                if ($request->has('permission')) {
+                    $update['permission'] = $request->input('permission');
+                }
+                app(User::class)->where(['usin' => $id])->limit(1)->updateTs($update);
+            } else {
+                return response()->json([
+                    'error_msg' => '该用户不存在'
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'error_msg' => '操作用户'
+            ], 401);
         }
-
-        $request->user()->updateTs($update);
-
-        return response()->json([
-            'message' => 'Successfully updated'
-        ]);
     }
   
     /**

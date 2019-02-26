@@ -60,7 +60,8 @@ class StoreImagesInBatchJob extends Job
                             'author_id' => $user['id'],
                             'author_name' => $user['name'],
                             'file_name' => $fhash,
-                            'file_format' => $end
+                            'file_format' => $end,
+                            'tags' => json_encode([])
                         ]);
                     }
                 } catch (\Exception $e) {

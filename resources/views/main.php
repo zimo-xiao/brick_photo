@@ -13,7 +13,12 @@
     const URL = "<?=$url;?>";
     const TOKEN = "<?=$token;?>";
     const URI = "<?=$uri;?>";
+    const USER = <?=json_encode($user);?>;
     var userInfo = [];
+
+    // Vue placeholder
+    var app_description = null;
+    var app_tags = null;
     </script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -36,6 +41,9 @@
     <!-- Login/Register Box -->
     <?=$login.$register;?>
 
+    <!-- Tags -->
+    <?=$add_tags.$add_description;?>
+
     <!-- Navbar and Header -->
     <?=$header;?>
 
@@ -44,9 +52,9 @@
 
     <!-- Core Javascript -->
     <?php
-    if ($permission === 3) {
+    if ($user->permission === 3) {
+        echo $change_permission;
         echo '<script src="'.$url.'/js/request.admin.js"></script>';
-        echo '<script src="'.$url.'/layui/admin.js"></script>';
     }
     ?>
     <script src="<?=$url;?>/js/exif.min.js"></script>
@@ -59,10 +67,6 @@
     <script src="<?=$url;?>/js/init.js"></script>
 
     <script>
-    if (TOKEN != '') {
-        redRequest.user();
-    }
-
     layui.use(['flow'], function() {
         var flow = layui.flow;
         flow.lazyimg({

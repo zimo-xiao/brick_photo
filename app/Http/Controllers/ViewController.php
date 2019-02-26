@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Tag;
 use App\Models\User;
 use Carbon\Carbon;
+use Ixudra\Curl\Facades\Curl;
 
 class ViewController extends Controller
 {
@@ -25,11 +26,12 @@ class ViewController extends Controller
             ->where(['permission' => User::PERMISSION_WRITE])
             ->orWhere(['permission' => User::PERMISSION_ADMIN])
             ->get();
+
+        $user = $this->user($request);
         
         return $this->main($request, view('index', [
-            'is_expand' => $request->session()->has('token'),
-            'is_admin' => $request->session()->get('permission') === User::PERMISSION_ADMIN,
-            'is_write' => $request->session()->get('permission') === User::PERMISSION_WRITE,
+            'token' => $request->session()->get('token'),
+            'user' => $user,
             'query' => [
                 'tag' => $request->input('tag'),
                 'author' => $request->input('author')
@@ -50,9 +52,10 @@ class ViewController extends Controller
      */
     public function upload(Request $request)
     {
+        $user = $this->user($request);
         return $this->main($request, view('upload', [
             'token' => $request->session()->get('token'),
-            'permission' => $request->session()->get('permission')
+            'user' => $user
         ]));
     }
 
@@ -63,9 +66,10 @@ class ViewController extends Controller
      */
     public function adminUploadValidationCode(Request $request)
     {
+        $user = $this->user($request);
         return $this->main($request, view('admin/upload-validation-code', [
             'token' => $request->session()->get('token'),
-            'permission' => $request->session()->get('permission')
+            'user' => $user
         ]));
     }
 
@@ -76,11 +80,15 @@ class ViewController extends Controller
      */
     public function main($request, $view)
     {
+        $user = $this->user($request);
         return view('main', [
             'url' => $request->root(),
             'uri' => $request->path(),
             'token' => $request->session()->get('token'),
-            'permission' => $request->session()->get('permission'),
+            'user' => $user,
+            'change_permission' => $this->changePermission($request),
+            'add_tags' => $this->addTags($request),
+            'add_description' => $this->addDescription($request),
             'login' => $this->login($request),
             'register' => $this->register($request),
             'header' => $this->header($request),
@@ -97,10 +105,10 @@ class ViewController extends Controller
      */
     private function header($request)
     {
+        $user = $this->user($request);
         return view('component/header', [
             'token' => $request->session()->get('token'),
-            'permission' => $request->session()->get('permission'),
-            'user' => $request->user(),
+            'user' => $user,
             'url' => $request->root(),
             'uri' => $request->path(),
             'imageCount' => app(Image::class)->count()
@@ -118,6 +126,48 @@ class ViewController extends Controller
             return view('component/login', [
                 'url' => $request->root()
             ]);
+        }
+    }
+
+    /**
+     * Add tags
+     *
+     * @return [response] view
+     */
+    private function addTags($request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
+            return view('component/tags_box', [
+                'url' => $request->root(),
+                'tags' => app(Tag::class)->all()
+            ]);
+        }
+    }
+
+    /**
+     * Add description
+     *
+     * @return [response] view
+     */
+    private function addDescription($request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
+            return view('component/description_box', []);
+        }
+    }
+
+    /**
+     * Change permission
+     *
+     * @return [response] view
+     */
+    private function changePermission($request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            return view('component/change_permission', []);
         }
     }
 
@@ -158,6 +208,35 @@ class ViewController extends Controller
     {
         if ($request->session()->get('token') != null) {
             return view('component/download_box', []);
+        }
+    }
+
+    /**
+     * Get user data from token
+     *
+     * @return [response] view
+     */
+    private function user($request)
+    {
+        $token = $request->session()->get('token');
+        if ($request->session()->get('token') != null) {
+            if (\Cache::store('redis')->has($token)) {
+                return json_decode(\Cache::store('redis')->get($token));
+            } else {
+                $data = Curl::to($request->root().'/auth')
+                    ->withHeader('Authorization: Bearer '.$token)
+                    ->asJson()
+                    ->get();
+                \Cache::store('redis')->put($token, json_encode($data), 60);
+                return $data;
+            }
+        } else {
+            return json_decode(json_encode([
+                'name' => null,
+                'permission' => null,
+                'id' => null,
+                'usin' => null
+            ]));
         }
     }
 }

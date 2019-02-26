@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Image;
 use App\Models\User;
+use App\Models\Download;
 use App\Jobs\StoreNewImageJob;
 
 class ImageController extends Controller
@@ -90,7 +91,8 @@ class ImageController extends Controller
             'author_id' => $user->id,
             'author_name' => $user->name,
             'file_name' => $name,
-            'file_format' => $end
+            'file_format' => $end,
+            'tags' => json_encode([])
         ]);
     }
 
@@ -133,6 +135,49 @@ class ImageController extends Controller
     }
 
     /**
+     * Update image info
+     *
+     * @return [response] view
+     */
+    public function update(Request $request, $id)
+    {
+        $image = app(Image::class)->find($id);
+
+        if ($image->author_id === $request->user()->id || $request->user()->permission === User::PERMISSION_ADMIN) {
+            if ($request->has('tags')) {
+                $image->tags = json_encode($request->input('tags'));
+            }
+
+            if ($request->has('description')) {
+                $image->description = $request->input('description');
+            }
+
+            $image->save();
+        } else {
+            return response()->json([
+                'error_msg' => '你没有权限修改图片'
+            ], 401);
+        }
+    }
+
+    /**
+     * Delete image
+     *
+     * @return [response] view
+     */
+    public function delete(Request $request, $id)
+    {
+        if ($request->user()->permission === User::PERMISSION_ADMIN) {
+            $image = app(Image::class)->find($id);
+            $image->delete();
+        } else {
+            return response()->json([
+                'error_msg' => '你没有权限删除图片'
+            ], 401);
+        }
+    }
+
+    /**
      * Get image from query
      *
      * @return
@@ -140,8 +185,25 @@ class ImageController extends Controller
     private function view($page, $perPage, $author = null, $tag = null)
     {
         $skip = ($page - 1) * $perPage;
+        $data = $this->initModel($author, $tag)->orderBy('updated_at', 'desc')->skip($skip)->take($perPage)->get();
+        
+        // 计算count
+        $query = [];
+        foreach ($data as $d) {
+            $query[$d['id']] = ['image_id' => $d['id']];
+        }
+        
+        $downloadCount = app(Download::class)->rawMultipleCounts($query, function ($model) {
+            return $model;
+        });
+
+        foreach ($data as $k => $d) {
+            $data[$k]['tag'] = json_decode($d['tags'], true);
+            $data[$k]['download_count'] = $downloadCount[$d['id']] ?? 0;
+        }
+
         return [
-            'data' => $this->initModel($author, $tag)->orderBy('updated_at', 'desc')->skip($skip)->take($perPage)->get(),
+            'data' => $data,
             'count' => $this->initModel($author, $tag)->count()
         ];
     }

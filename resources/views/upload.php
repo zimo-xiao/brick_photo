@@ -1,5 +1,5 @@
 <?php 
-if ($token != null && $permission != 1) {
+if ($token != null && $user->permission != 1) {
     ?>
 
 <div class="container">

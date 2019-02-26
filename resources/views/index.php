@@ -2,7 +2,7 @@
     $expandClass = 'gallery-expand';
     $expand = true;
     $replaceShadow = '';
-    if (!$is_expand) {
+    if ($token === null) {
         $expandClass = '';
         $expand = false;
         $replaceShadow = 'box-shadow: 0 1px 4px rgba(0,0,0,0.1);';
@@ -89,14 +89,49 @@
                             <span class="price">作者：{{image.author_name}}</span>
                         </div>
                         <p class="description" style="line-height:90%;">
-                            <a class="waves-effect waves-light btn light-blue darken-1"><i
-                                    class="material-icons left">thumb_up</i>30点赞</a>
+                            <span
+                                v-bind:onclick='"$(\"#download_box\").show();$(\"#download_box_image_id\").val(\""+image.id+"\")"'
+                                class="waves-effect waves-light btn brick-red"><i
+                                    class="material-icons left">file_download</i>
+                                {{image.download_count}}下载
+                            </span>
+                            <span v-on:click="app_tags.selected_image_tags = image.tag"
+                                v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
+                                v-bind:onclick='"$(\"#tags_box\").show();$(\"#tags_box_image_id\").val(\""+image.id+"\")"'
+                                class="waves-effect waves-light btn brick-red"><i
+                                    class="material-icons left">turned_in_not</i>
+                                添加标签
+                            </span>
+                            <span v-on:click="app_description.previous_msg = image.description"
+                                v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
+                                v-bind:onclick='"$(\"#description_box\").show();$(\"#description_box_image_id\").val(\""+image.id+"\")"'
+                                class="waves-effect waves-light btn brick-red"><i
+                                    class="material-icons left">chat_bubble_outline</i>
+                                添加介绍
+                            </span>
+                            <span v-if="user.permission === 3"
+                                v-bind:onclick='"adminRequest.delete_image("+image.id+")"'
+                                class="waves-effect waves-light btn brick-red"><i
+                                    class="material-icons left">delete_forever</i>
+                                删除
+                            </span>
                             <br><br>
+                            <div class="msg"><i class="layui-icon">&#xe645;</i>
+                                侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者
+                                {{image.author_name}}」</div>
                         </p>
                         <!-- description -->
-                        <p v-if="image.description != null" class="description">{{image.description}}</p>
+                        <p v-if="image.description != null" class="description br">{{image.description}}</p>
                         <p v-else class="description">
                             暂时没有作品简介哦
+                        </p>
+                        <p class="description"
+                            style="margin-top:35px;border-top-style: solid;border-top-width: 1px;border-top-color: #e0e0e0;">
+                            <div v-for="t in image.tag">
+                                <a v-bind:href="url+'/?tag='+t+'#anchor'">
+                                    <div class="tag">{{t}}</div>
+                                </a>
+                            </div>
                         </p>
                         <!-- description END -->
                     </div>
@@ -125,10 +160,14 @@
 </style>
 <script>
 var app_images = new Vue({
+    inherit: true,
     el: '#index_images',
     data: {
         url: URL,
-        images: <?=json_encode($images);?>
+        user: USER,
+        images: <?=json_encode($images);?>,
+        app_tags: app_tags,
+        app_description: app_description
     }
 });
 
