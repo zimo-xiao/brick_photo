@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Ixudra\Curl\Facades\Curl;
 use Illuminate\Http\Request;
 use App\Models\Download;
 use Keygen\Keygen;
@@ -50,11 +51,20 @@ class DownloadController extends Controller
     {
         if (\Cache::store('redis')->has($code)) {
             $img = \Cache::store('redis')->get($code);
-            $pubDir = \public_path();
-            $imageDir = \env('IMAGE_DIR');
-            $rawImg = $pubDir.'/'.$imageDir.'/raw/'.$img;
             \Cache::store('redis')->delete($code);
-            return response()->download($rawImg);
+
+            $user = $this->user($request);
+            $imageDir = \env('IMAGE_DIR');
+            $pubDir = \public_path();
+            if ($user->permission === User::PERMISSION_ADMIN) {
+                $rawImg = $pubDir.'/'.$imageDir.'/raw/'.$img;
+                return response()->download($rawImg);
+            } else {
+                $watermarkImage = $pubDir.'/'.$imageDir.'/watermark/'.$img;
+                return response()->download($watermarkImage);
+            }
+        } else {
+            return '下载过期';
         }
     }
 
@@ -70,5 +80,34 @@ class DownloadController extends Controller
     private function generateNumericKey()
     {
         return Keygen::numeric(8)->prefix(mt_rand(1, 9))->generate(true);
+    }
+
+    /**
+     * Get user data from token
+     *
+     * @return [response] view
+     */
+    private function user($request)
+    {
+        $token = $request->session()->get('token');
+        if ($request->session()->get('token') != null) {
+            if (\Cache::store('redis')->has($token)) {
+                return json_decode(\Cache::store('redis')->get($token));
+            } else {
+                $data = Curl::to($request->root().'/auth')
+                    ->withHeader('Authorization: Bearer '.$token)
+                    ->asJson()
+                    ->get();
+                \Cache::store('redis')->put($token, json_encode($data), 60);
+                return $data;
+            }
+        } else {
+            return json_decode(json_encode([
+                'name' => null,
+                'permission' => null,
+                'id' => null,
+                'usin' => null
+            ]));
+        }
     }
 }

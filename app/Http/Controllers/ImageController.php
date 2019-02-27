@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Download;
 use App\Jobs\StoreNewImageJob;
+use Intervention\Image\Facades\Image as ProcessImage;
 
 class ImageController extends Controller
 {
@@ -89,19 +90,29 @@ class ImageController extends Controller
         // 上传目录
         $rawImgDir = $pubDir.'/'.$imageDir.'/raw/'.$name.'.'.$end;
         $cacheImgDir = $pubDir.'/'.$imageDir.'/cache/'.$name.'.jpg';
+        $watermarkDir = $pubDir.'/'.$imageDir.'/watermark/'.$name.'.'.$end;
+        // 水印文件
+        $watermarkCoverDir = $pubDir.'/image/logo.png';
         // 上传文件
         if (file_put_contents($rawImgDir, $raw) && file_put_contents($cacheImgDir, $cache)) {
             // 删除临时文件
             unlink($tempImg);
+            \ini_set('memory_limit', '500M');
+            $orgImage = ProcessImage::make($rawImgDir);
+            $width = round($orgImage->width()/(3.5));
+            $watermarkImage = ProcessImage::make($watermarkCoverDir);
+            $height = round($width * $watermarkImage->height() / $watermarkImage->width());
+            $watermarkImage->resize($width, $height);
+            $orgImage->insert($watermarkImage, 'center')->save($watermarkDir);
+            // index
+            app(Image::class)->insertTs([
+                'author_id' => $user->id,
+                'author_name' => $user->name,
+                'file_name' => $name,
+                'file_format' => $end,
+                'tags' => json_encode([])
+            ]);
         }
-        // index
-        app(Image::class)->insertTs([
-            'author_id' => $user->id,
-            'author_name' => $user->name,
-            'file_name' => $name,
-            'file_format' => $end,
-            'tags' => json_encode([])
-        ]);
     }
 
     /**

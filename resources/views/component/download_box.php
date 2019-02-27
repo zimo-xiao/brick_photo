@@ -2,6 +2,8 @@
     <div class="cover card">
         <div class="inner">
             <div class="row">
+                <div class="msg"><i class="layui-icon">&#xe645;</i> 如要下载去水印图片，请联系xxx</div>
+
                 <div class="input-field col s12">
                     <input id="download_usage" type="text" class="validate" required>
                     <label for="download_usage">请简单描述一下图片用途</label>

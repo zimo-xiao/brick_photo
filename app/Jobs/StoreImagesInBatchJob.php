@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\User;
 use App\Models\Image;
+use Intervention\Image\Facades\Image as ProcessImage;
 
 class StoreImagesInBatchJob extends Job
 {
@@ -55,6 +56,19 @@ class StoreImagesInBatchJob extends Job
                         $fhash = hash_file("md5", $srcDir.'/'.$file, false);
                         $fhash = $fhash.date('YmdHis', time());
                         exec('node '.$nodeDir.'/compress.js "'.$toRawDir.'" "'.$toCacheDir.'" "'.$srcDir.$file.'" '.$fhash.' '.$end);
+
+                        $rawImgDir = $pubDir.'/'.$imageDir.'/raw/'.$fhash.'.'.$end;
+                        $watermarkDir = $pubDir.'/'.$imageDir.'/watermark/'.$fhash.'.'.$end;
+                        // 水印文件
+                        $watermarkCoverDir = $pubDir.'/image/logo.png';
+                        \ini_set('memory_limit', '500M');
+                        $orgImage = ProcessImage::make($rawImgDir);
+                        $width = round($orgImage->width()/(3.5));
+                        $watermarkImage = ProcessImage::make($watermarkCoverDir);
+                        $height = round($width * $watermarkImage->height() / $watermarkImage->width());
+                        $watermarkImage->resize($width, $height);
+                        $orgImage->insert($watermarkImage, 'center')->save($watermarkDir);
+
                         //
                         app(Image::class)->insertTs([
                             'author_id' => $user['id'],
