@@ -61,7 +61,11 @@ class DownloadController extends Controller
                 return response()->download($rawImg);
             } else {
                 $watermarkImage = $pubDir.'/'.$imageDir.'/watermark/'.$img;
-                return response()->download($watermarkImage);
+                try {
+                    return response()->download($watermarkImage);
+                } catch (\Exception $e) {
+                    return '水印还在生成中，请过10分钟后再来下载';
+                }
             }
         } else {
             return '下载过期';

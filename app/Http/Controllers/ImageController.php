@@ -8,7 +8,7 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Download;
 use App\Jobs\StoreNewImageJob;
-use Intervention\Image\Facades\Image as ProcessImage;
+use App\Jobs\StoreWatermarkJob;
 
 class ImageController extends Controller
 {
@@ -97,13 +97,7 @@ class ImageController extends Controller
         if (file_put_contents($rawImgDir, $raw) && file_put_contents($cacheImgDir, $cache)) {
             // 删除临时文件
             unlink($tempImg);
-            \ini_set('memory_limit', '500M');
-            $orgImage = ProcessImage::make($rawImgDir);
-            $width = round($orgImage->width()/(3.5));
-            $watermarkImage = ProcessImage::make($watermarkCoverDir);
-            $height = round($width * $watermarkImage->height() / $watermarkImage->width());
-            $watermarkImage->resize($width, $height)->opacity(50);
-            $orgImage->insert($watermarkImage, 'center')->save($watermarkDir);
+
             // index
             app(Image::class)->insertTs([
                 'author_id' => $user->id,
@@ -112,6 +106,8 @@ class ImageController extends Controller
                 'file_format' => $end,
                 'tags' => json_encode([])
             ]);
+
+            dispatch(new StoreWatermarkJob($name.'.'.$end));
         }
     }
 
