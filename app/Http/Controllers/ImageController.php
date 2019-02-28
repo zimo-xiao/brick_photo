@@ -102,7 +102,7 @@ class ImageController extends Controller
             $width = round($orgImage->width()/(3.5));
             $watermarkImage = ProcessImage::make($watermarkCoverDir);
             $height = round($width * $watermarkImage->height() / $watermarkImage->width());
-            $watermarkImage->resize($width, $height);
+            $watermarkImage->resize($width, $height)->opacity(50);
             $orgImage->insert($watermarkImage, 'center')->save($watermarkDir);
             // index
             app(Image::class)->insertTs([
