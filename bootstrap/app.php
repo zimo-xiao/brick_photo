@@ -123,4 +123,8 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
+
 return $app;
