@@ -22,7 +22,7 @@
     </script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="<?=$url;?>/js/over-write.js"></script>
     <script src="<?=$url;?>/layui/main/layui.js"></script>
     <script src="<?=$url;?>/layui/index.js"></script>
