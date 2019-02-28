@@ -91,6 +91,7 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->configure('database');
 $app->configure('auth');
 $app->register(Intervention\Image\ImageServiceProvider::class);
+$app->register(Laravel\Tinker\TinkerServiceProvider::class);
 $app->register(Ixudra\Curl\CurlServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
