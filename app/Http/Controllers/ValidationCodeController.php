@@ -26,10 +26,14 @@ class ValidationCodeController extends Controller
         try {
             Excel::load($request->file('file'), function ($reader) {
                 foreach ($reader->toArray() as $row) {
-                    if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
-                        $row['code'] = app(ValidationCode::class)->generateCode();
-                        app(ValidationCode::class)->insert($row);
-                        dispatch(new SendMailJob($row['email'], $this->emailText($row)));
+                    try {
+                        if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
+                            $row['code'] = app(ValidationCode::class)->generateCode();
+                            app(ValidationCode::class)->insert($row);
+                            dispatch(new SendMailJob($row['email'], $this->emailText($row)));
+                        }
+                    } catch (\Exception $e) {
+                        // 如果输入不进去则跳过
                     }
                 }
             });
