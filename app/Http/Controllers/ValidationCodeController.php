@@ -26,15 +26,24 @@ class ValidationCodeController extends Controller
         try {
             Excel::load($request->file('file'), function ($reader) {
                 foreach ($reader->toArray() as $row) {
-                    // try {
-                    if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
-                        $row['code'] = app(ValidationCode::class)->generateCode();
-                        app(ValidationCode::class)->insert($row);
-                        dispatch(new SendMailJob($row['email'], $this->emailText($row)));
+                    try {
+                        if (
+                            filter_var($row['email'], FILTER_VALIDATE_EMAIL) &&
+                            $row['name'] != null && $row['usin'] != null && $row['email'] != null
+                        ) {
+                            $input = [
+                                'code' => app(ValidationCode::class)->generateCode(),
+                                'name' => $row['name'],
+                                'usin' => $row['usin'],
+                                'email' => $row['email']
+                            ];
+                            
+                            app(ValidationCode::class)->insert($input);
+                            dispatch(new SendMailJob($input['email'], $this->emailText($input)));
+                        }
+                    } catch (\Exception $e) {
+                        // 如果输入不进去则跳过
                     }
-                    // } catch (\Exception $e) {
-                    //     // 如果输入不进去则跳过
-                    // }
                 }
             });
         } catch (\Exception $e) {
@@ -49,11 +58,11 @@ class ValidationCodeController extends Controller
         ]);
     }
 
-    private function emailText($row)
+    private function emailText($input)
     {
         return [
-            'name' => $row['name'],
-            'description' => '您的激活码是：**'.$row['code'].'**',
+            'name' => $input['name'],
+            'description' => '您的激活码是：**'.$input['code'].'**',
             'title' => '发送激活码'
         ];
     }
