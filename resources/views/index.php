@@ -61,11 +61,11 @@
                     <div class="card-content white-text">
                         <span class="card-title">关于我们</span>
                         <p>
-                            红砖是由20位历届摄影师/4个社团组织共同创立版权联盟，监督图片的使用，保护摄影师利益不被侵害。目的在于防止老照片流失，保护附中摄影师的著作权，方便附中社团为校友和在校生进行文化服务。
+                            红砖是目前北大附中最大的图片库，面向全校同学和附中校友免费开放。我们的目的是以图片的形式收集北大附中的校园记忆，并在保证作者权益的情况下让这些图片得到合理的使用。
                         </p>
                     </div>
                     <div class="card-action">
-                        <a href="#">协议</a>
+                        <a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e">协议</a>
                         <a href="#">公示</a>
                     </div>
                 </div>
