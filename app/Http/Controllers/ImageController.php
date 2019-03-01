@@ -160,7 +160,14 @@ class ImageController extends Controller
 
         if ($image->author_id === $request->user()->id || $request->user()->permission === User::PERMISSION_ADMIN) {
             if ($request->has('tags')) {
-                $image->tags = json_encode($request->input('tags'));
+                $tags = json_decode($request->input('tags'), true);
+                // 如果不是admin，则不能设置编辑推荐
+                if (\in_array('编辑推荐', $tags) && $request->user()->permission != User::PERMISSION_ADMIN) {
+                    $tags = array_filter($tags, function ($a) {
+                        return $a != '编辑推荐';
+                    });
+                }
+                $image->tags = json_encode($tags);
             }
 
             if ($request->has('description')) {
