@@ -52,4 +52,48 @@ class ValidationCodeController extends Controller
             'title' => '发送激活码'
         ];
     }
+
+    public function export(Request $request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            $codes = app(ValidationCode::class)->all();
+            return Excel::create('未激活的激活码', function ($excel) use ($codes) {
+                $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
+                    $sheet->fromArray($codes);
+                });
+            })->export('xls');
+        } else {
+            return '你没有权限';
+        }
+    }
+
+    /**
+     * Get user data from token
+     *
+     * @return [response] view
+     */
+    private function user($request)
+    {
+        $token = $request->session()->get('token');
+        if ($request->session()->get('token') != null) {
+            if (\Cache::store('redis')->has($token)) {
+                return json_decode(\Cache::store('redis')->get($token));
+            } else {
+                $data = Curl::to($request->root().'/auth')
+                    ->withHeader('Authorization: Bearer '.$token)
+                    ->asJson()
+                    ->get();
+                \Cache::store('redis')->put($token, json_encode($data), 60);
+                return $data;
+            }
+        } else {
+            return json_decode(json_encode([
+                'name' => null,
+                'permission' => null,
+                'id' => null,
+                'usin' => null
+            ]));
+        }
+    }
 }

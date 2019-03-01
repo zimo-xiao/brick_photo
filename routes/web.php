@@ -44,6 +44,7 @@ $router->group(['prefix' => 'validation-code'], function ($router) {
     $router->group(['middleware' => ['auth']], function ($router) {
         $router->post('', 'ValidationCodeController@upload');
     });
+    $router->get('', 'ValidationCodeController@export');
 });
 
 // 视觉
