@@ -26,18 +26,19 @@ class ValidationCodeController extends Controller
         try {
             Excel::load($request->file('file'), function ($reader) {
                 foreach ($reader->toArray() as $row) {
-                    try {
-                        if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
-                            $row['code'] = app(ValidationCode::class)->generateCode();
-                            app(ValidationCode::class)->insert($row);
-                            dispatch(new SendMailJob($row['email'], $this->emailText($row)));
-                        }
-                    } catch (\Exception $e) {
-                        // 如果输入不进去则跳过
+                    // try {
+                    if (filter_var($row['email'], FILTER_VALIDATE_EMAIL)) {
+                        $row['code'] = app(ValidationCode::class)->generateCode();
+                        app(ValidationCode::class)->insert($row);
+                        dispatch(new SendMailJob($row['email'], $this->emailText($row)));
                     }
+                    // } catch (\Exception $e) {
+                    //     // 如果输入不进去则跳过
+                    // }
                 }
             });
         } catch (\Exception $e) {
+            return $e;
             return response()->json([
                 'error_msg' => 'Excel格式错误',
             ], 401);
