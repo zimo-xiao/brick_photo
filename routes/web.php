@@ -18,6 +18,8 @@ $router->group(['prefix' => 'auth'], function ($router) {
 
         $router->put('usin/{id}', 'AuthController@updateByUsin');
     });
+
+    $router->get('export', 'AuthController@export');
 });
 
 $router->group(['prefix' => 'download'], function ($router) {

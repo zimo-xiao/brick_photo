@@ -8,6 +8,7 @@ use App\Models\ValidationCode;
 use App\Models\User;
 use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
+use Ixudra\Curl\Facades\Curl;
 
 class ValidationCodeController extends Controller
 {

@@ -9,6 +9,8 @@ use App\Models\ValidationCode;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendMailJob;
 use Keygen\Keygen;
+use Maatwebsite\Excel\Facades\Excel;
+use Ixudra\Curl\Facades\Curl;
 
 class AuthController extends Controller
 {
@@ -188,6 +190,22 @@ class AuthController extends Controller
         }
     }
 
+    public function export(Request $request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            $codes = app(User::class)->all();
+            return Excel::create('所有用户信息', function ($excel) use ($codes) {
+                $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
+                    unset($codes['password']);
+                    $sheet->fromArray($codes);
+                });
+            })->export('xls');
+        } else {
+            return '你没有权限';
+        }
+    }
+
     /**
      * Render upload view
      *
@@ -278,5 +296,34 @@ class AuthController extends Controller
     private function generateNumericKey()
     {
         return Keygen::numeric(8)->prefix(mt_rand(1, 9))->generate(true);
+    }
+
+    /**
+     * Get user data from token
+     *
+     * @return [response] view
+     */
+    private function user($request)
+    {
+        $token = $request->session()->get('token');
+        if ($request->session()->get('token') != null) {
+            if (\Cache::store('redis')->has($token)) {
+                return json_decode(\Cache::store('redis')->get($token));
+            } else {
+                $data = Curl::to($request->root().'/auth')
+                    ->withHeader('Authorization: Bearer '.$token)
+                    ->asJson()
+                    ->get();
+                \Cache::store('redis')->put($token, json_encode($data), 60);
+                return $data;
+            }
+        } else {
+            return json_decode(json_encode([
+                'name' => null,
+                'permission' => null,
+                'id' => null,
+                'usin' => null
+            ]));
+        }
     }
 }

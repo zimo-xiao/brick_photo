@@ -59,6 +59,7 @@
                     echo '<li class="'.$adminUploadValidationCode.'"><a href="'.$url.'/admin/upload-validation-code">上传激活码</a></li>';
                     echo '<li><a href="#" onclick="$(\'#change_permission\').show()">修改用户权限</a></li>';
                     echo '<li><a href="'.$url.'/validation-code">下载未激活码</a></li>';
+                    echo '<li><a href="'.$url.'/auth/export">所有用户信息</a></li>';
                 }
                 ?>
                 <li><a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e" target="_black">协议</a></li>
