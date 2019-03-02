@@ -119,6 +119,7 @@ var redRequest = {
     var code = $("#register_code").val();
     var password = $("#register_password").val();
     var reenterPassword = $("#register_reenter_password").val();
+    var agree = $("#register_agree").val();
 
     if (password != reenterPassword) {
       layer.msg('重复输入密码要和原密码一致哦', {
@@ -126,10 +127,10 @@ var redRequest = {
       });
     } else if (password != '' && usin != '' && code != '') {
       axios.post(URL + '/auth/register', {
-          usin: usin,
-          code: code,
-          password: password
-        })
+        usin: usin,
+        code: code,
+        password: password
+      })
         .then(function (response) {
           location.reload();
         })
@@ -138,7 +139,11 @@ var redRequest = {
             time: 2000
           });
         });
-    } else {
+    } else if (agree == 0) {
+      layer.msg('请先阅读协议', {
+        time: 2000
+      });
+    }else{
       layer.msg('请不要留空', {
         time: 2000
       });
