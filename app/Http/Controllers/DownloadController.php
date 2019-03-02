@@ -24,16 +24,13 @@ class DownloadController extends Controller
                 'error_msg' => '图片不存在'
             ], 401);
         }
-        $author = app(User::class)->find($image['author_id']);
 
-        app(Download::class)->insert([
+        app(Download::class)->insertTs([
             'downloader_id' => $request->user()->id,
             'downloader_name' => $request->user()->name,
             'image_id' => $id,
             'usage' => $usage
         ]);
-
-        dispatch(new SendMailJob($author['email'], $this->emailText($author['name'], $request->user()->name, $id, $usage)));
 
         $code = $this->generateNumericKey();
         while (\Cache::store('redis')->has($code)) {
@@ -66,14 +63,5 @@ class DownloadController extends Controller
         } else {
             return '下载过期';
         }
-    }
-
-    private function emailText($authorName, $downloaderName, $imageId, $usage)
-    {
-        return [
-            'name' => $authorName,
-            'description' => '你的编号为**'.$imageId.'**的图片，被'.$downloaderName.'下载，用途为：**'.$usage.'**',
-            'title' => '下载图片提醒'
-        ];
     }
 }

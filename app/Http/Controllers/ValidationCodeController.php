@@ -38,7 +38,7 @@ class ValidationCodeController extends Controller
                                 'email' => $row['email']
                             ];
                             
-                            app(ValidationCode::class)->insert($input);
+                            app(ValidationCode::class)->insertTs($input);
                             dispatch(new SendMailJob($input['email'], $this->emailText($input)));
                         }
                     } catch (\Exception $e) {
@@ -62,7 +62,7 @@ class ValidationCodeController extends Controller
     {
         return [
             'name' => $input['name'],
-            'description' => "我们现在向你发送红砖图库的邀请码\n你的激活码是：**".$input['code']."**\n希望你可以点击链接右侧按照我们的用户手册（https://shimo.im/docs/1Z7Xhh9IUhg51ym7/）中的指导来使用红砖。",
+            'description' => "我们现在向你发送红砖图库的邀请码\n\n\n你的激活码是：**".$input['code']."**\n\n\n希望你可以点击链接右侧按照[我们的用户手册](https://shimo.im/docs/1Z7Xhh9IUhg51ym7/)中的指导来使用红砖。",
             'title' => '发送激活码'
         ];
     }
