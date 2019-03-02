@@ -250,7 +250,7 @@ var redRequest = {
           })
           .then(function (response) {
             var code = response.data['code'];
-            window.open(URL + '/download/action/' + code);
+            redRequest.popUrl(URL + '/download/action/' + code);
           })
           .catch(function (error) {
             layer.msg(error.response.data['error_msg'], {
@@ -271,5 +271,15 @@ var redRequest = {
         'Authorization': 'Bearer ' + TOKEN
       }
     });
+  },
+
+  popUrl: (url) => {
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    delete link;
   }
 }
