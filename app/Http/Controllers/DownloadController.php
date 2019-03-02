@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Jobs\SendMailJob;
+use Illuminate\Support\Facades\File;
 
 class DownloadController extends Controller
 {
@@ -54,15 +55,13 @@ class DownloadController extends Controller
             $user = $this->user($request);
             $imageDir = \env('IMAGE_DIR');
             if ($user->permission === User::PERMISSION_ADMIN) {
-                $rawImg = $imageDir.'/raw/'.$img;
-                return response()->download($rawImg);
+                return $this->responseImageFromPath($imageDir, 'raw', $img);
             } else {
-                $watermarkImage = $imageDir.'/watermark/'.$img;
-                try {
-                    return response()->download($watermarkImage);
-                } catch (\Exception $e) {
+                $path = $imageDir.'/watermark/'.$img;
+                if (!File::exists($path)) {
                     return '水印还在生成中，请过10分钟后再来下载';
                 }
+                return $this->responseImageFromPath($imageDir, 'watermark', $img);
             }
         } else {
             return '下载过期';
