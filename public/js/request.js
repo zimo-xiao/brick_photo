@@ -250,7 +250,12 @@ var redRequest = {
           })
           .then(function (response) {
             var code = response.data['code'];
-            redRequest.popUrl(URL + '/download/action/' + code);
+            var url = URL + '/download/action/' + code;
+            layer.open({
+              title: '知情同意',
+              btn: [],
+              content: '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图<br><br><a href="' + url + '" target="_blank" class="btn waves-effect waves-light" style="background-color: #EA5662">同意并下载图片</a>'
+            });
           })
           .catch(function (error) {
             layer.msg(error.response.data['error_msg'], {
@@ -271,15 +276,5 @@ var redRequest = {
         'Authorization': 'Bearer ' + TOKEN
       }
     });
-  },
-
-  popUrl: (url) => {
-    var link = document.createElement("a");
-    link.href = url;
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    delete link;
   }
 }
