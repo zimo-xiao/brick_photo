@@ -22,8 +22,8 @@
                     <label for="register_reenter_password">重复输入密码</label>
                 </div>
                 <div class="input-field col s12">
-                    <input id="register_agree" type="checkbox" class="validate" required>
-                    <label for="register_agree">我已阅读、理解并同意<a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e">《红砖平台使用协议》</a></label>
+                    <input id="register_agree" type="checkbox" class="validate" required checked>
+                    <span>我已阅读、理解并同意<a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e">《红砖平台使用协议》</a></span>
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#register').hide();redRequest.register()" class="btn waves-effect waves-light"
