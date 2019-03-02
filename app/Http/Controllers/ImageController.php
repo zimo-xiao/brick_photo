@@ -197,7 +197,13 @@ class ImageController extends Controller
     public function viewImageCache(Request $request, $id)
     {
         $image = app(Image::class)->find($id);
-        return $this->responseImageFromPath($image->path, 'cache', $image->file_name.'.jpg');
+        if ($image) {
+            return $this->responseImageFromPath($image->path, 'cache', $image->file_name.'.jpg');
+        } else {
+            return response()->json([
+                'error_msg' => '图片不存在'
+            ], 404);
+        }
     }
 
     /**

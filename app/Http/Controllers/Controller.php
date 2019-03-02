@@ -42,13 +42,13 @@ class Controller extends BaseController
 
     public function responseImageFromPath($path, $dir, $image)
     {
+        $path = $path.'/'.$dir.'/'.$image;
         if (!File::exists($path)) {
             return response()->json([
                 'error_msg' => '图片不存在'
             ], 404);
         }
 
-        $path = $path.'/'.$dir.'/'.$image;
         $file = File::get($path);
         $type = File::mimeType($path);
         return (new Response($file, 200))->header('Content-Type', $type);
