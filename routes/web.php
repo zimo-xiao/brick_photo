@@ -30,6 +30,8 @@ $router->group(['prefix' => 'download'], function ($router) {
 });
 
 $router->group(['prefix' => 'image'], function ($router) {
+    $router->get('view/cache/{id}', 'ImageController@viewImageCache');
+
     $router->group(['middleware' => ['auth']], function ($router) {
         $router->post('', 'ImageController@upload');
 

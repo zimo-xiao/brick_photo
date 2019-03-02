@@ -34,12 +34,11 @@ class StoreImagesInBatchJob extends Job
             $uploadDir = \env('UPLOAD_DIR');
             $srcDir = $storageDir.'/'.$uploadDir.'/';
 
-            $nodeDir = $storageDir;
+            $nodeDir = $storageDir.'/compress.js';
 
-            $pubDir = \public_path();
             $imageDir = \env('IMAGE_DIR');
-            $toRawDir = $pubDir.'/'.$imageDir.'/raw/';
-            $toCacheDir = $pubDir.'/'.$imageDir.'/cache/';
+            $toRawDir = $imageDir.'/raw/';
+            $toCacheDir = $imageDir.'/cache/';
         
             $files = scandir($srcDir);
             foreach ($files as $file) {
@@ -55,14 +54,15 @@ class StoreImagesInBatchJob extends Job
                     if ($end === 'jpg' || $end === 'png') {
                         $fhash = hash_file("md5", $srcDir.'/'.$file, false);
                         $fhash = $fhash.date('YmdHis', time());
-                        exec('node '.$nodeDir.'/compress.js "'.$toRawDir.'" "'.$toCacheDir.'" "'.$srcDir.$file.'" '.$fhash.' '.$end);
+                        exec('node '.$nodeDir.' "'.$toRawDir.'" "'.$toCacheDir.'" "'.$srcDir.$file.'" '.$fhash.' '.$end);
 
                         app(Image::class)->insertTs([
                             'author_id' => $user['id'],
                             'author_name' => $user['name'],
                             'file_name' => $fhash,
                             'file_format' => $end,
-                            'tags' => json_encode([])
+                            'tags' => json_encode([]),
+                            'path' => $imageDir
                         ]);
 
                         dispatch(new StoreWatermarkJob($fhash.'.'.$end));

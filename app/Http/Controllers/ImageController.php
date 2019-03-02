@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\Image;
 use App\Models\User;
 use App\Models\Download;
+use Illuminate\Http\Request;
 use App\Jobs\StoreNewImageJob;
 use App\Jobs\StoreWatermarkJob;
 
@@ -51,9 +50,8 @@ class ImageController extends Controller
         }
 
         // 系统信息
-        $pubDir = \public_path();
         $imageDir = \env('IMAGE_DIR');
-        $tempImg = $pubDir.'/'.$imageDir.'/tmp/'.$name.'.tmp';
+        $tempImg = $imageDir.'/tmp/'.$name.'.tmp';
 
         // 储存图片片段
         if ($index == 0) {
@@ -77,9 +75,8 @@ class ImageController extends Controller
     public function store($end, $total, $index, $name, $user)
     {
         // 系统信息
-        $pubDir = \public_path();
         $imageDir = \env('IMAGE_DIR');
-        $tempImg = $pubDir.'/'.$imageDir.'/tmp/'.$name.'.tmp';
+        $tempImg = $imageDir.'/tmp/'.$name.'.tmp';
 
         // 如果传输到结尾了
         // 分割文件
@@ -88,11 +85,8 @@ class ImageController extends Controller
         $cache = \base64_decode(substr($inputData[0], \strpos($inputData[0], ',') + 1));
         $raw = \base64_decode(substr($inputData[1], \strpos($inputData[1], ',') + 1));
         // 上传目录
-        $rawImgDir = $pubDir.'/'.$imageDir.'/raw/'.$name.'.'.$end;
-        $cacheImgDir = $pubDir.'/'.$imageDir.'/cache/'.$name.'.jpg';
-        $watermarkDir = $pubDir.'/'.$imageDir.'/watermark/'.$name.'.'.$end;
-        // 水印文件
-        $watermarkCoverDir = $pubDir.'/image/logo.png';
+        $rawImgDir = $imageDir.'/raw/'.$name.'.'.$end;
+        $cacheImgDir = $imageDir.'/cache/'.$name.'.jpg';
         // 上传文件
         if (file_put_contents($rawImgDir, $raw) && file_put_contents($cacheImgDir, $cache)) {
             // 删除临时文件
@@ -104,7 +98,8 @@ class ImageController extends Controller
                 'author_name' => $user->name,
                 'file_name' => $name,
                 'file_format' => $end,
-                'tags' => json_encode([])
+                'tags' => json_encode([]),
+                'path' => $imageDir
             ]);
 
             dispatch(new StoreWatermarkJob($name.'.'.$end));
@@ -199,6 +194,12 @@ class ImageController extends Controller
         }
     }
 
+    public function viewImageCache(Request $request, $id)
+    {
+        $image = app(Image::class)->find($id);
+        return $this->responseImageFromPath($image->path, 'cache', $image->file_name.'.jpg');
+    }
+
     /**
      * Get image from query
      *
@@ -237,7 +238,7 @@ class ImageController extends Controller
      */
     private function initModel($author, $tag)
     {
-        $image = app(Image::class);
+        $image = app(Image::class)->select(['id', 'author_id', 'author_name', 'tags', 'description']);
         if ($author != null) {
             $image = $image->where(['author_id' => $author]);
         }

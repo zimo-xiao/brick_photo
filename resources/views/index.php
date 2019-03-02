@@ -75,8 +75,7 @@
             <div v-for="image in images" class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
                 <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper" style="<?=$replaceShadow;?>">
                     <a class="gallery-cover gray">
-                        <img class="responsive-img"
-                            v-bind:lay-src="url + '/storage/images/cache/' + image.file_name + '.jpg'">
+                        <img class="responsive-img" v-bind:lay-src="url + '/image/view/cache/' + image.id">
                     </a>
                     <div class="gallery-header">
                         <span>作品编号：{{image.id}}</span>

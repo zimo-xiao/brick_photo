@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\Errors;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ImageController;
 use App\Models\Image;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use App\Models\User;
-use Carbon\Carbon;
-use Ixudra\Curl\Facades\Curl;
 
 class ViewController extends Controller
 {
@@ -237,35 +235,6 @@ class ViewController extends Controller
     {
         if ($request->session()->get('token') != null) {
             return view('component/download_box', []);
-        }
-    }
-
-    /**
-     * Get user data from token
-     *
-     * @return [response] view
-     */
-    private function user($request)
-    {
-        $token = $request->session()->get('token');
-        if ($request->session()->get('token') != null) {
-            if (\Cache::store('redis')->has($token)) {
-                return json_decode(\Cache::store('redis')->get($token));
-            } else {
-                $data = Curl::to($request->root().'/auth')
-                    ->withHeader('Authorization: Bearer '.$token)
-                    ->asJson()
-                    ->get();
-                \Cache::store('redis')->put($token, json_encode($data), 60);
-                return $data;
-            }
-        } else {
-            return json_decode(json_encode([
-                'name' => null,
-                'permission' => null,
-                'id' => null,
-                'usin' => null
-            ]));
         }
     }
 }

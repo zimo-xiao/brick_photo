@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Imports\ValidationCodeImport;
 use App\Models\ValidationCode;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
-use Ixudra\Curl\Facades\Curl;
 
 class ValidationCodeController extends Controller
 {
@@ -80,35 +79,6 @@ class ValidationCodeController extends Controller
             })->export('xls');
         } else {
             return '你没有权限';
-        }
-    }
-
-    /**
-     * Get user data from token
-     *
-     * @return [response] view
-     */
-    private function user($request)
-    {
-        $token = $request->session()->get('token');
-        if ($request->session()->get('token') != null) {
-            if (\Cache::store('redis')->has($token)) {
-                return json_decode(\Cache::store('redis')->get($token));
-            } else {
-                $data = Curl::to($request->root().'/auth')
-                    ->withHeader('Authorization: Bearer '.$token)
-                    ->asJson()
-                    ->get();
-                \Cache::store('redis')->put($token, json_encode($data), 60);
-                return $data;
-            }
-        } else {
-            return json_decode(json_encode([
-                'name' => null,
-                'permission' => null,
-                'id' => null,
-                'usin' => null
-            ]));
         }
     }
 }

@@ -10,6 +10,6 @@ class Image extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'uid', 'usinauthor_name','tags','description','file_name'
+        'author_id', 'author_name','tags','description','file_name','file_format','path'
     ];
 }

@@ -25,10 +25,10 @@ class StoreWatermarkJob extends Job
      */
     public function handle()
     {
-        $pubDir = \public_path();
         $imageDir = \env('IMAGE_DIR');
-        $rawImgDir = $pubDir.'/'.$imageDir.'/raw/'.$this->fileName;
-        $watermarkDir = $pubDir.'/'.$imageDir.'/watermark/'.$this->fileName;
+        $rawImgDir = $imageDir.'/raw/'.$this->fileName;
+        $watermarkDir = $imageDir.'/watermark/'.$this->fileName;
+        $pubDir = \public_path();
         $watermarkCoverDir = $pubDir.'/image/logo.png';
         \ini_set('memory_limit', '5000M');
         $orgImage = ProcessImage::make($rawImgDir);

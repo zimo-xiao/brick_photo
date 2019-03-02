@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ValidationCode;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendMailJob;
-use Keygen\Keygen;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
-use Ixudra\Curl\Facades\Curl;
 
 class AuthController extends Controller
 {
@@ -291,39 +289,5 @@ class AuthController extends Controller
             'description' => '请点击以下链接找回密码（50分钟内有效）：'.$url.'/reset-password/'.$code,
             'title' => '找回密码邮件'
         ];
-    }
-
-    private function generateNumericKey()
-    {
-        return Keygen::numeric(8)->prefix(mt_rand(1, 9))->generate(true);
-    }
-
-    /**
-     * Get user data from token
-     *
-     * @return [response] view
-     */
-    private function user($request)
-    {
-        $token = $request->session()->get('token');
-        if ($request->session()->get('token') != null) {
-            if (\Cache::store('redis')->has($token)) {
-                return json_decode(\Cache::store('redis')->get($token));
-            } else {
-                $data = Curl::to($request->root().'/auth')
-                    ->withHeader('Authorization: Bearer '.$token)
-                    ->asJson()
-                    ->get();
-                \Cache::store('redis')->put($token, json_encode($data), 60);
-                return $data;
-            }
-        } else {
-            return json_decode(json_encode([
-                'name' => null,
-                'permission' => null,
-                'id' => null,
-                'usin' => null
-            ]));
-        }
     }
 }
