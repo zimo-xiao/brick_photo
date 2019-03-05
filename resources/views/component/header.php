@@ -28,7 +28,7 @@
 
         <div class="nav-header center">
             <h1>不倒的记忆，附中的宝藏</h1>
-            <div class="tagline">北大附中最大的图库，目前共藏<?=$imageCount;?>张摄影作品</div>
+            <div class="tagline">北大附中最大的图库，目前共藏<?=$imageCount;?>张摄影作品，共<?=$userCount;?>位附中校友在红砖</div>
         </div>
     </div>
 

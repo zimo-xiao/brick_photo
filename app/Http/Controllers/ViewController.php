@@ -126,7 +126,8 @@ class ViewController extends Controller
             'user' => $user,
             'url' => $request->root(),
             'uri' => $request->path(),
-            'imageCount' => app(Image::class)->count()
+            'imageCount' => app(Image::class)->count(),
+            'userCount' => app(User::class)->count(),
         ]);
     }
 
