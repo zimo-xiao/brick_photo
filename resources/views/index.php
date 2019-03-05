@@ -45,6 +45,20 @@
             ?>
         </dl>
     </li>
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="">管理员</a>
+        <dl class="layui-nav-child">
+            <?php
+                foreach ($admins as $admin) {
+                    $on = '';
+                    if ($query['author'] == $admins['id']) {
+                        $on = 'layui-this';
+                    }
+                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$admins['id'].'#anchor">'.$admins['name'].'</a></dd>';
+                }
+            ?>
+        </dl>
+    </li>
 </ul>
 <!-- 左边导航栏END -->
 

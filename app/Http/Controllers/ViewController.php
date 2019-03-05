@@ -22,8 +22,12 @@ class ViewController extends Controller
         
         $authors = app(User::class)
             ->where(['permission' => User::PERMISSION_WRITE])
-            ->orWhere(['permission' => User::PERMISSION_ADMIN])
             ->get();
+
+        $admins = app(User::class)
+            ->where(['permission' => User::PERMISSION_ADMIN])
+            ->get();
+
 
         $user = $this->user($request);
         
@@ -39,6 +43,7 @@ class ViewController extends Controller
             'url' => $request->root(),
             'tags' => app(Tag::class)->all(),
             'authors' => $authors,
+            'admins' => $admins,
             'download_box' => $this->downloadBox($request)
         ]));
     }
