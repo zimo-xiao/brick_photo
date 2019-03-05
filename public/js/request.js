@@ -56,7 +56,7 @@ var redRequest = {
       }
     );
 
-    if (tags.length > 0 && TOKEN != '') {
+    if (TOKEN != '') {
       redRequest.token().put(URL + '/image/' + id, {
           tags: tags
         })
@@ -71,7 +71,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg('权限不正确', {
         time: 2000
       });
     }
