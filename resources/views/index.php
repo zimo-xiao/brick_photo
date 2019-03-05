@@ -51,10 +51,10 @@
             <?php
                 foreach ($admins as $admin) {
                     $on = '';
-                    if ($query['author'] == $admins['id']) {
+                    if ($query['author'] == $admin['id']) {
                         $on = 'layui-this';
                     }
-                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$admins['id'].'#anchor">'.$admins['name'].'</a></dd>';
+                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$admin['id'].'#anchor">'.$admin['name'].'</a></dd>';
                 }
             ?>
         </dl>
