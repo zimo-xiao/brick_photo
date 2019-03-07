@@ -15,8 +15,9 @@ class Controller extends BaseController
     {
         $token = $request->session()->get('token');
         if ($token != null) {
-            if (\Cache::store('redis')->has($token) && $this->isJson(\Cache::store('redis')->get($token))) {
-                return json_decode(\Cache::store('redis')->get($token));
+            $value = \Cache::store('redis')->get($token);
+            if (\Cache::store('redis')->has($token) && $this->isValid($value)) {
+                return json_decode($value);
             } else {
                 $data = Curl::to($request->root().'/auth')
                     ->withHeader('Authorization: Bearer '.$token)
@@ -54,9 +55,9 @@ class Controller extends BaseController
         return (new Response($file, 200))->header('Content-Type', $type);
     }
 
-    private function isJson($string)
+    private function isValid($string)
     {
-        json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
+        json_decode($string, true);
+        return isset($string['id']);
     }
 }
