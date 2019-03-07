@@ -45,7 +45,7 @@ class ResendValidationCode extends Command
      */
     public function handle()
     {
-        $codes = app(ValidationCode::class)->where('created_at', '<', Carbon::today()->subDays(7));
+        $codes = app(ValidationCode::class)->where('created_at', '<', Carbon::today()->subDays(2));
         echo json_encode($codes);
     }
 }
