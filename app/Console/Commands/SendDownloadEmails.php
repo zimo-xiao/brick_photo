@@ -53,13 +53,15 @@ class SendDownloadEmails extends Command
 
         foreach ($todayDownload as $t) {
             $image = app(Image::class)->find($t['image_id']);
-            if (!isset($indexedTodayDownload[$image->author_id])) {
-                $author = app(User::class)->find($image->author_id);
-                $indexedTodayDownload[$author->id] = [
+            if ($image != null) {
+                if (!isset($indexedTodayDownload[$image->author_id])) {
+                    $author = app(User::class)->find($image->author_id);
+                    $indexedTodayDownload[$author->id] = [
                     'name' => $author->name,
                     'data' => [],
                     'email' => $author->email
                 ];
+                }
             }
             $indexedTodayDownload[$image->author_id]['data'][] = $t;
         }
