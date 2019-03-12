@@ -131,11 +131,19 @@ class AuthController extends Controller
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             $user = app(User::class)->where(['usin' => $id])->get();
             if (count($user) > 0) {
+                $user = $user[0];
+                $sendPhotographerEmail = false;
                 $update = [];
                 if ($request->has('permission')) {
                     $update['permission'] = $request->input('permission');
+                    if ($update['permission'] === User::PERMISSION_WRITE) {
+                        $sendPhotographerEmail = true;
+                    }
                 }
                 app(User::class)->where(['usin' => $id])->limit(1)->updateTs($update);
+                if ($sendPhotographerEmail) {
+                    dispatch(new SendMailJob($user['email'], $this->emailText($user['name'])));
+                }
             } else {
                 return response()->json([
                     'error_msg' => '该用户不存在'
@@ -288,6 +296,15 @@ class AuthController extends Controller
             'name' => $name,
             'description' => '请点击以下链接找回密码（50分钟内有效）：'.$url.'/reset-password/'.$code,
             'title' => '找回密码邮件'
+        ];
+    }
+
+    private function welcomeEmailText($name)
+    {
+        return [
+            'name' => $name,
+            'description' => "恭喜你成为红砖摄影师，现在传图权限已经为你开启啦！\n\n\n请退出账号重新登陆,传图等功能已为您开启，如遇到任何问题请及时联系我们。期待你可以把自己满意的作品传到红砖，为附中增添一份宝藏！如果在传图的过程中遇到问题，或者你有大量传图的需求，欢迎联系我们（微信：lrh20021108），我们会第一时间给予支持！",
+            'title' => '欢迎！摄影师！'
         ];
     }
 }
