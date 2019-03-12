@@ -142,7 +142,7 @@ class AuthController extends Controller
                 }
                 app(User::class)->where(['usin' => $id])->limit(1)->updateTs($update);
                 if ($sendPhotographerEmail) {
-                    dispatch(new SendMailJob($user['email'], $this->emailText($user['name'])));
+                    dispatch(new SendMailJob($user['email'], $this->welcomeEmailText($user['name'])));
                 }
             } else {
                 return response()->json([
