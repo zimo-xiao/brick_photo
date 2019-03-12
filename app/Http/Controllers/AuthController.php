@@ -136,7 +136,7 @@ class AuthController extends Controller
                 $update = [];
                 if ($request->has('permission')) {
                     $update['permission'] = $request->input('permission');
-                    if ($update['permission'] === User::PERMISSION_WRITE) {
+                    if ($update['permission'] == User::PERMISSION_WRITE) {
                         $sendPhotographerEmail = true;
                     }
                 }
