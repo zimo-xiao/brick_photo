@@ -19,10 +19,20 @@ class Controller extends BaseController
             if (\Cache::store('redis')->has($token) && $this->isValid($value)) {
                 return json_decode($value);
             } else {
-                $data = Curl::to($request->root().'/auth')
+                try {
+                    $data = Curl::to($request->root().'/auth')
                     ->withHeader('Authorization: Bearer '.$token)
                     ->asJson()
                     ->get();
+                } catch (\Exception $e) {
+                    return json_decode(json_encode([
+                        'name' => null,
+                        'permission' => null,
+                        'id' => null,
+                        'usin' => null
+                    ]));
+                }
+
                 \Cache::store('redis')->put($token, json_encode($data), 60);
                 return $data;
             }
