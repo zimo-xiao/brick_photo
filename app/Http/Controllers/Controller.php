@@ -16,10 +16,13 @@ class Controller extends BaseController
         $token = $request->session()->get('token');
         if ($token != null) {
             try {
-                return Curl::to($request->root().'/auth')
+                $out = Curl::to($request->root().'/auth')
                     ->withHeader('Authorization: Bearer '.$token)
                     ->asJson()
                     ->get();
+                // HACK: 测试用户是否存在，故意报错
+                $out->permission;
+                return $out;
             } catch (\Exception $e) {
                 $request->session()->forget('token');
                 return json_decode(json_encode([
