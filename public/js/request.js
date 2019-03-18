@@ -174,7 +174,6 @@ var redRequest = {
   },
 
   upload: (i, j) => {
-    console.log([i, j])
     if (files.length == 0) {
       layer.msg('请选择图片', {
         time: 2000
