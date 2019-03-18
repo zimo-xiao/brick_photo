@@ -180,6 +180,7 @@ var redRequest = {
       });
       return;
     }
+
     var total = files[i].file.length;
     redRequest.token().post(URL + '/image', {
         file: files[i].file[j],
@@ -192,10 +193,10 @@ var redRequest = {
         if ((i + 1) < files.length) {
           // 最后一个要做特殊处理
           if ((j + 1) < total) {
-            j++;
+            j = j + 1;
           } else {
             j = 0;
-            i++;
+            i = i + 1;
           }
           redRequest.upload(i, j);
         } else {
