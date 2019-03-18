@@ -191,27 +191,27 @@ var redRequest = {
         end: files[i].end
       })
       .then(function (response) {
-        if ((i + 1) < files.length) {
-          // 最后一个要做特殊处理
-          if ((j + 1) < total) {
-            j = j + 1;
-            console.log('j++')
-          } else {
-            j = 0;
-            i = i + 1;
-            console.log('i++')
-          }
+        if ((j + 1) < total) {
+          j = j + 1;
           redRequest.upload(i, j);
         } else {
-          layer.closeAll('loading');
-          layer.open({
-            title: '上传完成',
-            content: '成功上传' + files.length + '张图片，请进入图库查看'
-          });
-          $("#submit").show();
-          $('#nosubmit').hide();
-          $('#submit').text('已选择0张图片');
-          files = [];
+          // 如果这张图片传完了，看是不是到最后一张图片了
+          if ((i + 1) < files.length) {
+            // 不是则继续传
+            j = 0;
+            i = i + 1;
+            redRequest.upload(i, j);
+          } else {
+            layer.closeAll('loading');
+            layer.open({
+              title: '上传完成',
+              content: '成功上传' + files.length + '张图片，请进入图库查看'
+            });
+            $("#submit").show();
+            $('#nosubmit').hide();
+            $('#submit').text('已选择0张图片');
+            files = [];
+          }
         }
       })
       .catch(function (error) {
