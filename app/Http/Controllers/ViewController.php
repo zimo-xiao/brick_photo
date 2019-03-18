@@ -19,20 +19,8 @@ class ViewController extends Controller
     public function index(Request $request)
     {
         $images = $this->images($request);
-        
-        if (\Cache::store('redis')->has('index_sidebar')) {
-            $sidebar = json_decode(\Cache::store('redis')->get('index_sidebar'), true);
-        } else {
-            $sidebar = [
-                'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
-                'admins' => app(User::class)->where(['permission' => User::PERMISSION_ADMIN])->get(),
-                'tags' => app(Tag::class)->all()
-            ];
-            \Cache::store('redis')->put('index_sidebar', json_encode($sidebar), 24*60);
-        }
-
         $user = $this->user($request);
-        
+        $sidebar = $this->getSidebarData();
         return $this->main($request, view('index', [
             'token' => $request->session()->get('token'),
             'user' => $user,
@@ -185,7 +173,7 @@ class ViewController extends Controller
         if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
             return view('component/tags_box', [
                 'url' => $request->root(),
-                'tags' => app(Tag::class)->all()
+                'tags' => $this->getSidebarData()['tags']
             ]);
         }
     }
@@ -255,5 +243,20 @@ class ViewController extends Controller
         if ($request->session()->get('token') != null) {
             return view('component/download_box', []);
         }
+    }
+
+    private function getSidebarData()
+    {
+        if (\Cache::store('redis')->has('index_sidebar')) {
+            $sidebar = json_decode(\Cache::store('redis')->get('index_sidebar'), true);
+        } else {
+            $sidebar = [
+                'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
+                'admins' => app(User::class)->where(['permission' => User::PERMISSION_ADMIN])->get(),
+                'tags' => app(Tag::class)->orderBy('created_at', 'desc')->all()
+            ];
+            \Cache::store('redis')->put('index_sidebar', json_encode($sidebar), 24*60);
+        }
+        return $sidebar;
     }
 }
