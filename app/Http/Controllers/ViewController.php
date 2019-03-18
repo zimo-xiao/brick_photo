@@ -253,7 +253,7 @@ class ViewController extends Controller
             $sidebar = [
                 'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
                 'admins' => app(User::class)->where(['permission' => User::PERMISSION_ADMIN])->get(),
-                'tags' => app(Tag::class)->orderBy('created_at', 'desc')->all()
+                'tags' => app(Tag::class)->orderBy('created_at', 'desc')->get()
             ];
             \Cache::store('redis')->put('index_sidebar', json_encode($sidebar), 24*60);
         }
