@@ -225,7 +225,8 @@ class ViewController extends Controller
     {
         if ($request->session()->get('token') === null) {
             return view('component/register', [
-                'url' => $request->root()
+                'url' => $request->root(),
+                'show' => $request->input('show') == 'register'
             ]);
         }
     }
