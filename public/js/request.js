@@ -174,6 +174,7 @@ var redRequest = {
   },
 
   upload: (i, j) => {
+    console.log([i, j])
     if (files.length == 0) {
       layer.msg('请选择图片', {
         time: 2000
@@ -194,9 +195,11 @@ var redRequest = {
           // 最后一个要做特殊处理
           if ((j + 1) < total) {
             j = j + 1;
+            console.log('j++')
           } else {
             j = 0;
             i = i + 1;
+            console.log('i++')
           }
           redRequest.upload(i, j);
         } else {
