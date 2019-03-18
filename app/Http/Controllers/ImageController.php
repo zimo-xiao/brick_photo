@@ -102,6 +102,8 @@ class ImageController extends Controller
                 'path' => $imageDir
             ]);
 
+            $this->deleteGlobalCache();
+
             dispatch(new StoreWatermarkJob($name.'.'.$end));
         }
     }

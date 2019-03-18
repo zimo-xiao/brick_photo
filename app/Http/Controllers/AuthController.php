@@ -66,6 +66,7 @@ class AuthController extends Controller
             ], 401);
         }
 
+        $this->deleteGlobalCache();
         $token = $this->createAccessToken($user);
         $request->session()->put('token', $token['access_token']);
         $request->session()->put('permission', $user->permission);
@@ -141,6 +142,7 @@ class AuthController extends Controller
                     }
                 }
                 app(User::class)->where(['usin' => $id])->limit(1)->updateTs($update);
+                $this->deleteGlobalCache();
                 if ($sendPhotographerEmail) {
                     dispatch(new SendMailJob($user['email'], $this->welcomeEmailText($user['name'])));
                 }

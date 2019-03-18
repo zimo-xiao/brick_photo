@@ -20,14 +20,16 @@ class ViewController extends Controller
     {
         $images = $this->images($request);
         
-        $authors = app(User::class)
-            ->where(['permission' => User::PERMISSION_WRITE])
-            ->get();
-
-        $admins = app(User::class)
-            ->where(['permission' => User::PERMISSION_ADMIN])
-            ->get();
-
+        if (\Cache::store('redis')->has('index_sidebar')) {
+            $sidebar = json_decode(\Cache::store('redis')->get('index_sidebar'), true);
+        } else {
+            $sidebar = [
+                'authors' => app(User::class)->where(['permission' => User::PERMISSION_WRITE])->get(),
+                'admins' => app(User::class)->where(['permission' => User::PERMISSION_ADMIN])->get(),
+                'tags' => app(Tag::class)->all()
+            ];
+            \Cache::store('redis')->out('index_sidebar', json_encode($counter), 24*60);
+        }
 
         $user = $this->user($request);
         
@@ -41,9 +43,9 @@ class ViewController extends Controller
             'images' => $images['data'],
             'count' => $images['count'],
             'url' => $request->root(),
-            'tags' => app(Tag::class)->all(),
-            'authors' => $authors,
-            'admins' => $admins,
+            'tags' => $sidebar['tags'],
+            'authors' => $sidebar['authors'],
+            'admins' => $sidebar['admins'],
             'download_box' => $this->downloadBox($request)
         ]));
     }
@@ -125,14 +127,24 @@ class ViewController extends Controller
      */
     private function header($request)
     {
+        if (\Cache::store('redis')->has('header_counter')) {
+            $counter = json_decode(\Cache::store('redis')->get('header_counter'), true);
+        } else {
+            $counter = [
+                'imageCount' => app(Image::class)->count(),
+                'userCount' => app(User::class)->count(),
+            ];
+            \Cache::store('redis')->out('header_counter', json_encode($counter), 24*60);
+        }
+
         $user = $this->user($request);
         return view('component/header', [
             'token' => $request->session()->get('token'),
             'user' => $user,
             'url' => $request->root(),
             'uri' => $request->path(),
-            'imageCount' => app(Image::class)->count(),
-            'userCount' => app(User::class)->count(),
+            'imageCount' => $counter['imageCount'],
+            'userCount' => $counter['userCount'],
         ]);
     }
 

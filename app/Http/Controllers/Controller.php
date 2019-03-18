@@ -67,6 +67,12 @@ class Controller extends BaseController
         return (new Response($file, 200))->header('Content-Type', $type);
     }
 
+    public function deleteGlobalCache()
+    {
+        \Cache::store('redis')->delete('header_counter');
+        \Cache::store('redis')->delete('index_sidebar');
+    }
+
     private function isValid($string)
     {
         json_decode($string, true);
