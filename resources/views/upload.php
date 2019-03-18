@@ -13,7 +13,7 @@ if ($token != null && $user->permission != 1) {
             <button id="submit" onclick="layer.load();$('#submit').hide();$('#nosubmit').show();redRequest.upload(0, 0)"
                 class="layui-btn layui-btn-fluid" style="margin-top:0.5em">已选择0张图片</button>
             <button id="nosubmit" class="layui-btn layui-btn-fluid"
-                style="display:none;margin-top:0.5em">上传中请稍后...</button>
+                style="display:none;margin-top:0.5em">上传中请稍后，请不要关闭离开页面...</button>
             <!-- 上传图片表单END -->
         </div>
     </div>
