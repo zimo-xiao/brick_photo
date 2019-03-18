@@ -28,7 +28,7 @@ class ViewController extends Controller
                 'admins' => app(User::class)->where(['permission' => User::PERMISSION_ADMIN])->get(),
                 'tags' => app(Tag::class)->all()
             ];
-            \Cache::store('redis')->out('index_sidebar', json_encode($counter), 24*60);
+            \Cache::store('redis')->out('index_sidebar', json_encode($sidebar), 24*60);
         }
 
         $user = $this->user($request);
