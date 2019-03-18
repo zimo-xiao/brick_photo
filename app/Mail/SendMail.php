@@ -19,7 +19,9 @@ class SendMail extends Mailable
      */
     public function __construct($tmp)
     {
-        $tmp['url'] = \env('APP_URL');
+        if (!isset($tmp['url'])) {
+            $tmp['url'] = \env('APP_URL');
+        }
         $this->email = $tmp;
     }
 
