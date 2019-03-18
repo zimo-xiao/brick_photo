@@ -4,8 +4,6 @@ layui.config({
 })
 
 var files = [];
-var testResult = null;
-
 //载入layui组建
 var form = null;
 var layer = null;
@@ -101,7 +99,6 @@ function photoCompress(file, w, objDiv, result) {
 };
 
 function canvasDataURL(path, obj, callback, result) {
-  testResult = result;
   var img = new Image();
   //安卓获取的base64数据无信息头，加之
   if (path.substring(5, 10) != "image") {
