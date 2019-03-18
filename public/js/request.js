@@ -181,7 +181,7 @@ var redRequest = {
       return;
     }
     var total = files[i].file.length;
-    axios.post(URL + '/image', {
+    redRequest.token().post(URL + '/image', {
         file: files[i].file[j],
         total: total,
         index: j,
