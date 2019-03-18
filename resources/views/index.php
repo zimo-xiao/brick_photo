@@ -99,7 +99,8 @@
                     <div class="gallery-body">
                         <div class="title-wrapper">
                             <h3>作品编号：{{image.id}}</h3>
-                            <span class="price">作者：{{image.author_name}}</span>
+                            <a v-bind:href="'<?=$url; ?>/?author=' + image.author_id"><span
+                                    class="price">作者：{{image.author_name}}</span></a>
                         </div>
                         <p class="description" style="line-height:90%;">
                             <span
