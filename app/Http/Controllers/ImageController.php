@@ -119,6 +119,7 @@ class ImageController extends Controller
         $tag = null;
         $page = 1;
         $perPage = 40;
+        $orderBy = 'update_desc';
         if ($request->has('author')) {
             $author = $request->input('author');
         }
@@ -127,6 +128,9 @@ class ImageController extends Controller
         }
         if ($request->has('page')) {
             $page = $request->input('page');
+        }
+        if ($request->has('order')) {
+            $orderBy = $request->input('order');
         }
         return $this->view($page, $perPage, $author, $tag);
     }
@@ -213,10 +217,22 @@ class ImageController extends Controller
      *
      * @return
      */
-    private function view($page, $perPage, $author = null, $tag = null)
+    private function view($page, $perPage, $author = null, $tag = null, $orderBy = 'update')
     {
         $skip = ($page - 1) * $perPage;
-        $data = $this->initModel($author, $tag)->orderBy('updated_at', 'desc')->skip($skip)->take($perPage)->get();
+        $data = $this->initModel($author, $tag);
+
+        if ($orderBy == 'update_desc') {
+            $data = $data->orderBy('updated_at', 'desc');
+        } elseif ($orderBy == 'update_asc') {
+            $data = $data->orderBy('updated_at', 'asc');
+        } elseif ($orderBy == 'created_desc') {
+            $data = $data->orderBy('created_at', 'desc');
+        } elseif ($orderBy == 'created_asc') {
+            $data = $data->orderBy('created_at', 'asc');
+        }
+        
+        $data->skip($skip)->take($perPage)->get();
         
         // 计算count
         $query = [];
