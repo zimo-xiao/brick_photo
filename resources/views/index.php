@@ -233,6 +233,7 @@ layui.use(['laypage'], function() {
 $('#index_select_order').change(function() {
     var u = new URL(window.location.href);
     u.searchParams.append('order', $(this).val());
+    alert(u.toString());
     $('#index_select_order_form').attr('action', u.toString()).submit();
 });
 </script>
