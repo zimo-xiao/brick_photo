@@ -65,14 +65,12 @@
 <!-- Gallery -->
 <div id="portfolio" class="section gray">
 
-    <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;margin-top:10px;margin-bottom:10px;">
-        <div class="gallery row">
-            <select class="input-field" style="float:right;margin-right:0px;margin-top:10px;height:40px">
-                <option value="1" selected>最新动态</option>
-                <option value="2">最新发布</option>
-                <option value="3">最旧发布</option>
-            </select>
-        </div>
+    <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;margin-top:10px;margin-bottom:10px;height:60px">
+        <select class="input-field" style="float:right;margin-right:0px;margin-top:10px;width:100px;height:60px">
+            <option value="1" selected>最新动态</option>
+            <option value="2">最新发布</option>
+            <option value="3">最旧发布</option>
+        </select>
     </div>
 
     <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw">
