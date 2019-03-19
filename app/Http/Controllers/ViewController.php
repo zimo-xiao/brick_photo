@@ -26,7 +26,8 @@ class ViewController extends Controller
             'user' => $user,
             'query' => [
                 'tag' => $request->input('tag'),
-                'author' => $request->input('author')
+                'author' => $request->input('author'),
+                'order' => $request->input('order')
             ],
             'images' => $images['data'],
             'count' => $images['count'],

@@ -71,9 +71,19 @@
             <div class="col s2">
                 <form action="" method="get" id="index_select_order_form">
                     <select class=" input-field" style="height:60px" id="index_select_order">
-                        <option value="update_desc" selected>最新动态</option>
-                        <option value="created_desc">最新发布</option>
-                        <option value="created_asc">最旧发布</option>
+                        <?php
+                            $update_desc = '';
+                            $created_desc = '';
+                            $created_asc = '';
+                            if ($order == null || $order == 'update_desc') {
+                                $update_desc = 'selected';
+                            } elseif ($order == 'created_desc') {
+                                $created_desc = 'selected';
+                            } elseif ($order == 'created_asc') {
+                                $created_asc = 'selected';
+                            }
+                            echo '<option value="update_desc" '.$update_desc.'>最新动态</option><option value="created_desc" '.$created_desc.'>最新发布</option><option value="created_asc" '.$created_asc.'>最旧发布</option>';
+                        ?>
                     </select>
                 </form>
             </div>
@@ -111,7 +121,7 @@
                         <span>作品编号：{{image.id}}</span>
                     </div>
                     <?php if ($expand) {
-                ?>
+                            ?>
                     <div class="gallery-body">
                         <div class="title-wrapper">
                             <h3>作品编号：{{image.id}}</h3>
@@ -172,7 +182,7 @@
                                 class="material-icons">file_download</i></span>
                     </div>
                     <?php
-            }?>
+                        }?>
                 </div>
             </div>
         </div>
