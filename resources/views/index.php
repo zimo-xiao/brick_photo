@@ -69,11 +69,13 @@
         <div class="row">
             <div class="col s10"></div>
             <div class="col s2">
-                <select class="input-field" style="height:60px" id="index_select_order">
-                    <option value="update_desc" selected>最新动态</option>
-                    <option value="created_desc">最新发布</option>
-                    <option value="created_asc">最旧发布</option>
-                </select>
+                <form action="" method="get" id="index_select_order_form">
+                    <select class=" input-field" style="height:60px" id="index_select_order">
+                        <option value="update_desc" selected>最新动态</option>
+                        <option value="created_desc">最新发布</option>
+                        <option value="created_asc">最旧发布</option>
+                    </select>
+                </form>
             </div>
         </div>
     </div>
@@ -230,6 +232,6 @@ layui.use(['laypage'], function() {
 $('#index_select_order').change(function() {
     var url = new URL(window.location.href);
     url.searchParams.append('order', $(this).val());
-    window.location.href = url.toString();
+    $('index_select_order_form').attr('action', url.toString()).submit();
 });
 </script>
