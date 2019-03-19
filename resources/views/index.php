@@ -67,11 +67,13 @@
 
     <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;margin-top:10px;margin-bottom:10px;height:60px">
         <div class="row">
-            <div class="col s9"></div>
-            <div class="col s3">
+            <div class="col s10"></div>
+            <div class="col s2">
                 <select class="input-field" style="height:60px">
                     <option value="1" selected>最新动态</option>
-                    <option value="2">最新发布</option>
+                    <a href="<?=$url;?>">
+                        <option value="2">最新发布</option>
+                    </a>
                     <option value="3">最旧发布</option>
                 </select>
             </div>
