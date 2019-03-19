@@ -232,8 +232,8 @@ layui.use(['laypage'], function() {
 
 $('#index_select_order').change(function() {
     var u = new URL(window.location.href);
-    u.searchParams.append('order', $(this).val());
-    u.searchParams.forEach((k, v) => {
+    u.searchParams.set('order', $(this).val());
+    u.searchParams.forEach((v, k) => {
         $('<input>').attr({
             'name': k,
             'value': v,
