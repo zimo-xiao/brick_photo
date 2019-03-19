@@ -193,7 +193,7 @@ var app_images = new Vue({
     inherit: true,
     el: '#index_images',
     data: {
-        url: URL,
+        url: THIS_URL,
         user: USER,
         images: <?=json_encode($images);?>,
         app_tags: app_tags,
@@ -222,7 +222,8 @@ layui.use(['laypage'], function() {
         layout: ['prev', 'page', 'next'],
         jump: function(obj, first) {
             if (!first) {
-                window.location.href = URL + '?page=' + obj.curr + '&author=' + author + '&tag=' +
+                window.location.href = THIS_URL + '?page=' + obj.curr + '&author=' + author +
+                    '&tag=' +
                     tag + '#anchor';
             }
         }
@@ -230,6 +231,7 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(function() {
+    var u = new URL(window.location.href);
     u.searchParams.append('order', $(this).val());
     $('index_select_order_form').attr('action', u.toString()).submit();
 });

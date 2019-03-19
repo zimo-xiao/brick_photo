@@ -4,7 +4,7 @@ var redRequest = {
     var password = $("#login_password").val();
 
     if (usin != '' && password != '') {
-      axios.post(URL + '/auth/login', {
+      axios.post(THIS_URL + '/auth/login', {
           usin: usin,
           password: password
         })
@@ -27,7 +27,7 @@ var redRequest = {
     var usin = $("#find_password_usin").val();
 
     if (usin != '') {
-      axios.post(URL + '/auth/find-password', {
+      axios.post(THIS_URL + '/auth/find-password', {
           usin: usin
         })
         .then(function (response) {
@@ -57,7 +57,7 @@ var redRequest = {
     );
 
     if (TOKEN != '') {
-      redRequest.token().put(URL + '/image/' + id, {
+      redRequest.token().put(THIS_URL + '/image/' + id, {
           tags: tags
         })
         .then(function (response) {
@@ -82,7 +82,7 @@ var redRequest = {
     var id = $("#description_box_image_id").val();
 
     if (description != null && TOKEN != '') {
-      redRequest.token().put(URL + '/image/' + id, {
+      redRequest.token().put(THIS_URL + '/image/' + id, {
           description: description
         })
         .then(function (response) {
@@ -103,7 +103,7 @@ var redRequest = {
   },
 
   logout: () => {
-    redRequest.token().delete(URL + '/auth/logout', {})
+    redRequest.token().delete(THIS_URL + '/auth/logout', {})
       .then(function (response) {
         location.reload();
       })
@@ -125,7 +125,7 @@ var redRequest = {
         time: 2000
       });
     } else if (password != '' && usin != '' && code != '') {
-      axios.post(URL + '/auth/register', {
+      axios.post(THIS_URL + '/auth/register', {
           usin: usin,
           code: code,
           password: password
@@ -154,12 +154,12 @@ var redRequest = {
         time: 2000
       });
     } else if (password != '') {
-      axios.post(URL + '/auth/reset-password/' + CODE, {
+      axios.post(THIS_URL + '/auth/reset-password/' + CODE, {
           password: password
         })
         .then(function (response) {
           alert('密码重置成功！请输入新密码重新登录');
-          window.location = URL;
+          window.location = THIS_URL;
         })
         .catch(function (error) {
           layer.msg(error.response.data['error_msg'], {
@@ -182,7 +182,7 @@ var redRequest = {
     }
 
     var total = files[i].file.length;
-    redRequest.token().post(URL + '/image', {
+    redRequest.token().post(THIS_URL + '/image', {
         file: files[i].file[j],
         total: total,
         index: j,
@@ -223,7 +223,7 @@ var redRequest = {
   // TODO: 异步渲染有问题，暂时不用这种方法
   // visitorImages: () => {
   //   // if (TOKEN == '') {
-  //   redRequest.token().get(URL + '/image/visitor')
+  //   redRequest.token().get(THIS_URL + '/image/visitor')
   //     .then(function (response) {
   //       app_images.images = response.data;
   //     })
@@ -241,12 +241,12 @@ var redRequest = {
       var usage = $("#download_usage").val();
 
       if (usage != '' && id != '') {
-        redRequest.token().post(URL + '/download/' + id, {
+        redRequest.token().post(THIS_URL + '/download/' + id, {
             usage: usage
           })
           .then(function (response) {
             var code = response.data['code'];
-            var url = URL + '/download/action/' + code;
+            var url = THIS_URL + '/download/action/' + code;
             redRequest.pop = layer.open({
               title: '知情同意',
               btn: [],

@@ -10,7 +10,7 @@
     <title>红砖图库 - 附中的宝藏</title>
 
     <script>
-    const URL = "<?=$url;?>";
+    const THIS_URL = "<?=$url;?>";
     const TOKEN = "<?=$token;?>";
     const URI = "<?=$uri;?>";
     const USER = <?=json_encode($user);?>;
@@ -19,8 +19,6 @@
     // Vue placeholder
     var app_description = null;
     var app_tags = null;
-
-    var thisUrl = new URL(window.location.href);
     </script>
 
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>

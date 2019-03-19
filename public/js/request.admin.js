@@ -4,7 +4,7 @@ var adminRequest = {
       content: '请问你是否要删除本图片？',
       btn: ['删除'],
       yes: function (index, layero) {
-        redRequest.token().delete(URL + '/image/' + id, {})
+        redRequest.token().delete(THIS_URL + '/image/' + id, {})
           .then(function (response) {
             layer.msg('删除成功，请刷新查看', {
               time: 2000
@@ -24,7 +24,7 @@ var adminRequest = {
     var permission = $("#change_permission_permission").val();
 
     if (usin != '' && permission != '' && TOKEN != null) {
-      redRequest.token().put(URL + '/auth/usin/' + usin, {
+      redRequest.token().put(THIS_URL + '/auth/usin/' + usin, {
           permission: permission
         })
         .then(function (response) {
