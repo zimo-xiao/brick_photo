@@ -66,7 +66,14 @@
 <div id="portfolio" class="section gray">
 
     <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;height:100px">
-
+        <div class="input-field col s12">
+            <select>
+                <option value="1">最新动态</option>
+                <option value="2">最新发布</option>
+                <option value="3">最旧发布</option>
+            </select>
+            <label>图片排序</label>
+        </div>
     </div>
 
     <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw">
