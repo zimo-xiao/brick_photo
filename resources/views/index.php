@@ -70,10 +70,8 @@
             <div class="col s10"></div>
             <div class="col s2">
                 <select class="input-field" style="height:60px">
-                    <option value="1" selected>最新动态</option>
-                    <a href="<?=$url;?>">
-                        <option value="2">最新发布</option>
-                    </a>
+                    <option value="1" selected><i class="material-icons">format_line_spacing</i>&nbsp;最新动态</option>
+                    <option value="2">最新发布</option>
                     <option value="3">最旧发布</option>
                 </select>
             </div>
