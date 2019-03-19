@@ -147,7 +147,7 @@ class ImageController extends Controller
         if ($request->has('page')) {
             $page = $request->input('page');
         }
-        return $this->view($page, $perPage, $author = null, $tag = '编辑推荐');
+        return $this->view($page, $perPage, $author = null, $tag = '编辑推荐', 'update_desc');
     }
 
     /**
@@ -232,7 +232,7 @@ class ImageController extends Controller
             $data = $data->orderBy('created_at', 'asc');
         }
         
-        $data->skip($skip)->take($perPage)->get();
+        $data = $data->skip($skip)->take($perPage)->get();
         
         // 计算count
         $query = [];
