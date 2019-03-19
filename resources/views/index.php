@@ -233,12 +233,16 @@ layui.use(['laypage'], function() {
 $('#index_select_order').change(function() {
     var u = new URL(window.location.href);
     u.searchParams.append('order', $(this).val());
+    var m = [];
     u.searchParams.forEach((k, v) => {
+        m[k] = v;
+    });
+    m.forEach((k, v) => {
         $('<input>').attr({
             'name': k,
             'value': v,
             'type': 'hidden'
-        }).appendTo('#index_select_order');
+        }).appendTo('#index_select_order_form');
     });
     $('#index_select_order_form').submit();
 });
