@@ -64,11 +64,6 @@
 
 <!-- Gallery -->
 <div id="portfolio" class="section gray">
-
-    <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;height:100px">
-
-    </div>
-
     <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw">
 
         <!-- 使用 Vue 来进行渲染 -->
