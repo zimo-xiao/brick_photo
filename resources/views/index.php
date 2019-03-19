@@ -75,11 +75,11 @@
                             $update_desc = '';
                             $created_desc = '';
                             $created_asc = '';
-                            if ($order == null || $order == 'update_desc') {
+                            if ($query['order'] == null || $query['order'] == 'update_desc') {
                                 $update_desc = 'selected';
-                            } elseif ($order == 'created_desc') {
+                            } elseif ($query['order'] == 'created_desc') {
                                 $created_desc = 'selected';
-                            } elseif ($order == 'created_asc') {
+                            } elseif ($query['order'] == 'created_asc') {
                                 $created_asc = 'selected';
                             }
                             echo '<option value="update_desc" '.$update_desc.'>最新动态</option><option value="created_desc" '.$created_desc.'>最新发布</option><option value="created_asc" '.$created_asc.'>最旧发布</option>';
