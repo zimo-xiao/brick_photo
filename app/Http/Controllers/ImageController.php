@@ -132,7 +132,7 @@ class ImageController extends Controller
         if ($request->has('order')) {
             $orderBy = $request->input('order');
         }
-        return $this->view($page, $perPage, $author, $tag);
+        return $this->view($page, $perPage, $author, $tag, $orderBy);
     }
 
     /**
@@ -217,7 +217,7 @@ class ImageController extends Controller
      *
      * @return
      */
-    private function view($page, $perPage, $author = null, $tag = null, $orderBy = 'update')
+    private function view($page, $perPage, $author = null, $tag = null, $orderBy = 'update_desc')
     {
         $skip = ($page - 1) * $perPage;
         $data = $this->initModel($author, $tag);
