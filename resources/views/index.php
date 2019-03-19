@@ -230,7 +230,7 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(function() {
-    var url = new URL(window.location.href);
+    var url = new URL(window.location.href.toString());
     url.searchParams.append('order', $(this).val());
     $('index_select_order_form').attr('action', url.toString()).submit();
 });
