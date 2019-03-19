@@ -244,6 +244,6 @@ $('#index_select_order').change(function() {
             'type': 'hidden'
         }).appendTo('#index_select_order');
     });
-    $('#index_select_order_form').submit();
+    // $('#index_select_order_form').submit();
 });
 </script>
