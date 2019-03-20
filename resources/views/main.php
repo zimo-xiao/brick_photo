@@ -76,14 +76,10 @@
         });
     });
 
-    $(document).ready(() => {
-        var u = new URL(window.location.href);
-        if (u.searchParams.get('anchor') == 1) {
-            $(function() {
-                $(document).scrollTop($("#anchor").offset().top);
-            });
-        }
-    });
+    var u = new URL(window.location.href);
+    if (u.searchParams.get('anchor') == 1) {
+        document.getElementById("anchor").scrollIntoView();
+    }
     </script>
 
 </body>
