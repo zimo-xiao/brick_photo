@@ -219,9 +219,6 @@ $(document).ready(function() {
 });
 
 layui.use(['laypage'], function() {
-    var author = "<?=$query['author'];?>";
-    var tag = "<?=$query['tag'];?>";
-    var order = "<?=$query['order'];?>";
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',

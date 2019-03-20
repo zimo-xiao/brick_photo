@@ -75,6 +75,13 @@
             elem: '#index_images img'
         });
     });
+
+    $(document).ready(() => {
+        var u = new URL(window.location.href);
+        if (u.searchParams.get('anchor') == '1') {
+            jumpToAnchor();
+        }
+    });
     </script>
 
 </body>

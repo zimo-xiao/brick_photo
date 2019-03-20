@@ -11,6 +11,7 @@ function jsonLength(c) {
 }
 
 function jumpTo(u) {
+  u.searchParams.set('anchor', '1');
   u.searchParams.forEach((v, k) => {
     $('<input>').attr({
       'name': k,
@@ -18,5 +19,9 @@ function jumpTo(u) {
       'type': 'hidden'
     }).appendTo('#jump');
   });
-  $('#jump').attr('action', u.origin + u.hash).submit();
+  $('#jump').attr('action', u.origin).submit();
 }
+
+function jumpToAnchor() {
+  document.getElementById('anchor').scrollIntoView();
+}​
