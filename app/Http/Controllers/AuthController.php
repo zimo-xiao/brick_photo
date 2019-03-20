@@ -202,17 +202,17 @@ class AuthController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            $codes = app(User::class)->all();
-            return Excel::create('所有用户信息', function ($excel) use ($codes) {
-                $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
-                    unset($codes['password']);
-                    foreach ($codes['usin'] as $k => $v) {
-                        $codes['usin'][$k] = $this->blurText($v, 4);
-                    }
-                    foreach ($codes['email'] as $k => $v) {
-                        $codes['email'][$k] = $this->blurText($v, 4);
-                    }
-                    $sheet->fromArray($codes);
+            $users = app(User::class)->all();
+            return Excel::create('所有用户信息', function ($excel) use ($users) {
+                $excel->sheet('Sheet 1', function ($sheet) use ($users) {
+                    // unset($users['password']);
+                    // foreach ($codes['usin'] as $k => $v) {
+                    //     $codes['usin'][$k] = $this->blurText($v, 4);
+                    // }
+                    // foreach ($codes['email'] as $k => $v) {
+                    //     $codes['email'][$k] = $this->blurText($v, 4);
+                    // }
+                    $sheet->fromArray($users);
                 });
             })->export('xls');
         } else {
