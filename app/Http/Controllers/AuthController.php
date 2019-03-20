@@ -206,8 +206,12 @@ class AuthController extends Controller
             return Excel::create('所有用户信息', function ($excel) use ($codes) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
                     unset($codes['password']);
-                    $codes['usin'] = $this->blurText($codes['usin'], 4);
-                    $codes['email'] = $this->blurText($codes['usin'], 4);
+                    foreach ($codes['usin'] as $k => $v) {
+                        $codes['usin'][$k] = $this->blurText($v, 4);
+                    }
+                    foreach ($codes['email'] as $k => $v) {
+                        $codes['email'][$k] = $this->blurText($v, 4);
+                    }
                     $sheet->fromArray($codes);
                 });
             })->export('xls');
