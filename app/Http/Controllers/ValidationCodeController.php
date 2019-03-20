@@ -75,8 +75,10 @@ class ValidationCodeController extends Controller
             $codes = app(ValidationCode::class)->all();
             return Excel::create('未激活的激活码', function ($excel) use ($codes) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
-                    $codes['usin'] = $this->blurText($codes['usin'], 4);
-                    $codes['email'] = $this->blurText($codes['email'], 4);
+                    foreach ($users as $k => $u) {
+                        $users[$k]['usin'] = $this->blurText($u['usin'], 4);
+                        $users[$k]['email'] = $this->blurText($u['email'], 4);
+                    }
                     $sheet->fromArray($codes);
                 });
             })->export('xls');
