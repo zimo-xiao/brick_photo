@@ -79,8 +79,7 @@
     $(document).ready(() => {
         var u = new URL(window.location.href);
         if (u.searchParams.get('anchor') == 1) {
-            console.log(1);
-            document.getElementById("anchor").scrollIntoView();
+            $(document).scrollTop($("#anchor").offset().top);
         }
     });
     </script>
