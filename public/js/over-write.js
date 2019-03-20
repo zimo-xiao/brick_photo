@@ -21,7 +21,3 @@ function jumpTo(u) {
   });
   $('#jump').attr('action', u.origin).submit();
 }
-
-function jumpToAnchor() {
-  document.getElementById('anchor').scrollIntoView();
-}​
