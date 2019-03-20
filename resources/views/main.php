@@ -76,10 +76,10 @@
         });
     });
 
-    $(document).ready(() => {
+    $(() => {
         var u = new URL(window.location.href);
         if (u.searchParams.get('anchor') == 1) {
-            window.location.href += '#anchor';
+            document.getElementById("anchor").scrollIntoView();
         }
     });
     </script>
