@@ -69,23 +69,21 @@
         <div class="row">
             <div class="col s10"></div>
             <div class="col s2">
-                <form action="" method="get" id="index_select_order_form">
-                    <select class=" input-field" style="height:60px" id="index_select_order">
-                        <?php
-                            $update_desc = '';
-                            $created_desc = '';
-                            $created_asc = '';
-                            if ($query['order'] == null || $query['order'] == 'update_desc') {
-                                $update_desc = 'selected';
-                            } elseif ($query['order'] == 'created_desc') {
-                                $created_desc = 'selected';
-                            } elseif ($query['order'] == 'created_asc') {
-                                $created_asc = 'selected';
-                            }
-                            echo '<option value="update_desc" '.$update_desc.'>最新动态</option><option value="created_desc" '.$created_desc.'>最新发布</option><option value="created_asc" '.$created_asc.'>最旧发布</option>';
+                <select class=" input-field" style="height:60px" id="index_select_order">
+                    <?php
+                        $update_desc = '';
+                        $created_desc = '';
+                        $created_asc = '';
+                        if ($query['order'] == null || $query['order'] == 'update_desc') {
+                            $update_desc = 'selected';
+                        } elseif ($query['order'] == 'created_desc') {
+                            $created_desc = 'selected';
+                        } elseif ($query['order'] == 'created_asc') {
+                            $created_asc = 'selected';
+                        }
+                        echo '<option value="update_desc" '.$update_desc.'>最新动态</option><option value="created_desc" '.$created_desc.'>最新发布</option><option value="created_asc" '.$created_asc.'>最旧发布</option>';
                         ?>
-                    </select>
-                </form>
+                </select>
             </div>
         </div>
     </div>
@@ -223,6 +221,7 @@ $(document).ready(function() {
 layui.use(['laypage'], function() {
     var author = "<?=$query['author'];?>";
     var tag = "<?=$query['tag'];?>";
+    var order = "<?=$query['order'];?>";
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',
@@ -232,9 +231,9 @@ layui.use(['laypage'], function() {
         layout: ['prev', 'page', 'next'],
         jump: function(obj, first) {
             if (!first) {
-                window.location.href = THIS_URL + '?page=' + obj.curr + '&author=' + author +
-                    '&tag=' +
-                    tag + '#anchor';
+                var u = new URL(window.location.href);
+                u.searchParams.set('page', obj.curr);
+                jumpTo(u);
             }
         }
     });
@@ -243,13 +242,6 @@ layui.use(['laypage'], function() {
 $('#index_select_order').change(function() {
     var u = new URL(window.location.href);
     u.searchParams.set('order', $(this).val());
-    u.searchParams.forEach((v, k) => {
-        $('<input>').attr({
-            'name': k,
-            'value': v,
-            'type': 'hidden'
-        }).appendTo('#index_select_order_form');
-    });
-    $('#index_select_order_form').submit();
+    jumpTo(u);
 });
 </script>

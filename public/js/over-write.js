@@ -9,3 +9,14 @@ function jsonLength(c) {
   }
   return lengthJson;
 }
+
+function jumpTo(u) {
+  u.searchParams.forEach((v, k) => {
+    $('<input>').attr({
+      'name': k,
+      'value': v,
+      'type': 'hidden'
+    }).appendTo('#jump');
+  });
+  $('#jump').attr('action', u.origin + u.hash).submit();
+}

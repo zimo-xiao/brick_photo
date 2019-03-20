@@ -57,6 +57,8 @@
         echo '<script src="'.$url.'/js/request.admin.js"></script>';
     }
     ?>
+
+    <form action="" method="get" id="jump"></form>
     <script src="<?=$url;?>/js/exif.min.js"></script>
     <script src="<?=$url;?>/js/spark-md5.min.js"></script>
     <script src="<?=$url;?>/js/imagesloaded.pkgd.min.js"></script>
