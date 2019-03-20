@@ -205,13 +205,10 @@ class AuthController extends Controller
             $users = app(User::class)->all();
             return Excel::create('所有用户信息', function ($excel) use ($users) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($users) {
-                    // unset($users['password']);
-                    // foreach ($codes['usin'] as $k => $v) {
-                    //     $codes['usin'][$k] = $this->blurText($v, 4);
-                    // }
-                    // foreach ($codes['email'] as $k => $v) {
-                    //     $codes['email'][$k] = $this->blurText($v, 4);
-                    // }
+                    foreach ($users as $k => $u) {
+                        $users[$k]['usin'] = $this->blurText($u['usin'], 4);
+                        $users[$k]['email'] = $this->blurText($u['email'], 4);
+                    }
                     $sheet->fromArray($users);
                 });
             })->export('xls');
