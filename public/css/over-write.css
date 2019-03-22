@@ -1,13 +1,13 @@
 nav {
-	background-color: #EA5662;
+	background-color: #ea5662
 }
 
 .brick-red {
-	background-color: #EA5662;
+	background-color: #ea5662
 }
 
 .pagination li.active {
-	background-color: #EA5662;
+	background-color: #ea5662
 }
 
 .card p {
@@ -16,13 +16,13 @@ nav {
 
 .cover-background {
 	position: fixed;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: #555;
 	z-index: 100;
-	opacity: 0.6;
+	opacity: .6
 }
 
 .cover {
@@ -32,85 +32,80 @@ nav {
 	top: 22%;
 	z-index: 110;
 	max-height: 70vh;
-	overflow-y: scroll;
+	overflow-y: scroll
 }
 
 .cover .inner {
 	float: left;
 	margin-left: 5%;
 	margin-top: 3%;
-	width: 90%;
+	width: 90%
 }
 
 #upok {
 	margin-top: 4em;
-	display: none;
+	display: none
 }
 
 .up-box {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2em;
-	/*width:94.6%;*/
 	width: 100%;
 	-moz-box-sizing: border-box;
-	/*Firefox3.5+*/
 	-webkit-box-sizing: border-box;
-	/*Safari3.2+*/
 	-o-box-sizing: border-box;
-	/*Opera9.6*/
 	-ms-box-sizing: border-box;
-	/*IE8*/
 	box-sizing: border-box;
-	left: 0%;
-	background-color: #F9F9F9;
+	left: 0;
+	background-color: #f9f9f9
 }
 
 .up-box i {
 	font-size: 80px;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto
 }
 
 .up-box p {
-	margin-bottom: 20px;
+	margin-bottom: 20px
 }
 
 .description {
-	line-height: 180%;
+	line-height: 180%
 }
 
 .br {
-	white-space: pre-wrap;
+	white-space: pre-wrap
 }
 
 .msg {
 	border-style: solid;
 	border-width: 1px;
-	border-color: #EA5662;
-	background-color: #FFFFFF;
+	border-color: #ea5662;
+	background-color: #fff;
 	line-height: 1em;
 	padding: 12px;
 	margin-bottom: 15px;
 	border-radius: 5px;
-	color: #EA5662;
+	color: #ea5662
 }
 
 .tag {
 	float: left;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #EA5662;
-	background-color: #FFFFFF;
+	border-color: #ea5662;
+	background-color: #fff;
 	line-height: 1em;
 	padding: 12px;
 	margin-top: 20px;
 	margin-right: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
-	color: #EA5662;
+	color: #ea5662
 }
 
 select {
-	color: #EA5662;
+	color: #ea5662
 }
