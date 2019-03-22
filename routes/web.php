@@ -39,7 +39,7 @@ $router->group(['prefix' => 'image'], function ($router) {
 
         $router->delete('{id}', 'ImageController@delete');
 
-        $router->delete('batch', 'ImageController@deleteBatch');
+        $router->delete('batch/range', 'ImageController@deleteBatch');
         
         $router->get('', 'ImageController@userView');
     });

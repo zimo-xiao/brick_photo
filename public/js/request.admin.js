@@ -27,7 +27,7 @@ var adminRequest = {
       yes: function (index, layero) {
         var from = $("#delete_image_from").val();
         var to = $("#delete_image_to").val();
-        redRequest.token().delete(THIS_URL + '/image/batch', {
+        redRequest.token().delete(THIS_URL + '/image/batch/range', {
             from: from,
             to: to
           })
