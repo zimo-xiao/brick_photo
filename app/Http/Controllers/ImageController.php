@@ -205,15 +205,9 @@ class ImageController extends Controller
      *
      * @return [response] view
      */
-    public function deleteBatch(Request $request)
+    public function deleteBatch(Request $request, $from, $to)
     {
-        $this->validate($request, [
-            'from' => 'required',
-            'to' => 'required'
-        ]);
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
-            $from = $request->input('from');
-            $to = $request->input('to');
             return response()->json([
                 'error_msg' => $from.$to
             ], 401);
