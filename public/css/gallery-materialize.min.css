@@ -1015,11 +1015,10 @@
 }
 
 .teal.lighten-1 {
-    background-color: #26a69a !important
+    background-color: #EA5662 !important
 }
 
 .teal-text.text-lighten-1 {
-    color: #26a69a !important
 }
 
 .teal.darken-1 {
@@ -2936,7 +2935,7 @@ th {
 }
 
 .collection .collection-item.active {
-    background-color: #26a69a;
+    background-color: #EA5662;
     color: #eafaf9
 }
 
@@ -2947,7 +2946,7 @@ th {
 .collection a.collection-item {
     display: block;
     transition: .25s;
-    color: #26a69a
+    color: #EA5662
 }
 
 .collection a.collection-item:not(.active):hover {
@@ -2970,7 +2969,7 @@ th {
 
 .secondary-content {
     float: right;
-    color: #26a69a
+    color: #EA5662
 }
 
 .collapsible .collection {
@@ -3011,12 +3010,12 @@ th {
     top: 0;
     left: 0;
     bottom: 0;
-    background-color: #26a69a;
+    background-color: #EA5662;
     transition: width .3s linear
 }
 
 .progress .indeterminate {
-    background-color: #26a69a
+    background-color: #EA5662
 }
 
 .progress .indeterminate:before {
@@ -3185,7 +3184,7 @@ span.badge.new {
     font-weight: 300;
     font-size: 0.8rem;
     color: #fff;
-    background-color: #26a69a;
+    background-color: #EA5662;
     border-radius: 2px
 }
 
@@ -5236,7 +5235,7 @@ small {
 .btn-small {
     text-decoration: none;
     color: #fff;
-    background-color: #26a69a;
+    background-color: #EA5662;
     text-align: center;
     letter-spacing: .5px;
     transition: background-color .2s ease-out;
@@ -5259,7 +5258,7 @@ small {
     height: 40px;
     line-height: 40px;
     padding: 0;
-    background-color: #26a69a;
+    background-color: #EA5662;
     border-radius: 50%;
     transition: background-color .3s;
     cursor: pointer;
@@ -5267,7 +5266,7 @@ small {
 }
 
 .btn-floating:hover {
-    background-color: #26a69a
+    background-color: #EA5662
 }
 
 .btn-floating:before {
@@ -5465,7 +5464,7 @@ button.btn-floating {
     z-index: -1;
     width: 40px;
     height: 40px;
-    background-color: #26a69a;
+    background-color: #EA5662;
     border-radius: 50%;
     -webkit-transform: scale(0);
     transform: scale(0)
@@ -5566,7 +5565,7 @@ button.btn-floating {
 .dropdown-content li>a,
 .dropdown-content li>span {
     font-size: 16px;
-    color: #26a69a;
+    color: #EA5662;
     display: block;
     line-height: 22px;
     padding: 14px 16px
@@ -5939,7 +5938,7 @@ body.keyboard-focused .dropdown-content li:focus {
 
 .chip:focus {
     outline: none;
-    background-color: #26a69a;
+    background-color: #EA5662;
     color: #fff
 }
 
@@ -5970,8 +5969,8 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .chips.focus {
-    border-bottom: 1px solid #26a69a;
-    box-shadow: 0 1px 0 0 #26a69a
+    border-bottom: 1px solid #EA5662;
+    box-shadow: 0 1px 0 0 #EA5662
 }
 
 .chips:hover {
@@ -6188,8 +6187,8 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #26a69a;
-    box-shadow: 0 1px 0 0 #26a69a
+    border-bottom: 1px solid #EA5662;
+    box-shadow: 0 1px 0 0 #EA5662
 }
 
 input:not([type]):focus:not([readonly])+label,
@@ -6205,7 +6204,7 @@ input[type=tel]:not(.browser-default):focus:not([readonly])+label,
 input[type=number]:not(.browser-default):focus:not([readonly])+label,
 input[type=search]:not(.browser-default):focus:not([readonly])+label,
 textarea.materialize-textarea:focus:not([readonly])+label {
-    color: #26a69a
+    color: #EA5662
 }
 
 input:not([type]):focus.valid~label,
@@ -6549,7 +6548,7 @@ textarea.materialize-textarea+label:after,
 }
 
 .input-field .prefix.active {
-    color: #26a69a
+    color: #EA5662
 }
 
 .input-field .prefix~input,
@@ -6727,12 +6726,12 @@ textarea.materialize-textarea {
 [type="radio"]:checked+span:after,
 [type="radio"].with-gap:checked+span:before,
 [type="radio"].with-gap:checked+span:after {
-    border: 2px solid #26a69a
+    border: 2px solid #EA5662
 }
 
 [type="radio"]:checked+span:after,
 [type="radio"].with-gap:checked+span:after {
-    background-color: #26a69a
+    background-color: #EA5662
 }
 
 [type="radio"]:checked+span:after {
@@ -6840,8 +6839,8 @@ textarea.materialize-textarea {
     height: 22px;
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;
-    border-right: 2px solid #26a69a;
-    border-bottom: 2px solid #26a69a;
+    border-right: 2px solid #EA5662;
+    border-bottom: 2px solid #EA5662;
     -webkit-transform: rotate(40deg);
     transform: rotate(40deg);
     -webkit-backface-visibility: hidden;
@@ -6862,7 +6861,7 @@ textarea.materialize-textarea {
     height: 22px;
     border-top: none;
     border-left: none;
-    border-right: 2px solid #26a69a;
+    border-right: 2px solid #EA5662;
     border-bottom: none;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
@@ -6930,8 +6929,8 @@ textarea.materialize-textarea {
     top: 0;
     width: 20px;
     height: 20px;
-    border: 2px solid #26a69a;
-    background-color: #26a69a;
+    border: 2px solid #EA5662;
+    background-color: #EA5662;
     z-index: 0
 }
 
@@ -6943,8 +6942,8 @@ textarea.materialize-textarea {
 
 [type="checkbox"].filled-in.tabbed:checked:focus+span:not(.lever):after {
     border-radius: 2px;
-    background-color: #26a69a;
-    border-color: #26a69a
+    background-color: #EA5662;
+    border-color: #EA5662
 }
 
 [type="checkbox"].filled-in:disabled:not(:checked)+span:not(.lever):before {
@@ -6995,7 +6994,7 @@ textarea.materialize-textarea {
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: #26a69a
+    background-color: #EA5662
 }
 
 .switch label .lever {
@@ -7113,7 +7112,7 @@ select {
 }
 
 .select-wrapper input.select-dropdown:focus {
-    border-bottom: 1px solid #26a69a
+    border-bottom: 1px solid #EA5662
 }
 
 .select-wrapper .caret {
@@ -7284,7 +7283,7 @@ input[type=range]+.thumb {
     height: 0;
     width: 0;
     border-radius: 50%;
-    background-color: #26a69a;
+    background-color: #EA5662;
     margin-left: 7px;
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
@@ -7296,7 +7295,7 @@ input[type=range]+.thumb .value {
     display: block;
     width: 30px;
     text-align: center;
-    color: #26a69a;
+    color: #EA5662;
     font-size: 0;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg)
@@ -7328,10 +7327,10 @@ input[type=range]::-webkit-slider-thumb {
     height: 14px;
     width: 14px;
     border-radius: 50%;
-    background: #26a69a;
+    background: #EA5662;
     transition: box-shadow .3s;
     -webkit-appearance: none;
-    background-color: #26a69a;
+    background-color: #EA5662;
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
     margin: -5px 0 0 0
@@ -7360,7 +7359,7 @@ input[type=range]::-moz-range-thumb {
     height: 14px;
     width: 14px;
     border-radius: 50%;
-    background: #26a69a;
+    background: #EA5662;
     transition: box-shadow .3s;
     margin-top: -5px
 }
@@ -7395,7 +7394,7 @@ input[type=range]::-ms-thumb {
     height: 14px;
     width: 14px;
     border-radius: 50%;
-    background: #26a69a;
+    background: #EA5662;
     transition: box-shadow .3s
 }
 
@@ -7521,7 +7520,7 @@ input[type=range]::-ms-thumb {
 }
 
 .sidenav li>a.btn-floating:hover {
-    background-color: #26a69a
+    background-color: #EA5662
 }
 
 .sidenav li>a>i,
@@ -7715,7 +7714,7 @@ input[type=range]::-ms-thumb {
     width: 100%;
     height: 100%;
     opacity: 0;
-    border-color: #26a69a
+    border-color: #EA5662
 }
 
 .spinner-blue,
@@ -8620,7 +8619,7 @@ input[type=range]::-ms-thumb {
     -webkit-flex: 1 auto;
     -ms-flex: 1 auto;
     flex: 1 auto;
-    background-color: #26a69a;
+    background-color: #EA5662;
     color: #fff;
     padding: 20px 22px;
     font-weight: 500
@@ -8676,11 +8675,11 @@ input[type=range]::-ms-thumb {
 }
 
 .datepicker-table td.is-today {
-    color: #26a69a
+    color: #EA5662
 }
 
 .datepicker-table td.is-selected {
-    background-color: #26a69a;
+    background-color: #EA5662;
     color: #fff
 }
 
@@ -8722,7 +8721,7 @@ input[type=range]::-ms-thumb {
 .datepicker-clear,
 .datepicker-today,
 .datepicker-done {
-    color: #26a69a;
+    color: #EA5662;
     padding: 0 1rem
 }
 
@@ -8781,7 +8780,7 @@ input[type=range]::-ms-thumb {
     -webkit-flex: 1 auto;
     -ms-flex: 1 auto;
     flex: 1 auto;
-    background-color: #26a69a;
+    background-color: #EA5662;
     padding: 10px;
     font-weight: 300
 }
@@ -8898,7 +8897,7 @@ input[type=range]::-ms-thumb {
 }
 
 .timepicker-canvas line {
-    stroke: #26a69a;
+    stroke: #EA5662;
     stroke-width: 4;
     stroke-linecap: round
 }
@@ -8909,12 +8908,12 @@ input[type=range]::-ms-thumb {
 
 .timepicker-canvas-bearing {
     stroke: none;
-    fill: #26a69a
+    fill: #EA5662
 }
 
 .timepicker-canvas-bg {
     stroke: none;
-    fill: #26a69a
+    fill: #EA5662
 }
 
 .timepicker-footer {
@@ -8933,7 +8932,7 @@ input[type=range]::-ms-thumb {
 }
 
 .timepicker-close {
-    color: #26a69a
+    color: #EA5662
 }
 
 .timepicker-clear,
