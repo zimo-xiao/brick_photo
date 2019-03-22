@@ -25,8 +25,8 @@ var adminRequest = {
       content: '请问你是否要删除这些图片？',
       btn: ['删除'],
       yes: function (index, layero) {
-        var from = $("#delete_image_from").val();
-        var to = $("#delete_image_to").val();
+        var from = $("#delete_image_batch_from").val();
+        var to = $("#delete_image_batch_to").val();
         redRequest.token().delete(THIS_URL + '/image/batch/range/' + from + '/' + to, {})
           .then(function (response) {
             layer.msg('删除成功，请刷新查看', {
