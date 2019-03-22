@@ -21,7 +21,7 @@
                     echo "<li><a class='dropdown-trigger' href='#' data-target='admin-dropdown'>管理员操作</a></li>";
                     echo "<ul id='admin-dropdown' class='dropdown-content'>
                         <li><a href=\"$url/admin/upload-validation-code\">上传激活码</a></li>
-                        <li><a href=\"#\" onclick=\"$(\'#change_permission\').show()\">修改用户权限</a></li>
+                        <li><a href=\"#\" onclick=\"$('#change_permission').show()\">修改用户权限</a></li>
                         <li><a href=\"$url/validation-code\">下载未激活码</a></li>
                         <li><a href=\"$url/auth/export\">所有用户信息</a></li>
                     </ul>";
