@@ -200,6 +200,27 @@ class ImageController extends Controller
         }
     }
 
+    /**
+     * Delete image
+     *
+     * @return [response] view
+     */
+    public function deleteBatch(Request $request)
+    {
+        if ($request->user()->permission === User::PERMISSION_ADMIN) {
+            $from = $request->input('from');
+            $to = $request->input('to');
+            app(Image::class)->where([
+                ['id', '>=', $from],
+                ['id', '<=', $to]
+            ])->delete();
+        } else {
+            return response()->json([
+                'error_msg' => '你没有权限删除图片'
+            ], 401);
+        }
+    }
+
     public function viewImageCache(Request $request, $id)
     {
         $image = app(Image::class)->find($id);

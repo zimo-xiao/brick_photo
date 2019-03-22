@@ -38,6 +38,8 @@ $router->group(['prefix' => 'image'], function ($router) {
         $router->put('{id}', 'ImageController@update');
 
         $router->delete('{id}', 'ImageController@delete');
+
+        $router->delete('batch', 'ImageController@deleteBatch');
         
         $router->get('', 'ImageController@userView');
     });

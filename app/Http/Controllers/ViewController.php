@@ -91,12 +91,19 @@ class ViewController extends Controller
     public function main($request, $view)
     {
         $user = $this->user($request);
-        return view('main', [
+        $adminView = [];
+        if ($user->permission == User::PERMISSION_ADMIN) {
+            $adminView = [
+                'change_permission' => $this->changePermission($request),
+                'delete_image' => $this->deleteImage($request),
+            ];
+        }
+
+        return view('main', array_merge($adminView, [
             'url' => $request->root(),
             'uri' => $request->path(),
             'token' => $request->session()->get('token'),
             'user' => $user,
-            'change_permission' => $this->changePermission($request),
             'add_tags' => $this->addTags($request),
             'add_description' => $this->addDescription($request),
             'login' => $this->login($request),
@@ -104,7 +111,7 @@ class ViewController extends Controller
             'register' => $this->register($request),
             'header' => $this->header($request),
             'custom' => $view
-        ]);
+        ]));
     }
 
     // components
@@ -202,6 +209,19 @@ class ViewController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             return view('component/change_permission', []);
+        }
+    }
+
+    /**
+     * Change permission
+     *
+     * @return [response] view
+     */
+    private function deleteImage($request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            return view('component/delete_image', []);
         }
     }
 
