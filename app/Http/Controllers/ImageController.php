@@ -193,6 +193,7 @@ class ImageController extends Controller
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             $image = app(Image::class)->find($id);
             $image->delete();
+            $this->deleteGlobalCache();
         } else {
             return response()->json([
                 'error_msg' => '你没有权限删除图片'
@@ -209,6 +210,7 @@ class ImageController extends Controller
     {
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             app(Image::class)->whereBetween('id', [$from, $to])->delete();
+            $this->deleteGlobalCache();
         } else {
             return response()->json([
                 'error_msg' => '你没有权限删除图片'
