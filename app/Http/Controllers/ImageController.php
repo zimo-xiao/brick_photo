@@ -208,9 +208,6 @@ class ImageController extends Controller
     public function deleteBatch(Request $request, $from, $to)
     {
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
-            return response()->json([
-                'error_msg' => $from.$to
-            ], 401);
             app(Image::class)->whereBetween('id', [$from, $to])->delete();
         } else {
             return response()->json([
