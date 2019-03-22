@@ -21,19 +21,19 @@
     var app_tags = null;
     </script>
 
-    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="<?=$url;?>/js/over-write.js"></script>
     <script src="<?=$url;?>/layui/main/layui.js"></script>
     <script src="<?=$url;?>/layui/index.js"></script>
     <script src="<?=$url;?>/js/request.js"></script>
-    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?=$url;?>/layui/main/css/layui.css">
     <link href="<?=$url;?>/css/gallery-materialize.min.css" rel="stylesheet">
     <link href="<?=$url;?>/css/over-write.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/material-design-icons@3.0.1/iconfont/material-icons.css" rel="stylesheet">
 </head>
 
 <body>
