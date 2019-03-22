@@ -91,7 +91,10 @@ class ViewController extends Controller
     public function main($request, $view)
     {
         $user = $this->user($request);
-        $adminView = [];
+        $adminView = [
+            'delete_image' => '',
+            'change_permission' => ''
+        ];
         if ($user->permission == User::PERMISSION_ADMIN) {
             $adminView = [
                 'change_permission' => $this->changePermission($request),
