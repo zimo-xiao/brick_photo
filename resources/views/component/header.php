@@ -12,6 +12,9 @@
             <?php
                 if ($token != null) {
                     echo "<li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>".$user->name."</a></li>";
+                    if ($token != null && $user->permission === 3) {
+                        echo "<li><a class='dropdown-trigger' href='#' data-target='admin-dropdown'>管理员操作</a></li>";
+                    }
                 } else {
                     echo "<li><a onclick='$(\"#login\").show()'>登录</a></li><li><a onclick='$(\"#register\").show()'>注册</a></li><li><a onclick='$(\"#find_password\").show()'>找回密码</a></li>";
                 }
@@ -19,9 +22,17 @@
         </ul>
         <?php
             if ($token != null) {
-                // 下拉菜单
                 echo "<ul id='feature-dropdown' class='dropdown-content'>
                     <li><a href='#' onclick='redRequest.logout()'>退出登录</a></li>
+                </ul>";
+            }
+
+            if ($token != null && $user->permission === 3) {
+                echo "<ul id='feature-dropdown' class='dropdown-content'>
+                    <li><a href=\"$url/admin/upload-validation-code\">上传激活码</a></li>
+                    <li><a href=\"#\" onclick=\"$(\'#change_permission\').show()\">修改用户权限</a></li>
+                    <li><a href=\"$url/validation-code\">下载未激活码</a></li>
+                    <li><a href=\"$url/auth/export\">所有用户信息</a></li>
                 </ul>";
             }
         ?>
@@ -44,22 +55,12 @@
                         $indexUnderline = 'active';
                     } elseif ($uri == 'upload') {
                         $uploadUnderline = 'active';
-                    } elseif ($uri == 'admin/upload-validation-code') {
-                        $adminUploadValidationCode = 'active';
                     }
                 ?>
                 <li class="<?=$indexUnderline;?>"><a href="<?=$url;?>">首页</a></li>
                 <?php 
                 if ($token != null && $user->permission != 1) {
                     echo '<li class="'.$uploadUnderline.'"><a href="'.$url.'/upload">上传图片</a></li>';
-                }
-                ?>
-                <?php 
-                if ($token != null && $user->permission === 3) {
-                    echo '<li class="'.$adminUploadValidationCode.'"><a href="'.$url.'/admin/upload-validation-code">上传激活码</a></li>';
-                    echo '<li><a href="#" onclick="$(\'#change_permission\').show()">修改用户权限</a></li>';
-                    echo '<li><a href="'.$url.'/validation-code">下载未激活码</a></li>';
-                    echo '<li><a href="'.$url.'/auth/export">所有用户信息</a></li>';
                 }
                 ?>
                 <li><a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e" target="_black">协议</a></li>
