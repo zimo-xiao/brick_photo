@@ -27,6 +27,8 @@ $router->group(['prefix' => 'download'], function ($router) {
         $router->post('{image}', 'DownloadController@view');
     });
     $router->get('action/{id}', 'DownloadController@action');
+
+    $router->get('export', 'DownloadController@export');
 });
 
 $router->group(['prefix' => 'image'], function ($router) {

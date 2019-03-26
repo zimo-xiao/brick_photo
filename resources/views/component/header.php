@@ -25,6 +25,7 @@
                         <li><a href=\"#\" onclick=\"$('#delete_image_batch').show()\">批量删除图片</a></li>
                         <li><a href=\"$url/validation-code\">下载未激活码</a></li>
                         <li><a href=\"$url/auth/export\">所有用户信息</a></li>
+                        <li><a href=\"$url/download/export\">图片下载动态</a></li>
                     </ul>";
                 }
             ?>

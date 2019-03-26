@@ -64,4 +64,19 @@ class DownloadController extends Controller
             return '下载过期';
         }
     }
+
+    public function export(Request $request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            $users = app(Download::class)->all();
+            return Excel::create('下载动态信息', function ($excel) use ($users) {
+                $excel->sheet('Sheet 1', function ($sheet) use ($users) {
+                    $sheet->fromArray($users);
+                });
+            })->export('xls');
+        } else {
+            return '你没有权限';
+        }
+    }
 }
