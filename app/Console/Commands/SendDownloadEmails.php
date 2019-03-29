@@ -57,10 +57,10 @@ class SendDownloadEmails extends Command
                 if (!isset($indexedTodayDownload[$image->author_id])) {
                     $author = app(User::class)->find($image->author_id);
                     $indexedTodayDownload[$author->id] = [
-                    'name' => $author->name,
-                    'data' => [],
-                    'email' => $author->email
-                ];
+                        'name' => $author->name,
+                        'data' => [],
+                        'email' => $author->email
+                    ];
                 }
             }
             $indexedTodayDownload[$image->author_id]['data'][] = $t;

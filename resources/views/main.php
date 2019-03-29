@@ -28,6 +28,7 @@
     <script src="<?=$url;?>/layui/index.js"></script>
     <script src="<?=$url;?>/js/request.js"></script>
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+    <script type="text/javascript" src="https://s23.cnzz.com/z_stat.php?id=1276832245&web_id=1276832245"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?=$url;?>/layui/main/css/layui.css">
