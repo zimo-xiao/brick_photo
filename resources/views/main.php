@@ -83,6 +83,8 @@
             document.getElementById("anchor").scrollIntoView();
         }
     });
+
+    $('a[title="站长统计"]').hide();
     </script>
 
 </body>
