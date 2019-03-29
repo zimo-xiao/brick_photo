@@ -93,12 +93,14 @@ class ViewController extends Controller
         $user = $this->user($request);
         $adminView = [
             'delete_image' => '',
-            'change_permission' => ''
+            'change_permission' => '',
+            'delete_box' => ''
         ];
         if ($user->permission == User::PERMISSION_ADMIN) {
             $adminView = [
                 'change_permission' => $this->changePermission($request),
                 'delete_image' => $this->deleteImage($request),
+                'delete_box' => $this->deleteBox($request)
             ];
         }
 
@@ -225,6 +227,19 @@ class ViewController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             return view('component/delete_image', []);
+        }
+    }
+
+    /**
+     * Change permission
+     *
+     * @return [response] view
+     */
+    private function deleteBox($request)
+    {
+        $user = $this->user($request);
+        if ($user->permission === User::PERMISSION_ADMIN) {
+            return view('component/delete_box', []);
         }
     }
 

@@ -147,7 +147,8 @@
                                     class="material-icons left">chat_bubble_outline</i>
                                 添加介绍
                             </span>
-                            <span v-if="user.permission === 3" v-bind:onclick='"adminRequest.deleteImage("+image.id+")"'
+                            <span v-if="user.permission === 3"
+                                v-bind:onclick='"$(\"#delete_box\").show();$(\"#delete_box_image_id\").val(\""+image.id+"\")""'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">delete_forever</i>
                                 删除
