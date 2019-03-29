@@ -109,3 +109,11 @@ nav {
 select {
 	color: #ea5662
 }
+
+.main_qr {
+	position: fixed;
+	z-index: 80;
+	right: 0px;
+	top: 60vh;
+	height: 15vh;
+}

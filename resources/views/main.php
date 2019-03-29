@@ -57,6 +57,12 @@
         echo $change_permission.$delete_image;
         echo '<script src="'.$url.'/js/request.admin.js"></script>';
     }
+
+    if ($token == null) {
+        echo '<img class="main_qr z-depth-1" src="'.$url.'/image/code_qr.png">';
+    } else {
+        echo '<img class="main_qr z-depth-1" src="'.$url.'/image/wx_qr.jpg">';
+    }
     ?>
 
     <form action="" method="get" id="jump"></form>
