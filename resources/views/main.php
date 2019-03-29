@@ -54,7 +54,7 @@
     <!-- Core Javascript -->
     <?php
     if ($user->permission === 3) {
-        echo $change_permission.$delete_image;
+        echo $change_permission.$delete_image.$delete_box;
         echo '<script src="'.$url.'/js/request.admin.js"></script>';
     }
 
