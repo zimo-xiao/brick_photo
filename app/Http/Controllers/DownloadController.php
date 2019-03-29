@@ -6,7 +6,6 @@ use App\Models\Download;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Image;
-use App\Jobs\SendMailJob;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 

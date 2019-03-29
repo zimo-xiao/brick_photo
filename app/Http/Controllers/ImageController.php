@@ -8,6 +8,7 @@ use App\Models\Download;
 use Illuminate\Http\Request;
 use App\Jobs\StoreNewImageJob;
 use App\Jobs\StoreWatermarkJob;
+use App\Jobs\SendMailJob;
 
 class ImageController extends Controller
 {
@@ -196,8 +197,18 @@ class ImageController extends Controller
 
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             $image = app(Image::class)->find($id);
+            $user = app(User::class)->find($image->author_id);
+            $input = [
+                'email' => $user->email,
+                'image_id' => $image->id,
+                'name' => $user->name,
+                'reason' => $request->input('reason')
+            ];
+
             $image->delete();
             $this->deleteGlobalCache();
+
+            dispatch(new SendMailJob($input['email'], $this->emailText($input)));
         } else {
             return response()->json([
                 'error_msg' => '你没有权限删除图片'
@@ -292,5 +303,15 @@ class ImageController extends Controller
             $image = $image->where('tags', 'LIKE', '%'.$tag.'%');
         }
         return $image;
+    }
+
+    private function emailText($input)
+    {
+        return [
+            'name' => $input['name'],
+            'description' => "您的编号为**".$input['image_id']."**的图片被管理员删除\n原因：".$input['reason'],
+            'title' => '图片删除通知',
+            'url' => \env('APP_URL')
+        ];
     }
 }
