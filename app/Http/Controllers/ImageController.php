@@ -190,9 +190,9 @@ class ImageController extends Controller
      */
     public function delete(Request $request, $id)
     {
-        $this->validate($request, [
-            'reason' => 'required'
-        ]);
+        return response()->json([
+            'error_msg' => $request->input('request')
+        ], 401);
 
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             $image = app(Image::class)->find($id);
