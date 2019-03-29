@@ -3,7 +3,9 @@ var adminRequest = {
     var id = $("#delete_box_image_id").val();
     var reason = $("#delete_box_reason").val();
     redRequest.token().delete(THIS_URL + '/image/' + id, {
-        reason: reason
+        data: {
+          reason: reason
+        }
       })
       .then(function (response) {
         layer.msg('删除成功，请刷新查看', {
