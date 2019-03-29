@@ -2,21 +2,28 @@ var adminRequest = {
   deleteImage: () => {
     var id = $("#delete_box_image_id").val();
     var reason = $("#delete_box_reason").val();
-    redRequest.token().delete(THIS_URL + '/image/' + id, {
-        data: {
-          reason: reason
-        }
-      })
-      .then(function (response) {
-        layer.msg('删除成功，请刷新查看', {
-          time: 2000
+
+    if (id != '' && reason != '') {
+      redRequest.token().delete(THIS_URL + '/image/' + id, {
+          data: {
+            reason: reason
+          }
+        })
+        .then(function (response) {
+          layer.msg('删除成功，请刷新查看', {
+            time: 2000
+          });
+        })
+        .catch(function (error) {
+          layer.msg(error.response.data['error_msg'], {
+            time: 2000
+          });
         });
-      })
-      .catch(function (error) {
-        layer.msg(error.response.data['error_msg'], {
-          time: 2000
-        });
+    } else {
+      layer.msg('请不要留空', {
+        time: 2000
       });
+    }
   },
 
   deleteImageBatch: () => {
