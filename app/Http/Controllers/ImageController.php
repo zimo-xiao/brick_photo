@@ -309,7 +309,7 @@ class ImageController extends Controller
     {
         return [
             'name' => $input['name'],
-            'description' => "您的编号为**".$input['image_id']."**的图片被管理员删除\n原因：".$input['reason'],
+            'description' => "您的编号为**".$input['image_id']."**的图片被管理员删除\n\n原因：".$input['reason'],
             'title' => '图片删除通知',
             'url' => \env('APP_URL')
         ];
