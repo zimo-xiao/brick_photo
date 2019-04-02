@@ -206,7 +206,6 @@ class AuthController extends Controller
             return Excel::create('所有用户信息', function ($excel) use ($users) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($users) {
                     foreach ($users as $k => $u) {
-                        $users[$k]['usin'] = $this->blurText($u['usin'], 4);
                         $users[$k]['email'] = $this->blurText($u['email'], 4);
                     }
                     $sheet->fromArray($users);
