@@ -72,7 +72,7 @@ class SendDeleteEmails extends Command
         $content = '有'.count($data).'张图片被管理员删除，如有疑问请联系：微信号lrh20021108';
 
         foreach ($data as $d) {
-            $content .= "\n\n编号为**".$d['image_id'].'的图片被管理员删除；原因：**'.$d['reason'].'**';
+            $content .= "\n\n编号为**".$d['image_id'].'**的图片被管理员删除；原因：**'.$d['reason'].'**';
         }
         
         return [
