@@ -91,6 +91,12 @@
     });
 
     $('a[title="站长统计"]').hide();
+
+    var pleaseLoginAlert = () => {
+        layer.msg('校友/教师请使用学号在「右上角登录」，未注册请扫描「右方二维码」获取红砖账号', {
+            time: 2000
+        })
+    }
     </script>
 
 </body>

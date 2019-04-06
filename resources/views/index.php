@@ -23,10 +23,14 @@
             <?php
                 foreach ($tags as $tag) {
                     $on = '';
-                    if ($query['tag'] == $tag['name']) {
-                        $on = 'layui-this';
+                    if ($token === null) {
+                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$admin['name'].'</a></dd>';
+                    } else {
+                        if ($query['tag'] == $tag['name']) {
+                            $on = 'layui-this';
+                        }
+                        echo '<dd class="'.$on.'"><a href="'.$url.'/?tag='.$tag['name'].'#anchor">'.$tag['name'].'</a></dd>';
                     }
-                    echo '<dd class="'.$on.'"><a href="'.$url.'/?tag='.$tag['name'].'#anchor">'.$tag['name'].'</a></dd>';
                 }
             ?>
         </dl>
@@ -37,10 +41,14 @@
             <?php
                 foreach ($authors as $author) {
                     $on = '';
-                    if ($query['author'] == $author['id']) {
-                        $on = 'layui-this';
+                    if ($token === null) {
+                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$admin['name'].'</a></dd>';
+                    } else {
+                        if ($query['author'] == $author['id']) {
+                            $on = 'layui-this';
+                        }
+                        echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$author['id'].'#anchor">'.$author['name'].'</a></dd>';
                     }
-                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$author['id'].'#anchor">'.$author['name'].'</a></dd>';
                 }
             ?>
         </dl>
@@ -51,10 +59,14 @@
             <?php
                 foreach ($admins as $admin) {
                     $on = '';
-                    if ($query['author'] == $admin['id']) {
-                        $on = 'layui-this';
+                    if ($token === null) {
+                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$admin['name'].'</a></dd>';
+                    } else {
+                        if ($query['author'] == $admin['id']) {
+                            $on = 'layui-this';
+                        }
+                        echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$admin['id'].'#anchor">'.$admin['name'].'</a></dd>';
                     }
-                    echo '<dd class="'.$on.'"><a href="'.$url.'/?author='.$admin['id'].'#anchor">'.$admin['name'].'</a></dd>';
                 }
             ?>
         </dl>
@@ -226,7 +238,7 @@ layui.use(['laypage'], function() {
         limit: 40,
         curr: urlParams.get('page'),
         layout: ['prev', 'page', 'next'],
-        jump: function(obj, first) {
+        jump: (obj, first) => {
             if (!first) {
                 var u = new URL(window.location.href);
                 u.searchParams.set('page', obj.curr);
@@ -236,9 +248,13 @@ layui.use(['laypage'], function() {
     });
 });
 
-$('#index_select_order').change(function() {
-    var u = new URL(window.location.href);
-    u.searchParams.set('order', $(this).val());
-    jumpTo(u);
+$('#index_select_order').change(() => {
+    if(TOKEN != null){
+        var u = new URL(window.location.href);
+        u.searchParams.set('order', $(this).val());
+        jumpTo(u);
+    }else{
+        pleaseLoginAlert()
+    }
 });
 </script>
