@@ -122,7 +122,14 @@
             </div>
             <!-- INFO END -->
 
-            <div v-for="image in images" class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
+            <?php
+                $pleaseLogin = '';
+                if ($token === null) {
+                    $pleaseLogin = 'onclick="pleaseLoginAlert()"';
+                }
+            ?>
+
+            <div v-for="image in images" <?=$pleaseLogin;?> class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
                 <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper" style="<?=$replaceShadow;?>">
                     <a class="gallery-cover gray">
                         <img class="responsive-img" v-bind:lay-src="url + '/image/view/cache/' + image.id">
@@ -131,7 +138,7 @@
                         <span>作品编号：{{image.id}}</span>
                     </div>
                     <?php if ($expand) {
-                            ?>
+                ?>
                     <div class="gallery-body">
                         <div class="title-wrapper">
                             <h3>作品编号：{{image.id}}</h3>
@@ -192,7 +199,7 @@
                                 class="material-icons">file_download</i></span>
                     </div>
                     <?php
-                        }?>
+            }?>
                 </div>
             </div>
         </div>
@@ -249,11 +256,11 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(() => {
-    if(TOKEN != null){
+    if (TOKEN != null) {
         var u = new URL(window.location.href);
         u.searchParams.set('order', $(this).val());
         jumpTo(u);
-    }else{
+    } else {
         pleaseLoginAlert()
     }
 });

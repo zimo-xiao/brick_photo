@@ -46,7 +46,7 @@ class SendDeleteEmails extends Command
      */
     public function handle()
     {
-        $todayDownload = app(Download::class)->whereDate('created_at', Carbon::today())->get();
+        $todayDeleted = app(Download::class)->whereDate('created_at', Carbon::today())->get();
 
         $indexedTodayDownload = [];
 
