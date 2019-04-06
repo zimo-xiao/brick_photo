@@ -93,7 +93,7 @@
     $('a[title="站长统计"]').hide();
 
     var pleaseLoginAlert = () => {
-        layer.msg("请在右上角登录，\n\n未注册请扫描右方「二维码」获取红砖账号", {
+        layer.msg("请在右上角登录；未注册请扫描右方 二维码 获取红砖账号", {
             time: 5000
         })
     }
