@@ -17,7 +17,7 @@
             </div>
             <div class="input-field col s12">
                 <input id="register_code" type="text" class="validate" required>
-                <label for="register_code">激活码</label>
+                <label for="register_code">激活码（扫描首页二维码获取）</label>
             </div>
             <div class="input-field col s12">
                 <input id="register_password" type="password" class="validate" required>
