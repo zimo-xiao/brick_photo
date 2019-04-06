@@ -15,7 +15,7 @@ class CreateDeleteTable extends Migration
     {
         Schema::create('delete', function (Blueprint $table) {
             $table->unsignedInteger('image_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('author_id');
             $table->string('reason');
             $table->unsignedInteger('created_by')->nullable($value = true);
             $table->unsignedInteger('updated_by')->nullable($value = true);

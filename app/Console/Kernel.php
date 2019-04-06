@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         Commands\UploadImagesInBatch::class,
         Commands\SendDownloadEmails::class,
         Commands\ResendValidationCode::class,
-        Commands\DeleteImageAfterAWeek::class
+        Commands\DeleteImageAfterAWeek::class,
+        Commands\SendDeleteEmails::class
     ];
 
     /**

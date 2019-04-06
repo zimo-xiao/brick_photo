@@ -12,7 +12,7 @@ namespace App\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use App\Jobs\SendMailJob;
-use App\Models\Image;
+use App\Models\Delete;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -46,42 +46,39 @@ class SendDeleteEmails extends Command
      */
     public function handle()
     {
-        $todayDeleted = app(Download::class)->whereDate('created_at', Carbon::today())->get();
+        $todayDeleted = app(Delete::class)->whereDate('created_at', Carbon::today())->get();
 
-        $indexedTodayDownload = [];
+        $indexedTodayDeleted = [];
 
-        foreach ($todayDownload as $t) {
-            $image = app(Image::class)->find($t['image_id']);
-            if ($image != null) {
-                if (!isset($indexedTodayDownload[$image->author_id])) {
-                    $author = app(User::class)->find($image->author_id);
-                    $indexedTodayDownload[$author->id] = [
-                        'name' => $author->name,
-                        'data' => [],
-                        'email' => $author->email
-                    ];
-                }
+        foreach ($todayDeleted as $t) {
+            if (!isset($indexedTodayDeleted[$t['author_id']])) {
+                $author = app(User::class)->find($t['author_id']);
+                $indexedTodayDeleted[$author->id] = [
+                    'name' => $author->name,
+                    'data' => [],
+                    'email' => $author->email
+                ];
             }
-            $indexedTodayDownload[$image->author_id]['data'][] = $t;
+            $indexedTodayDeleted[$t['author_id']]['data'][] = $t;
         }
         
-        foreach ($indexedTodayDownload as $k => $i) {
+        foreach ($indexedTodayDeleted as $k => $i) {
             dispatch(new SendMailJob($i['email'], $this->emailText($i['name'], $i['data'])));
         }
     }
 
     private function emailText($name, $data)
     {
-        $content = '今天一共有'.count($data).'次图片下载';
+        $content = '有'.count($data).'张图片被管理员删除，如有疑问请联系：微信号lrh20021108';
 
         foreach ($data as $d) {
-            $content .= "\n\n".$d['downloader_name'].'下载了你编号为**'.$d['image_id'].'**的图片，使用原因为：**'.$d['usage'].'**';
+            $content .= "\n\n编号为**".$d['image_id'].'的图片被管理员删除；原因：**'.$d['reason'].'**';
         }
         
         return [
             'name' => $name,
             'description' => $content,
-            'title' => '下载图片提醒'
+            'title' => '图片删除通知'
         ];
     }
 }
