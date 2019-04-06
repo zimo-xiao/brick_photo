@@ -21,7 +21,6 @@ class CreateDeleteTable extends Migration
             $table->unsignedInteger('updated_by')->nullable($value = true);
             $table->timestamps();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 
