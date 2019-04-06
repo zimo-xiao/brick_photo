@@ -24,7 +24,7 @@
                 foreach ($tags as $tag) {
                     $on = '';
                     if ($token === null) {
-                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$admin['name'].'</a></dd>';
+                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$tag['name'].'</a></dd>';
                     } else {
                         if ($query['tag'] == $tag['name']) {
                             $on = 'layui-this';
@@ -42,7 +42,7 @@
                 foreach ($authors as $author) {
                     $on = '';
                     if ($token === null) {
-                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$admin['name'].'</a></dd>';
+                        echo '<dd class="'.$on.'"><a href="#anchor" onclick="pleaseLoginAlert()">'.$author['name'].'</a></dd>';
                     } else {
                         if ($query['author'] == $author['id']) {
                             $on = 'layui-this';
