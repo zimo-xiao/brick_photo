@@ -256,7 +256,7 @@ layui.use(['laypage'], function() {
     });
 });
 
-$('#index_select_order').change(() => {
+$('#index_select_order').change(function() {
     <?php
         if ($token === null) {
             echo 'pleaseLoginAlert()';
