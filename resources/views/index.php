@@ -129,7 +129,8 @@
                 }
             ?>
 
-            <div v-for="image in images" <?=$pleaseLogin;?> class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
+            <div v-for="image in images" <?=$pleaseLogin;?>
+                class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
                 <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper" style="<?=$replaceShadow;?>">
                     <a class="gallery-cover gray">
                         <img class="responsive-img" v-bind:lay-src="url + '/image/view/cache/' + image.id">
@@ -256,12 +257,14 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(() => {
-    if (TOKEN != null) {
-        var u = new URL(window.location.href);
-        u.searchParams.set('order', $(this).val());
-        jumpTo(u);
-    } else {
-        pleaseLoginAlert()
-    }
+    <?php
+        if ($token === null) {
+            echo 'pleaseLoginAlert()';
+        } else {
+            echo "var u = new URL(window.location.href);
+                u.searchParams.set('order', $(this).val());
+                jumpTo(u);";
+        }
+    ?>
 });
 </script>
