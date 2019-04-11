@@ -28,12 +28,12 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
         
-        $usin = strtoLOWER($request->input('usin'));
+        $usin = strtolower($request->input('usin'));
         $password = $request->input('password');
 
         $code = $request->input('code');
 
-        $validation = app(ValidationCode::class)->where(['code' => $code, 'LOWER(usin)' => $usin])->get();
+        $validation = app(ValidationCode::class)->where(['code' => $code])->whereRaw('LOWER(usin) = ?', [$usin])->get();
         if (count($validation) === 0) {
             return response()->json([
                 'error_msg' => '激活码错误'
@@ -57,7 +57,7 @@ class AuthController extends Controller
             ], 401);
         }
                 
-        app(ValidationCode::class)->where(['code' => $code, 'LOWER(usin)' => $usin])->delete();
+        app(ValidationCode::class)->where(['code' => $code])->whereRaw('LOWER(usin) = ?', [$usin])->delete();
 
         $user = $this->validateLogin($usin, $password);
         if (!$user) {
@@ -89,7 +89,7 @@ class AuthController extends Controller
         ]);
 
         $password = $request->input('password');
-        $usin = strtoLOWER($request->input('usin'));
+        $usin = strtolower($request->input('usin'));
         
         $user = $this->validateLogin($usin, $password);
         if (!$user) {
@@ -179,8 +179,8 @@ class AuthController extends Controller
             'usin' => 'required'
         ]);
 
-        $usin = strtoLOWER($request->input('usin'));
-        $user = app(User::class)->where(['LOWER(usin)' => $usin])->limit(1)->get();
+        $usin = strtolower($request->input('usin'));
+        $user = app(User::class)->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->get();
         if (count($user) > 0) {
             $user = $user[0];
 
@@ -250,11 +250,8 @@ class AuthController extends Controller
      */
     private function validateLogin($usin, $password)
     {
-        $usin = strtoLOWER($usin);
-        $query = app(User::class)->where([
-            'LOWER(usin)' => $usin,
-            'password' => $this->encrypt($password)
-        ])->limit(1)->get();
+        $usin = strtolower($usin);
+        $query = app(User::class)->where(['password' => $this->encrypt($password)])->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->get();
 
         if (count($query) > 0) {
             return app(User::class)->find($query[0]['id']);
