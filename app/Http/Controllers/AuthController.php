@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         $code = $request->input('code');
 
-        $validation = app(ValidationCode::class)->where(['code' => $code, 'LCASE(usin)' => $usin])->get();
+        $validation = app(ValidationCode::class)->where(['code' => $code, 'lower(usin)' => $usin])->get();
         if (count($validation) === 0) {
             return response()->json([
                 'error_msg' => '激活码错误'
@@ -57,7 +57,7 @@ class AuthController extends Controller
             ], 401);
         }
                 
-        app(ValidationCode::class)->where(['code' => $code, 'LCASE(usin)' => $usin])->delete();
+        app(ValidationCode::class)->where(['code' => $code, 'lower(usin)' => $usin])->delete();
 
         $user = $this->validateLogin($usin, $password);
         if (!$user) {
@@ -180,7 +180,7 @@ class AuthController extends Controller
         ]);
 
         $usin = strtolower($request->input('usin'));
-        $user = app(User::class)->where(['LCASE(usin)' => $usin])->limit(1)->get();
+        $user = app(User::class)->where(['lower(usin)' => $usin])->limit(1)->get();
         if (count($user) > 0) {
             $user = $user[0];
 
@@ -250,8 +250,9 @@ class AuthController extends Controller
      */
     private function validateLogin($usin, $password)
     {
+        $usin = strtolower($usin);
         $query = app(User::class)->where([
-            'LCASE(usin)' => strtolower($usin),
+            'lower(usin)' => $usin,
             'password' => $this->encrypt($password)
         ])->limit(1)->get();
 
