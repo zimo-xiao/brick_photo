@@ -37,5 +37,6 @@ class StoreWatermarkJob extends Job
         $height = round($width * $watermarkImage->height() / $watermarkImage->width());
         $watermarkImage->resize($width, $height)->opacity(50);
         $orgImage->insert($watermarkImage, 'center')->save($watermarkDir);
+        chmod($watermarkDir, 0777);
     }
 }
