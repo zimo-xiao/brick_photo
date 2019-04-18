@@ -46,19 +46,23 @@ class DownloadController extends Controller
     public function action(Request $request, $code)
     {
         if (\Cache::store('redis')->has($code)) {
-            $img = \Cache::store('redis')->get($code);
+            $imgId = \Cache::store('redis')->get($code);
             \Cache::store('redis')->delete($code);
 
             $user = $this->user($request);
-            $imageDir = \env('IMAGE_DIR');
-            if ($user->permission === User::PERMISSION_ADMIN) {
-                return $this->responseImageFromPath($imageDir, 'raw', $img);
-            } else {
-                $path = $imageDir.'/watermark/'.$img;
-                if (!File::exists($path)) {
-                    return '水印还在生成中，请过10分钟后再来下载';
+            $image = app(Image::class)->find($imgId);
+            if ($image) {
+                if ($user->permission === User::PERMISSION_ADMIN) {
+                    return $this->responseImageFromPath($image->path, 'raw', $image->id);
+                } else {
+                    $path = $image->path.'/raw/'.$image->id;
+                    if (!File::exists($path)) {
+                        return '水印还在生成中，请过10分钟后再来下载';
+                    }
+                    return $this->responseImageFromPath($image->path, 'watermark', $image->id);
                 }
-                return $this->responseImageFromPath($imageDir, 'watermark', $img);
+            } else {
+                return '图片不存在';
             }
         } else {
             return '下载过期';

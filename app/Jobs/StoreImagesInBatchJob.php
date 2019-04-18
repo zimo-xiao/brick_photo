@@ -56,6 +56,9 @@ class StoreImagesInBatchJob extends Job
                         $fhash = $fhash.date('YmdHis', time());
                         exec('node '.$nodeDir.' "'.$toRawDir.'" "'.$toCacheDir.'" "'.$srcDir.$file.'" '.$fhash.' '.$end);
 
+                        chmod($toRawDir.$fhash.'.'.$end, 0777);
+                        chmod($toCacheDir.$fhash.'.'.$end, 0777);
+
                         app(Image::class)->insertTs([
                             'author_id' => $user['id'],
                             'author_name' => $user['name'],
