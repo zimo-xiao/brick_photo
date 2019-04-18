@@ -36,7 +36,7 @@ class DownloadController extends Controller
         while (\Cache::store('redis')->has($code)) {
             $code = $this->generateNumericKey();
         }
-        \Cache::store('redis')->put($code, $image->file_name.'.'.$image->file_format, 5);
+        \Cache::store('redis')->put($code, $id, 5);
         
         return response()->json([
             'code' => $code
@@ -52,14 +52,15 @@ class DownloadController extends Controller
             $user = $this->user($request);
             $image = app(Image::class)->find($imgId);
             if ($image) {
+                $name = $image->file_name.'.'.$image->file_format;
                 if ($user->permission === User::PERMISSION_ADMIN) {
-                    return $this->responseImageFromPath($image->path, 'raw', $image->id);
+                    return $this->responseImageFromPath($image->path, 'raw', $name);
                 } else {
-                    $path = $image->path.'/raw/'.$image->id;
+                    $path = $image->path.'/raw/'.$name;
                     if (!File::exists($path)) {
                         return '水印还在生成中，请过10分钟后再来下载';
                     }
-                    return $this->responseImageFromPath($image->path, 'watermark', $image->id);
+                    return $this->responseImageFromPath($image->path, 'watermark', $name);
                 }
             } else {
                 return '图片不存在';
