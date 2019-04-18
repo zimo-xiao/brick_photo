@@ -66,6 +66,8 @@ class ImageController extends Controller
             }
         }
         
+        chmod($tempImg, 0777);
+
         if ($total == ($index + 1)) {
             dispatch(new StoreNewImageJob($end, $total, $index, $name, $user));
         }
@@ -93,6 +95,9 @@ class ImageController extends Controller
         if (file_put_contents($rawImgDir, $raw) && file_put_contents($cacheImgDir, $cache)) {
             // 删除临时文件
             unlink($tempImg);
+
+            chmod($rawImgDir, 0777);
+            chmod($cacheImgDir, 0777);
 
             // index
             app(Image::class)->insertTs([
