@@ -267,4 +267,8 @@ $('#index_select_order').change(function() {
         }
     ?>
 });
+
+$("img")
+    .on('load', function() { console.log("image loaded correctly"); })
+    .on('error', function() { console.log("error loading image"); })
 </script>
