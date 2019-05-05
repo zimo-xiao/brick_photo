@@ -229,15 +229,6 @@ var app_images = new Vue({
     }
 });
 
-// 循环重新渲染页面
-function renderImages() {
-    resetMasonry();
-    window.requestAnimationFrame(renderImages);
-}
-$(document).ready(function() {
-    renderImages();
-});
-
 layui.use(['laypage'], function() {
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
@@ -268,7 +259,8 @@ $('#index_select_order').change(function() {
     ?>
 });
 
+// 当 img 加载后重新渲染 grid
 $("img")
-    .on('load', function() { console.log("image loaded correctly"); })
-    .on('error', function() { console.log("error loading image"); })
+    .on('load', function() {resetMasonry()})
+    .on('error', function() {resetMasonry()})
 </script>
