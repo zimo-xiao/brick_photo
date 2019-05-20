@@ -126,7 +126,7 @@ class ImageController extends Controller
         $tag = null;
         $page = 1;
         $perPage = 40;
-        $orderBy = 'update_desc';
+        $orderBy = 'created_desc';
         if ($request->has('author')) {
             $author = $request->input('author');
         }

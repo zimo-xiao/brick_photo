@@ -24,7 +24,8 @@ class ValidationCodeController extends Controller
         }
 
         try {
-            Excel::load($request->file('file'), function ($reader) {
+            $errors = [];
+            Excel::load($request->file('file'), function ($reader) use (&$errors) {
                 foreach ($reader->toArray() as $row) {
                     try {
                         if (
@@ -43,6 +44,7 @@ class ValidationCodeController extends Controller
                         }
                     } catch (\Exception $e) {
                         // 如果输入不进去则跳过
+                        $errors[] = $e->getMessage();
                     }
                 }
             });
@@ -54,7 +56,7 @@ class ValidationCodeController extends Controller
         }
 
         return response()->json([
-            'code' => 0
+            'msg' => count($errors) == 0 ? '上传成功' : implode("\n", $errors)
         ]);
     }
 

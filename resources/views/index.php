@@ -86,9 +86,9 @@
                         $update_desc = '';
                         $created_desc = '';
                         $created_asc = '';
-                        if ($query['order'] == null || $query['order'] == 'update_desc') {
+                        if ($query['order'] == 'update_desc') {
                             $update_desc = 'selected';
-                        } elseif ($query['order'] == 'created_desc') {
+                        } elseif ($query['order'] == null || $query['order'] == 'created_desc') {
                             $created_desc = 'selected';
                         } elseif ($query['order'] == 'created_asc') {
                             $created_asc = 'selected';

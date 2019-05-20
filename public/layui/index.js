@@ -76,7 +76,7 @@ layui.use(['layer', 'form', 'element', 'upload'], function () {
       multiple: false,
       number: 1,
       done: function (res) {
-        layer.msg('上传成功', {
+        layer.msg(res.msg, {
           time: 2000
         });
       }
