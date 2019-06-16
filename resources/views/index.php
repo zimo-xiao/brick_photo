@@ -115,8 +115,8 @@
                         </p>
                     </div>
                     <div class="card-action">
-                        <a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e">协议</a>
-                        <a href="#">公示</a>
+                        <a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e" class="white-text">协议</a>
+                        <a href="https://shimo.im/docs/o7R76i5bzDsMDSKm" class="white-text">公示</a>
                     </div>
                 </div>
             </div>
