@@ -136,13 +136,13 @@
                         <img class="responsive-img" v-bind:lay-src="url + '/image/view/cache/' + image.id">
                     </a>
                     <div class="gallery-header">
-                        <span>作品编号：{{image.id}}</span>
+                        <span># {{image.id}} · {{image.author_name}}</span>
                     </div>
                     <?php if ($expand) {
                 ?>
                     <div class="gallery-body">
                         <div class="title-wrapper">
-                            <h3>作品编号：{{image.id}}</h3>
+                            <h3># {{image.id}}</h3>
                             <a v-bind:href="'<?=$url; ?>/?author=' + image.author_id"><span
                                     class="price">作者：{{image.author_name}}</span></a>
                         </div>
