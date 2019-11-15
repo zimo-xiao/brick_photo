@@ -89,6 +89,8 @@ $app->configure('session');
 // 配置Redis
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->configure('database');
+$app->configure('intl');
+$app->configure('bdfz');
 $app->configure('auth');
 $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(Laravel\Tinker\TinkerServiceProvider::class);

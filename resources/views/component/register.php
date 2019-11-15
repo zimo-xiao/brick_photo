@@ -8,32 +8,32 @@
 <div class="cover card" style="top:14vh">
     <div class="inner">
         <div class="row">
-            <h5 style="color: #EA5662">注册 - 欢迎附中人</h5>
+            <h5 style="color: #EA5662"><?=$intl['title']?></h5>
         </div>
         <div class="row">
             <div class="input-field col s12">
                 <input id="register_usin" type="text" class="validate" required>
-                <label for="register_usin">学号</label>
+                <label for="register_usin"><?=$intl['usin']?></label>
             </div>
             <div class="input-field col s12">
                 <input id="register_code" type="text" class="validate" required>
-                <label for="register_code">激活码（扫描首页二维码获取）</label>
+                <label for="register_code"><?=$intl['code']?></label>
             </div>
             <div class="input-field col s12">
                 <input id="register_password" type="password" class="validate" required>
-                <label for="register_password">密码</label>
+                <label for="register_password"><?=$intl['pass']?></label>
             </div>
             <div class="input-field col s12">
                 <input id="register_reenter_password" type="password" class="validate" required>
-                <label for="register_reenter_password">重复输入密码</label>
+                <label for="register_reenter_password"><?=$intl['reenter_pass']?></label>
             </div>
             <div class="input-field col s12">
                 <input id="register_agree" type="checkbox" class="validate" required checked>
-                <span>我已阅读、理解并同意<a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e">《红砖平台使用协议》</a></span>
+                <span><?=$intl['contract']?></span>
             </div>
             <div class="input-field col s12">
                 <button onclick="$('#register').hide();redRequest.register()" class="btn waves-effect waves-light"
-                    style="background-color: #EA5662" type="button" name="action">注册</button>
+                    style="background-color: #EA5662" type="button" name="action"><?=$intl['btn']?></button>
             </div>
         </div>
     </div>

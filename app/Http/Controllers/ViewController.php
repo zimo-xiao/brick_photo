@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Errors;
 use App\Http\Controllers\ImageController;
 use App\Models\Image;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\Apps;
 
 class ViewController extends Controller
 {
+    protected $apps;
+
+    public function __construct()
+    {
+        $this->apps = app(Apps::class);
+    }
+
     /**
      * Render index view
      *
@@ -76,7 +83,8 @@ class ViewController extends Controller
     {
         if (\Cache::store('redis')->has($code)) {
             return $this->main($request, view('reset_password', [
-                'code' => $code
+                'code' => $code,
+                'intl' => $this->apps->intl()['reset_password']
             ]));
         } else {
             return redirect()->route('index');
@@ -105,6 +113,7 @@ class ViewController extends Controller
         }
 
         return view('main', array_merge($adminView, [
+            'intl' => $this->apps->intl()['main'],
             'url' => $request->root(),
             'uri' => $request->path(),
             'token' => $request->session()->get('token'),
@@ -138,14 +147,18 @@ class ViewController extends Controller
             \Cache::store('redis')->put('header_counter', json_encode($counter), 24*60);
         }
 
+        $intl = $this->apps->intl()['header'];
         $user = $this->user($request);
+
+        $intl['tagline'] = str_replace('[images]', $counter['imageCount'], $intl['tagline']);
+        $intl['tagline'] = str_replace('[users]', $counter['userCount'], $intl['tagline']);
+
         return view('component/header', [
+            'intl' => $intl,
             'token' => $request->session()->get('token'),
             'user' => $user,
             'url' => $request->root(),
-            'uri' => $request->path(),
-            'imageCount' => $counter['imageCount'],
-            'userCount' => $counter['userCount'],
+            'uri' => $request->path()
         ]);
     }
 
@@ -158,7 +171,8 @@ class ViewController extends Controller
     {
         if ($request->session()->get('token') === null) {
             return view('component/login', [
-                'url' => $request->root()
+                'url' => $request->root(),
+                'intl' => $this->apps->intl()['login']
             ]);
         }
     }
@@ -253,7 +267,8 @@ class ViewController extends Controller
         if ($request->session()->get('token') === null) {
             return view('component/register', [
                 'url' => $request->root(),
-                'show' => $request->input('show') == 'register'
+                'show' => $request->input('show') == 'register',
+                'intl' => $this->apps->intl()['register']
             ]);
         }
     }
@@ -280,7 +295,9 @@ class ViewController extends Controller
     private function downloadBox($request)
     {
         if ($request->session()->get('token') != null) {
-            return view('component/download_box', []);
+            return view('component/download_box', [
+                'intl' => $this->apps->intl()['download_box']
+            ]);
         }
     }
 

@@ -220,21 +220,6 @@ var redRequest = {
       });
   },
 
-  // TODO: 异步渲染有问题，暂时不用这种方法
-  // visitorImages: () => {
-  //   // if (TOKEN == '') {
-  //   redRequest.token().get(THIS_URL + '/image/visitor')
-  //     .then(function (response) {
-  //       app_images.images = response.data;
-  //     })
-  //     .catch(function (error) {
-  //       layer.msg(error.response.data['error_msg'], {
-  //         time: 2000
-  //       });
-  //     });
-  //   // }
-  // },
-
   download: () => {
     if (TOKEN != '') {
       var id = $("#download_box_image_id").val();

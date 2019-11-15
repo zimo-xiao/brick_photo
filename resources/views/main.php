@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>红砖图库 - 附中的宝藏</title>
+    <title><?=$intl['title']?></title>
 
     <script>
     const THIS_URL = "<?=$url;?>";
@@ -28,7 +28,6 @@
     <script src="<?=$url;?>/layui/index.js"></script>
     <script src="<?=$url;?>/js/request.js"></script>
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
-    <script type="text/javascript" src="https://s23.cnzz.com/z_stat.php?id=1276832245&web_id=1276832245"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?=$url;?>/layui/main/css/layui.css">
@@ -90,10 +89,8 @@
         }
     });
 
-    $('a[title="站长统计"]').hide();
-
     var pleaseLoginAlert = () => {
-        layer.msg("请在右上角登录；未注册请扫描右方 二维码 获取红砖账号", {
+        layer.msg("<?=$intl['pls_login']?>", {
             time: 5000
         })
     }
