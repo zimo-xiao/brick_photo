@@ -29,6 +29,7 @@ class ViewController extends Controller
         $user = $this->user($request);
         $sidebar = $this->getSidebarData();
         return $this->main($request, view('index', [
+            'intl' => $this->apps->intl()['index'],
             'token' => $request->session()->get('token'),
             'user' => $user,
             'query' => [

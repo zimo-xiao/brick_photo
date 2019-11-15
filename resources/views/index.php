@@ -15,10 +15,10 @@
 <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test"
     style="position:fixed;display:inline-block;vertical-align:top;top:64px;border-radius:0px;left:0px;bottom:0px;width:15vw;overflow:auto">
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="<?=$url;?>" onclick="<?=$url;?>">全部</a>
+        <a href="<?=$url?>" onclick="<?=$url?>"><?=$intl['left_menu_bar']['all']?></a>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="">标签</a>
+        <a href=""><?=$intl['left_menu_bar']['tags']?></a>
         <dl class="layui-nav-child">
             <?php
                 foreach ($tags as $tag) {
@@ -36,7 +36,7 @@
         </dl>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="">摄影师/组织</a>
+        <a href=""><?=$intl['left_menu_bar']['photographers']?></a>
         <dl class="layui-nav-child">
             <?php
                 foreach ($authors as $author) {
@@ -54,7 +54,7 @@
         </dl>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="">管理员</a>
+        <a href=""><?=$intl['left_menu_bar']['admins']?></a>
         <dl class="layui-nav-child">
             <?php
                 foreach ($admins as $admin) {
@@ -93,7 +93,7 @@
                         } elseif ($query['order'] == 'created_asc') {
                             $created_asc = 'selected';
                         }
-                        echo '<option value="update_desc" '.$update_desc.'>最新动态</option><option value="created_desc" '.$created_desc.'>最新发布</option><option value="created_asc" '.$created_asc.'>最旧发布</option>';
+                        echo '<option value="update_desc" '.$update_desc.'>'.$intl['order']['update_desc'].'</option><option value="created_desc" '.$created_desc.'>'.$intl['order']['created_desc'].'</option><option value="created_asc" '.$created_asc.'>'.$intl['order']['created_asc'].'</option>';
                         ?>
                 </select>
             </div>
@@ -109,14 +109,15 @@
             <div class="col l4 m6 s12 gallery-item gallery-filter all">
                 <div class="card brick-red">
                     <div class="card-content white-text">
-                        <span class="card-title">关于我们</span>
-                        <p>
-                            红砖是目前北大附中最大的图片库，面向全校同学和附中校友免费开放。我们的目的是以图片的形式收集北大附中的校园记忆，并在保证作者权益的情况下让这些图片得到合理的使用。<br><br>联系/成为摄影师：微信号lrh20021108
-                        </p>
+                        <span class="card-title"><?=$intl['about']['title']?></span>
+                        <p><?=$intl['about']['description']?></p>
                     </div>
                     <div class="card-action">
-                        <a href="https://shimo.im/docs/bmH8eGUP7OEKRP1e" class="white-text">协议</a>
-                        <a href="https://shimo.im/docs/o7R76i5bzDsMDSKm" class="white-text">公示</a>
+                        <?php
+                            foreach ($intl['about']['custom_menu_items'] as $item) {
+                                echo '<a href="'.$item['url'].'" class="white-text">'.$item['name'].'</a>';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -124,6 +125,7 @@
 
             <?php
                 $pleaseLogin = '';
+                $imageIntl = $intl['image'];
                 if ($token === null) {
                     $pleaseLogin = 'onclick="pleaseLoginAlert()"';
                 }
@@ -144,44 +146,43 @@
                         <div class="title-wrapper">
                             <h3># {{image.id}}</h3>
                             <a v-bind:href="'<?=$url; ?>/?author=' + image.author_id"><span
-                                    class="price">作者：{{image.author_name}}</span></a>
+                                    class="price"><?=$imageIntl['author']?>: {{image.author_name}}</span></a>
                         </div>
                         <p class="description" style="line-height:90%;">
                             <span
                                 v-bind:onclick='"$(\"#download_box\").show();$(\"#download_box_image_id\").val(\""+image.id+"\")"'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">file_download</i>
-                                {{image.download_count}}下载
+                                {{image.download_count}}<?=$imageIntl['download']?>
                             </span>
                             <span v-on:click="app_tags.selected_image_tags = image.tag"
                                 v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
                                 v-bind:onclick='"$(\"#tags_box\").show();$(\"#tags_box_image_id\").val(\""+image.id+"\")"'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">turned_in_not</i>
-                                添加标签
+                                <?=$imageIntl['add_tags']?>
                             </span>
                             <span v-on:click="app_description.previous_msg = image.description"
                                 v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
                                 v-bind:onclick='"$(\"#description_box\").show();$(\"#description_box_image_id\").val(\""+image.id+"\")"'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">chat_bubble_outline</i>
-                                添加介绍
+                                <?=$imageIntl['add_description']?>
                             </span>
                             <span v-if="user.permission === 3"
                                 v-bind:onclick='"$(\"#delete_box\").show();$(\"#delete_box_image_id\").val(\""+image.id+"\")"'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">delete_forever</i>
-                                删除
+                                <?=$imageIntl['delete']?>
                             </span>
                             <br><br>
                             <div class="msg"><i class="layui-icon">&#xe645;</i>
-                                侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者
-                                {{image.author_name}}」</div>
+                                {{ "<?=$imageIntl['alert']?>".replace("[author]", image.author_name) }}</div>
                         </p>
                         <!-- description -->
                         <p v-if="image.description != null" class="description br">{{image.description}}</p>
                         <p v-else class="description">
-                            暂时没有作品简介哦
+                            <?=$imageIntl['no_description']?>
                         </p>
                         <p class="description"
                             style="margin-top:35px;border-top-style: solid;border-top-width: 1px;border-top-color: #e0e0e0;">
@@ -223,8 +224,8 @@ var app_images = new Vue({
     data: {
         url: THIS_URL,
         user: USER,
-        images: <?=json_encode($images);?>,
-        app_tags: app_tags,
+        images: < ? = json_encode($images); ? > ,
+        app_tags : app_tags,
         app_description: app_description
     }
 });
@@ -233,8 +234,8 @@ layui.use(['laypage'], function() {
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',
-        count: <?=$count;?>,
-        limit: 40,
+        count: < ? = $count; ? > ,
+        limit : 40,
         curr: urlParams.get('page'),
         layout: ['prev', 'page', 'next'],
         jump: (obj, first) => {
@@ -248,19 +249,26 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(function() {
-    <?php
-        if ($token === null) {
-            echo 'pleaseLoginAlert()';
-        } else {
-            echo "var u = new URL(window.location.href);
-                u.searchParams.set('order', $(this).val());
-                jumpTo(u);";
-        }
-    ?>
+    <
+    ?
+    php
+    if ($token === null) {
+        echo 'pleaseLoginAlert()';
+    } else {
+        echo "var u = new URL(window.location.href);
+        u.searchParams.set('order', $(this).val());
+        jumpTo(u);
+        ";
+    } ?
+    >
 });
 
 // 当 img 加载后重新渲染 grid
 $("img")
-    .on('load', function() {resetMasonry()})
-    .on('error', function() {resetMasonry()})
+    .on('load', function() {
+        resetMasonry()
+    })
+    .on('error', function() {
+        resetMasonry()
+    })
 </script>

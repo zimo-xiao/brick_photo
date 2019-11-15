@@ -48,6 +48,38 @@ return [
                 ]
             ]
         ],
+        'index' => [
+            'left_menu_bar' => [
+                'all' => '全部',
+                'tags' => '标签',
+                'photographers' => '摄影师/组织',
+                'admins' => '管理员'
+            ],
+            'order' => [
+                'update_desc' => '最新动态',
+                'created_desc' => '最新发布',
+                'created_asc' => '最旧发布'
+            ],
+            'about' => [
+                'title' => '关于我们',
+                'description' => '红砖是目前北大附中最大的图片库，面向全校同学和附中校友免费开放。我们',
+                'custom_menu_items' => [
+                    [
+                        'name' => '协议',
+                        'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
+                    ]
+                ]
+            ],
+            'image' => [
+                'author' => '作者',
+                'download' => '下载',
+                'add_tags' => '添加标签',
+                'add_description' => '添加介绍',
+                'no_description' => '暂时没有作品简介哦',
+                'delete' => '删除',
+                'alert' => '侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者[author]」'
+            ]
+        ],
         'main' => [
             'title' => '红砖图库 - 附中的宝藏',
             'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号'
@@ -58,5 +90,9 @@ return [
             'reenter_pass' => '请重复输入密码',
             'btn' => '更新密码'
         ]
+    ],
+    // en
+    'en' => [
+        //
     ]
 ];
