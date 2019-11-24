@@ -18,7 +18,7 @@
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#tags_box').hide();redRequest.addTags()" class="btn waves-effect waves-light"
-                        style="background-color: #EA5662" type="button" name="action">添加标签</button>
+                        style="background-color: #EA5662" type="button" name="action"><?=$intl['btn']?></button>
                 </div>
                 <input type="hidden" value="" id="tags_box_image_id">
             </div>

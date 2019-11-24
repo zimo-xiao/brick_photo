@@ -1,4 +1,4 @@
-<?php 
+<?php
 if ($token != null && $user->permission != 1) {
     ?>
 
@@ -8,12 +8,12 @@ if ($token != null && $user->permission != 1) {
             <!-- 上传图片表单 -->
             <div class="layui-upload-drag up-box" id="upimg">
                 <i class="layui-icon">&#xe67c;</i>
-                <p>将图片拖拽到此处，或点击选择文件，一次最多可上传40张图片</p>
+                <p><?=$intl['instruction']?></p>
             </div>
             <button id="submit" onclick="layer.load();$('#submit').hide();$('#nosubmit').show();redRequest.upload(0, 0)"
-                class="layui-btn layui-btn-fluid" style="margin-top:0.5em">已选择0张图片</button>
+                class="layui-btn layui-btn-fluid" style="margin-top:0.5em"><?=$intl['selected']?></button>
             <button id="nosubmit" class="layui-btn layui-btn-fluid"
-                style="display:none;margin-top:0.5em">上传中请稍后，请不要关闭离开页面...</button>
+                style="display:none;margin-top:0.5em"><?=$intl['btn']?></button>
             <!-- 上传图片表单END -->
         </div>
     </div>

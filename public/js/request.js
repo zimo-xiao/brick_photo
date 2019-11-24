@@ -17,7 +17,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -31,7 +31,7 @@ var redRequest = {
           usin: usin
         })
         .then(function (response) {
-          layer.msg('验证邮箱已发到该学号所绑定的邮箱中，请查收', {
+          layer.msg(intl.request.findPass, {
             time: 2000
           });
         })
@@ -41,7 +41,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -61,7 +61,7 @@ var redRequest = {
           tags: tags
         })
         .then(function (response) {
-          layer.msg('添加成功，请刷新查看', {
+          layer.msg(intl.request.addTags, {
             time: 2000
           });
         })
@@ -71,7 +71,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('权限不正确', {
+      layer.msg(intl.request.permissionDenied, {
         time: 2000
       });
     }
@@ -86,7 +86,7 @@ var redRequest = {
           description: description
         })
         .then(function (response) {
-          layer.msg('添加成功，请刷新查看', {
+          layer.msg(intl.request.addDescription, {
             time: 2000
           });
         })
@@ -96,7 +96,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -121,7 +121,7 @@ var redRequest = {
     var reenterPassword = $("#register_reenter_password").val();
 
     if (password != reenterPassword) {
-      layer.msg('重复输入密码要和原密码一致哦', {
+      layer.msg(intl.request.samePass, {
         time: 2000
       });
     } else if (password != '' && usin != '' && code != '') {
@@ -139,7 +139,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -150,7 +150,7 @@ var redRequest = {
     var reenterPassword = $("#reset_password_reenter_password").val();
 
     if (password != reenterPassword) {
-      layer.msg('重复输入密码要和原密码一致哦', {
+      layer.msg(intl.request.samePass, {
         time: 2000
       });
     } else if (password != '') {
@@ -158,7 +158,7 @@ var redRequest = {
           password: password
         })
         .then(function (response) {
-          alert('密码重置成功！请输入新密码重新登录');
+          alert(intl.request.resetPass);
           window.location = THIS_URL;
         })
         .catch(function (error) {
@@ -167,7 +167,7 @@ var redRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -175,7 +175,7 @@ var redRequest = {
 
   upload: (i, j) => {
     if (files.length == 0) {
-      layer.msg('请选择图片', {
+      layer.msg(intl.request.selectImg, {
         time: 2000
       });
       return;
@@ -203,12 +203,12 @@ var redRequest = {
           } else {
             layer.closeAll('loading');
             layer.open({
-              title: '上传完成',
-              content: '成功上传' + files.length + '张图片，请进入图库查看'
+              title: intl.request.uploadedTitle,
+              content: intl.request.uploadedContent.replace('[counter]', files.length)
             });
             $("#submit").show();
             $('#nosubmit').hide();
-            $('#submit').text('已选择0张图片');
+            $('#submit').text(intl.request.uploadBtn.replace('[counter]', 0));
             files = [];
           }
         }
@@ -233,9 +233,9 @@ var redRequest = {
             var code = response.data['code'];
             var url = THIS_URL + '/download/action/' + code;
             redRequest.pop = layer.open({
-              title: '知情同意',
+              title: intl.request.downloadAlertTitle,
               btn: [],
-              content: '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图<br><br><a href="' + url + '" target="_blank" onclick="layer.close(redRequest.pop)" class="btn waves-effect waves-light" style="background-color: #EA5662">同意并下载图片</a>'
+              content: intl.request.downloadAlert + '<br><br><a href="' + url + '" target="_blank" onclick="layer.close(redRequest.pop)" class="btn waves-effect waves-light" style="background-color: var(--color)">' + intl.request.downloadAlertBtn + '</a>'
             });
           })
           .catch(function (error) {
@@ -244,7 +244,7 @@ var redRequest = {
             });
           });
       } else {
-        layer.msg('请填写下载用途', {
+        layer.msg(intl.request.downloadRequireUsage, {
           time: 2000
         });
       }

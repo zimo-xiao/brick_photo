@@ -21,6 +21,16 @@
     var app_tags = null;
     </script>
 
+    <style>
+        body {
+            --color: <?=$intl['color']?>;
+        }
+    </style>
+
+    <script>
+    var intl = <?=json_encode($intl['js'])?>
+    </script>
+
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="<?=$url;?>/js/over-write.js"></script>

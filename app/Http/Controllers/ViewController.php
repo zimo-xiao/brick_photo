@@ -54,8 +54,11 @@ class ViewController extends Controller
      */
     public function upload(Request $request)
     {
+        $intl = $this->apps->intl()['upload'];
+        $intl['selected'] = str_replace('[img_count]', '0', $intl['selected']);
         $user = $this->user($request);
         return $this->main($request, view('upload', [
+            'intl' => $intl,
             'token' => $request->session()->get('token'),
             'user' => $user
         ]));
@@ -71,6 +74,7 @@ class ViewController extends Controller
         $user = $this->user($request);
         return $this->main($request, view('admin/upload-validation-code', [
             'token' => $request->session()->get('token'),
+            'intl' => $this->apps->intl()['admin_upload_validation_code'],
             'user' => $user
         ]));
     }
@@ -186,7 +190,9 @@ class ViewController extends Controller
     private function findPassword($request)
     {
         if ($request->session()->get('token') === null) {
-            return view('component/find_password', []);
+            return view('component/find_password', [
+                'intl' => $this->apps->intl()['find_password']
+            ]);
         }
     }
 
@@ -201,6 +207,7 @@ class ViewController extends Controller
         if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
             return view('component/tags_box', [
                 'url' => $request->root(),
+                'intl' => $this->apps->intl()['tags_box'],
                 'tags' => $this->getSidebarData()['tags']
             ]);
         }
@@ -215,7 +222,9 @@ class ViewController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
-            return view('component/description_box', []);
+            return view('component/description_box', [
+                'intl' => $this->apps->intl()['description_box']
+            ]);
         }
     }
 
@@ -228,7 +237,9 @@ class ViewController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            return view('component/change_permission', []);
+            return view('component/change_permission', [
+                'intl' => $this->apps->intl()['change_permission']
+            ]);
         }
     }
 
@@ -241,7 +252,9 @@ class ViewController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            return view('component/delete_image', []);
+            return view('component/delete_image', [
+                'intl' => $this->apps->intl()['delete_image']
+            ]);
         }
     }
 
@@ -254,7 +267,9 @@ class ViewController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            return view('component/delete_box', []);
+            return view('component/delete_box', [
+                'intl' => $this->apps->intl()['delete_box']
+            ]);
         }
     }
 

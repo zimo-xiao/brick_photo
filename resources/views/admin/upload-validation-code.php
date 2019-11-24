@@ -1,4 +1,4 @@
-<?php 
+<?php
 if ($token != null && $user->permission == 3) {
     ?>
 
@@ -8,9 +8,9 @@ if ($token != null && $user->permission == 3) {
             <!-- 上传激活码 Excel 表单 -->
             <div class="layui-upload-drag up-box" id="up-validation-code">
                 <i class="layui-icon">&#xe67c;</i>
-                <p>将Excel文件拖拽到此处，或点击选择文件，不可多选</p>
+                <p><?=$intl['instruction']?></p>
             </div>
-            <button id="code_submit" class="layui-btn layui-btn-fluid" style="margin-top:0.5em">上传</button>
+            <button id="code_submit" class="layui-btn layui-btn-fluid" style="margin-top:0.5em"><?=$intl['btn']?></button>
             <!-- 上传激活码 Excel 表单END -->
         </div>
     </div>

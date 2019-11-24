@@ -4,16 +4,16 @@
             <div class="row">
                 <div class="input-field col s12" style="margin-top:20px">
                     <input id="delete_image_batch_from" type="text" class="validate" required>
-                    <label for="delete_image_batch_from">开始编号（删除时包括此图，要小于结束）</label>
+                    <label for="delete_image_batch_from"><?=$intl['end']?></label>
                 </div>
                 <div class="input-field col s12" style="margin-top:20px">
                     <input id="delete_image_batch_to" type="text" class="validate" required>
-                    <label for="delete_image_batch_to">结束编号（删除时包括此图）</label>
+                    <label for="delete_image_batch_to"><?=$intl['end']?></label>
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#delete_image_batch').hide();adminRequest.deleteImageBatch()"
                         class="btn waves-effect waves-light" style="background-color: #EA5662" type="button"
-                        name="action">删除图片</button>
+                        name="action"><?=$intl['btn']?></button>
                 </div>
             </div>
         </div>

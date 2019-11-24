@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Services\Apps;
 
 class DownloadController extends Controller
 {
+    protected $intl;
+
+    public function __construct()
+    {
+        $this->intl = app(Apps::class)->intl()['downloadController'];
+    }
+
     public function view(Request $request, $id)
     {
         $this->validate($request, [
@@ -21,7 +29,7 @@ class DownloadController extends Controller
         $image = app(Image::class)->find($id);
         if (!$image) {
             return response()->json([
-                'error_msg' => '图片不存在'
+                'error_msg' => $this->intl['imgNotExits']
             ], 401);
         }
 
@@ -58,15 +66,15 @@ class DownloadController extends Controller
                 } else {
                     $path = $image->path.'/raw/'.$name;
                     if (!File::exists($path)) {
-                        return '水印还在生成中，请过10分钟后再来下载';
+                        return $this->intl['imgProcessNotComplete'];
                     }
                     return $this->responseImageFromPath($image->path, 'watermark', $name);
                 }
             } else {
-                return '图片不存在';
+                return $this->intl['imgNotExits'];
             }
         } else {
-            return '下载过期';
+            return $this->intl['expiredDownloadSession'];
         }
     }
 
@@ -75,13 +83,13 @@ class DownloadController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             $users = app(Download::class)->all();
-            return Excel::create('下载动态信息', function ($excel) use ($users) {
+            return Excel::create($this->intl['downloadActivity'], function ($excel) use ($users) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($users) {
                     $sheet->fromArray($users);
                 });
             })->export('xls');
         } else {
-            return '你没有权限';
+            return $this->intl['permissionDenied'];
         }
     }
 }

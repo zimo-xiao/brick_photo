@@ -58,7 +58,7 @@ class Controller extends BaseController
         $path = $path.'/'.$dir.'/'.$image;
         if (!File::exists($path)) {
             return response()->json([
-                'error_msg' => '图片不存在'
+                'error_msg' => 'image not exists'
             ], 404);
         }
 

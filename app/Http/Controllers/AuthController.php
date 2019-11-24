@@ -9,9 +9,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendMailJob;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Services\Apps;
 
 class AuthController extends Controller
 {
+    protected $intl;
+
+    public function __construct()
+    {
+        $this->intl = app(Apps::class)->intl()['authController'];
+    }
+
     /**
      * Register user
      *
@@ -36,7 +44,7 @@ class AuthController extends Controller
         $validation = app(ValidationCode::class)->where(['code' => $code])->whereRaw('LOWER(usin) = ?', [$usin])->get();
         if (count($validation) === 0) {
             return response()->json([
-                'error_msg' => '激活码错误'
+                'error_msg' => $this->intl['validationCodeError']
             ], 401);
         }
 
@@ -53,7 +61,7 @@ class AuthController extends Controller
             $user->save();
         } catch (\Exception $e) {
             return response()->json([
-                'error_msg' => '该学号已被注册'
+                'error_msg' => $this->intl['usinExists']
             ], 401);
         }
                 
@@ -62,7 +70,7 @@ class AuthController extends Controller
         $user = $this->validateLogin($usin, $password);
         if (!$user) {
             return response()->json([
-                'error_msg' => '用户验证错误'
+                'error_msg' => $this->intl['validationError']
             ], 401);
         }
 
@@ -94,7 +102,7 @@ class AuthController extends Controller
         $user = $this->validateLogin($usin, $password);
         if (!$user) {
             return response()->json([
-                'error_msg' => '用户名或密码错误'
+                'error_msg' => $this->intl['passOrUsinError']
             ], 401);
         }
         
@@ -148,12 +156,12 @@ class AuthController extends Controller
                 }
             } else {
                 return response()->json([
-                    'error_msg' => '该用户不存在'
+                    'error_msg' => $this->intl['userNotExists']
                 ], 401);
             }
         } else {
             return response()->json([
-                'error_msg' => '操作用户'
+                'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
     }
@@ -193,7 +201,7 @@ class AuthController extends Controller
             dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, $request->root())));
         } else {
             return response()->json([
-                'error_msg' => '该用户不存在'
+                'error_msg' => $this->intl['userNotExists']
             ], 401);
         }
     }
@@ -203,7 +211,7 @@ class AuthController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             $users = app(User::class)->all();
-            return Excel::create('所有用户信息', function ($excel) use ($users) {
+            return Excel::create($this->intl['allUserInfo'], function ($excel) use ($users) {
                 $excel->sheet('Sheet 1', function ($sheet) use ($users) {
                     foreach ($users as $k => $u) {
                         $users[$k]['email'] = $this->blurText($u['email'], 4);
@@ -212,7 +220,7 @@ class AuthController extends Controller
                 });
             })->export('xls');
         } else {
-            return '你没有权限';
+            return $this->intl['permissionDenied'];
         }
     }
 
@@ -236,7 +244,7 @@ class AuthController extends Controller
             \Cache::store('redis')->delete($code);
         } else {
             return response()->json([
-                'error_msg' => '验证出错'
+                'error_msg' => $this->intl['validationError']
             ], 401);
         }
     }
@@ -296,8 +304,8 @@ class AuthController extends Controller
     {
         return [
             'name' => $name,
-            'description' => '请点击以下链接找回密码（50分钟内有效）：'.$url.'/reset-password/'.$code,
-            'title' => '找回密码邮件'
+            'description' => str_replace('[url]', $url.'/reset-password/'.$code, $this->intl['email']['resetPass']['description']),
+            'title' => $this->intl['email']['resetPass']['title']
         ];
     }
 
@@ -305,8 +313,8 @@ class AuthController extends Controller
     {
         return [
             'name' => $name,
-            'description' => "恭喜你成为红砖摄影师，现在传图权限已经为你开启啦！\n\n\n请退出账号重新登陆,传图等功能已为您开启，如遇到任何问题请及时联系我们。期待你可以把自己满意的作品传到红砖，为附中增添一份宝藏！\n\n\n如果在传图的过程中遇到问题，或者你有大量传图的需求，欢迎联系我们（微信：lrh20021108），我们会第一时间给予支持！",
-            'title' => '欢迎！摄影师！'
+            'description' => $this->intl['email']['welcome']['description'],
+            'title' => $this->intl['email']['welcome']['title']
         ];
     }
 }

@@ -1,13 +1,13 @@
 nav {
-	background-color: #ea5662
+	background-color: var(--color)
 }
 
 .brick-red {
-	background-color: #ea5662
+	background-color: var(--color)
 }
 
 .pagination li.active {
-	background-color: #ea5662
+	background-color: var(--color)
 }
 
 .card p {
@@ -82,20 +82,20 @@ nav {
 .msg {
 	border-style: solid;
 	border-width: 1px;
-	border-color: #ea5662;
+	border-color: var(--color);
 	background-color: #fff;
 	line-height: 1em;
 	padding: 12px;
 	margin-bottom: 15px;
 	border-radius: 5px;
-	color: #ea5662
+	color: var(--color)
 }
 
 .tag {
 	float: left;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #ea5662;
+	border-color: var(--color);
 	background-color: #fff;
 	line-height: 1em;
 	padding: 12px;
@@ -103,11 +103,11 @@ nav {
 	margin-right: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
-	color: #ea5662
+	color: var(--color)
 }
 
 select {
-	color: #ea5662
+	color: var(--color)
 }
 
 .main_qr {
