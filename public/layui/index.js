@@ -5,14 +5,10 @@ layui.config({
 
 var files = [];
 //载入layui组建
-var form = null;
 var layer = null;
-var element = null;
 
-layui.use(['layer', 'form', 'element', 'upload'], function () {
-  form = layui.form;
+layui.use(['layer', 'upload'], function () {
   layer = layui.layer;
-  element = layui.element;
   var upload = layui.upload;
 
   if (URI === 'upload') {

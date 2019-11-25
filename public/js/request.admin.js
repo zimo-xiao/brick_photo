@@ -10,7 +10,7 @@ var adminRequest = {
           }
         })
         .then(function (response) {
-          layer.msg('删除成功，请刷新查看', {
+          layer.msg(intl.request.admin.deleteSuccess, {
             time: 2000
           });
         })
@@ -20,7 +20,7 @@ var adminRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }
@@ -28,14 +28,14 @@ var adminRequest = {
 
   deleteImageBatch: () => {
     layer.open({
-      content: '请问你是否要删除这些图片？',
-      btn: ['删除'],
+      content: intl.request.admin.wantToDelete,
+      btn: [intl.request.admin.deleteBtn],
       yes: function (index, layero) {
         var from = $("#delete_image_batch_from").val();
         var to = $("#delete_image_batch_to").val();
         redRequest.token().delete(THIS_URL + '/image/batch/range/' + from + '/' + to, {})
           .then(function (response) {
-            layer.msg('删除成功，请刷新查看', {
+            layer.msg(intl.request.admin.deleteSuccess, {
               time: 2000
             });
           })
@@ -58,7 +58,7 @@ var adminRequest = {
           permission: permission
         })
         .then(function (response) {
-          layer.msg('更改成功，请让用户退出登录再登录', {
+          layer.msg(intl.request.admin.changePermissionSuccess, {
             time: 2000
           });
         })
@@ -68,7 +68,7 @@ var adminRequest = {
           });
         });
     } else {
-      layer.msg('请不要留空', {
+      layer.msg(intl.request.noEmpty, {
         time: 2000
       });
     }

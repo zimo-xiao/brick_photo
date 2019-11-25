@@ -5,12 +5,15 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Services\Apps;
 
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $email;
+
+    protected $intl;
 
     /**
      * Create a new message instance.
@@ -23,6 +26,7 @@ class SendMail extends Mailable
             $tmp['url'] = \env('APP_URL');
         }
         $this->email = $tmp;
+        $this->intl = app(Apps::class)->intl()['email'];
     }
 
     /**
@@ -32,6 +36,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.tmp')->subject($this->email['title'].' | 红砖图库');
+        return $this->markdown('emails.tmp')->subject($this->email['title'].' | '.$this->intl['siteName']);
     }
 }

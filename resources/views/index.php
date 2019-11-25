@@ -234,7 +234,7 @@ layui.use(['laypage'], function() {
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',
-        count: < ? = $count; ? > ,
+        count: <?=$count?> ,
         limit : 40,
         curr: urlParams.get('page'),
         layout: ['prev', 'page', 'next'],

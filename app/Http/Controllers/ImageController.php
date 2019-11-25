@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 use App\Jobs\StoreNewImageJob;
 use App\Jobs\StoreWatermarkJob;
 use App\Jobs\SendMailJob;
+use App\Services\Apps;
 
 class ImageController extends Controller
 {
+    protected $intl;
+
+    public function __construct()
+    {
+        $this->intl = app(Apps::class)->intl()['imageController'];
+    }
+
     /**
      * Upload an image piece by piece
      *
@@ -39,7 +47,7 @@ class ImageController extends Controller
         // 权限
         if ($user->permission != User::PERMISSION_WRITE && $user->permission != User::PERMISSION_ADMIN) {
             return response()->json([
-                'error_msg' => '你没有权限上传图片'
+                'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
 
@@ -154,7 +162,7 @@ class ImageController extends Controller
         if ($request->has('page')) {
             $page = $request->input('page');
         }
-        return $this->view($page, $perPage, $author = null, $tag = '编辑推荐', 'update_desc');
+        return $this->view($page, $perPage, $author = null, $tag = $this->intl['visitorViewTag'], 'update_desc');
     }
 
     /**
@@ -170,9 +178,9 @@ class ImageController extends Controller
             if ($request->has('tags')) {
                 $tags = $request->input('tags');
                 // 如果不是admin，则不能设置编辑推荐
-                if (\in_array('编辑推荐', $tags) && $request->user()->permission != User::PERMISSION_ADMIN) {
+                if (\in_array($this->intl['visitorViewTag'], $tags) && $request->user()->permission != User::PERMISSION_ADMIN) {
                     $tags = array_filter($tags, function ($a) {
-                        return $a != '编辑推荐';
+                        return $a != $this->intl['visitorViewTag'];
                     });
                 }
                 $image->tags = json_encode($tags);
@@ -185,7 +193,7 @@ class ImageController extends Controller
             $image->save();
         } else {
             return response()->json([
-                'error_msg' => '你没有权限修改图片'
+                'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
     }
@@ -214,7 +222,7 @@ class ImageController extends Controller
             $this->deleteGlobalCache();
         } else {
             return response()->json([
-                'error_msg' => '你没有权限删除图片'
+                'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
     }
@@ -231,7 +239,7 @@ class ImageController extends Controller
             $this->deleteGlobalCache();
         } else {
             return response()->json([
-                'error_msg' => '你没有权限删除图片'
+                'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
     }
@@ -243,7 +251,7 @@ class ImageController extends Controller
             return $this->responseImageFromPath($image->path, 'cache', $image->file_name.'.jpg');
         } else {
             return response()->json([
-                'error_msg' => '图片不存在'
+                'error_msg' => $this->intl['imgNotExits']
             ], 404);
         }
     }
