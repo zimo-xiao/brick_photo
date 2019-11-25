@@ -9,7 +9,7 @@
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#description_box').hide();redRequest.addDescription()"
-                        class="btn waves-effect waves-light" style="background-color: #EA5662" type="button"
+                        class="btn waves-effect waves-light" style="background-color: var(--color)" type="button"
                         name="action"><?=$intl['btn']?></button>
                 </div>
                 <input type="hidden" value="" id="description_box_image_id">

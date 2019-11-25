@@ -8,7 +8,7 @@
 <div class="cover card" style="top:14vh">
     <div class="inner">
         <div class="row">
-            <h5 style="color: #EA5662"><?=$intl['title']?></h5>
+            <h5 style="color: var(--color)"><?=$intl['title']?></h5>
         </div>
         <div class="row">
             <div class="input-field col s12">
@@ -33,7 +33,7 @@
             </div>
             <div class="input-field col s12">
                 <button onclick="$('#register').hide();redRequest.register()" class="btn waves-effect waves-light"
-                    style="background-color: #EA5662" type="button" name="action"><?=$intl['btn']?></button>
+                    style="background-color: var(--color)" type="button" name="action"><?=$intl['btn']?></button>
             </div>
         </div>
     </div>

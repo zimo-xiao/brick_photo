@@ -12,7 +12,7 @@
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#delete_image_batch').hide();adminRequest.deleteImageBatch()"
-                        class="btn waves-effect waves-light" style="background-color: #EA5662" type="button"
+                        class="btn waves-effect waves-light" style="background-color: var(--color)" type="button"
                         name="action"><?=$intl['btn']?></button>
                 </div>
             </div>

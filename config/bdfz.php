@@ -4,7 +4,7 @@ return [
     'url' => 'hong.zuggr.com',
     'name' => '红砖图库',
     'logo' => 'https://hong.zuggr.com/image/logo.png',
-    'color' => '#ea5662',
+    'color' => 'var(--color)',
     'usin' => '学号',
     'contract' => [
         'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e/read',

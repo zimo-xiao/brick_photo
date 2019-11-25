@@ -10,7 +10,7 @@
                 </div>
                 <div class="input-field col s12">
                     <button onclick="$('#download_box').hide();redRequest.download()"
-                        class="btn waves-effect waves-light" style="background-color: #EA5662" type="button"
+                        class="btn waves-effect waves-light" style="background-color: var(--color)" type="button"
                         name="action"><?=$intl['btn']?></button>
                 </div>
                 <input type="hidden" value="" id="download_box_image_id">
