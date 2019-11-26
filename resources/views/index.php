@@ -224,7 +224,7 @@ var app_images = new Vue({
     data: {
         url: THIS_URL,
         user: USER,
-        images: < ? = json_encode($images); ? > ,
+        images: <?=json_encode($images)?> ,
         app_tags : app_tags,
         app_description: app_description
     }
@@ -249,9 +249,7 @@ layui.use(['laypage'], function() {
 });
 
 $('#index_select_order').change(function() {
-    <
-    ?
-    php
+    <?php
     if ($token === null) {
         echo 'pleaseLoginAlert()';
     } else {
@@ -259,8 +257,8 @@ $('#index_select_order').change(function() {
         u.searchParams.set('order', $(this).val());
         jumpTo(u);
         ";
-    } ?
-    >
+    }
+    ?>
 });
 
 // 当 img 加载后重新渲染 grid

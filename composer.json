@@ -9,6 +9,7 @@
         "dusterio/lumen-passport": "^0.2.9",
         "filp/whoops": "^2.3",
         "gladcodes/keygen": "^1.1",
+        "hhxsv5/laravel-s": "^3.5",
         "illuminate/mail": "^5.7",
         "illuminate/redis": "^5.7",
         "illuminate/session": "^5.7",

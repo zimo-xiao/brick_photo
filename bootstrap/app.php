@@ -105,9 +105,11 @@ $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Sentry\Laravel\ServiceProvider::class);
 $app->configure('mail');
+$app->configure('laravels');
 $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+$app->register(Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
