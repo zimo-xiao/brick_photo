@@ -75,6 +75,11 @@ return [
                         'changePermissionSuccess' => '更改成功，请让用户退出登录再登录'
                     ]
                 ]
+            ],
+            'dns' => [
+                'jquery' => 'https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js',
+                'axios' => 'https://unpkg.com/axios@0.18.0/dist/axios.min.js',
+                'vue' => 'https://unpkg.com/vue@2.6.10/dist/vue.min.js'
             ]
         ],
         'login' => [
