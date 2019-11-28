@@ -3,7 +3,13 @@ return [
     'cn' => [
         'email' => [
             'siteName' => '红砖图库',
-            
+            'siteColor' => '#13294b',
+            'default' => [
+                'hello' => '你好',
+                'title' => '来自红砖图库的一封信',
+                'btn' => '点击进入红砖',
+                'thanks' => '感谢'
+            ]
         ],
         'authController' => [
             'validationCodeError' => '激活码错误',

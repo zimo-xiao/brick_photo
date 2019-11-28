@@ -13,7 +13,7 @@
     const THIS_URL = "<?=$url;?>";
     const TOKEN = "<?=$token;?>";
     const URI = "<?=$uri;?>";
-    const USER = <?=json_encode($user);?>;
+    const USER = <?=json_encode($user)?> ;
     var userInfo = [];
 
     // Vue placeholder
@@ -22,9 +22,9 @@
     </script>
 
     <style>
-        body {
-            --color: <?=$intl['color']?>;
-        }
+    body {
+        --color: <?=$intl['color']?>;
+    }
     </style>
 
     <script>

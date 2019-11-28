@@ -29,6 +29,6 @@ class SendMailJob extends Job
      */
     public function handle()
     {
-        Mail::to($this->to)->send(new SendMail($this->tmp));
+        Mail::to($this->to)->send(new SendMail($this->tmp, 'default'));
     }
 }

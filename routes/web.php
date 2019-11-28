@@ -66,3 +66,5 @@ $router->get('reset-password/{id}', 'ViewController@resetPassword');
 $router->group(['prefix' => 'admin'], function ($router) {
     $router->get('upload-validation-code', 'ViewController@adminUploadValidationCode');
 });
+
+$router->get('test', 'ViewController@test');

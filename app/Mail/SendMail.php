@@ -13,20 +13,23 @@ class SendMail extends Mailable
 
     public $email;
 
-    protected $intl;
+    public $intl;
+
+    protected $type;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($tmp)
+    public function __construct($tmp, $type)
     {
         if (!isset($tmp['url'])) {
             $tmp['url'] = \env('APP_URL');
         }
-        $this->email = $tmp;
         $this->intl = app(Apps::class)->intl()['email'];
+        $this->email = $tmp;
+        $this->type = $type;
     }
 
     /**
@@ -36,6 +39,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.tmp')->subject($this->email['title'].' | '.$this->intl['siteName']);
+        return $this->markdown('emails.'.$this->type.'.tmp')->subject($this->email['title'].' | '.$this->intl['siteName']);
     }
 }

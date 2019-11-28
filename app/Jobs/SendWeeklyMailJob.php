@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendWeeklyMail;
+use App\Mail\SendMail;
 
 class SendMailJob extends Job
 {
@@ -29,6 +29,6 @@ class SendMailJob extends Job
      */
     public function handle()
     {
-        Mail::to($this->to)->send(new SendWeeklyMail($this->tmp));
+        Mail::to($this->to)->send(new SendMail($this->tmp, 'weekly'));
     }
 }
