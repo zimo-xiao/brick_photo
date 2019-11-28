@@ -1,0 +1,22 @@
+#! /bin/bash
+
+DOCKER_ROOT="/var/www/"
+PROJECT_NAME="brick_photo"
+
+# Permission check
+echo "🤖 step 1: change permission (current)"
+(cd ~/laradock && docker-compose exec -T php-worker chmod -R 777 $DOCKER_ROOT$PROJECT_NAME)
+echo "🤖 step 2: change permission (future)"
+(cd ~/laradock && docker-compose exec -T php-worker chmod -R g+s $DOCKER_ROOT$PROJECT_NAME)
+
+# composer update
+echo "🤖 step 3: update dependency"
+(cd ~/laradock && docker-compose exec -T workspace sh -c "cd $DOCKER_ROOT$PROJECT_NAME && composer install")
+
+# composer update
+echo "🤖 step 4: migrate"
+(cd ~/laradock && docker-compose exec -T workspace sh -c "cd $DOCKER_ROOT$PROJECT_NAME && php artisan migrate --force")
+
+# Restart service
+echo "🤖 step 5: restart services"
+(cd ~/laradock && docker-compose exec -T php-worker supervisorctl restart all)

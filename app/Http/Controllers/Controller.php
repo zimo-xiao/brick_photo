@@ -23,6 +23,8 @@ class Controller extends BaseController
                         ->withHeader('Authorization: Bearer '.$token)
                         ->asJson()
                         ->get();
+                    dump($out);
+                    return
                     \Cache::store('redis')->put(json_encode($out), 'user_info_'.$token, 5);
                 }
                 // HACK: 测试用户是否存在，故意报错
