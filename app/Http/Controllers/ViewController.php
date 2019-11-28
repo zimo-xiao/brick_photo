@@ -335,6 +335,10 @@ class ViewController extends Controller
     public function test(Request $request)
     {
         $request->session()->forget('_token');
+    }
+
+    public function showSession(Request $request)
+    {
         return $request->session()->all();
     }
 }
