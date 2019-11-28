@@ -39,7 +39,7 @@ class ViewController extends Controller
             ],
             'images' => $images['data'],
             'count' => $images['count'],
-            'url' => $request->root(),
+            'url' => \env('APP_URL'),
             'tags' => $sidebar['tags'],
             'authors' => $sidebar['authors'],
             'admins' => $sidebar['admins'],
@@ -119,7 +119,7 @@ class ViewController extends Controller
 
         return view('main', array_merge($adminView, [
             'intl' => $this->apps->intl()['main'],
-            'url' => $request->root(),
+            'url' => \env('APP_URL'),
             'uri' => $request->path(),
             'token' => $request->session()->get('access_token'),
             'user' => $user,
@@ -162,7 +162,7 @@ class ViewController extends Controller
             'intl' => $intl,
             'token' => $request->session()->get('access_token'),
             'user' => $user,
-            'url' => $request->root(),
+            'url' => \env('APP_URL'),
             'uri' => $request->path()
         ]);
     }
@@ -176,7 +176,7 @@ class ViewController extends Controller
     {
         if ($request->session()->get('access_token') === null) {
             return view('component/login', [
-                'url' => $request->root(),
+                'url' => \env('APP_URL'),
                 'intl' => $this->apps->intl()['login']
             ]);
         }
@@ -206,7 +206,7 @@ class ViewController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_WRITE || $user->permission === User::PERMISSION_ADMIN) {
             return view('component/tags_box', [
-                'url' => $request->root(),
+                'url' => \env('APP_URL'),
                 'intl' => $this->apps->intl()['tags_box'],
                 'tags' => $this->getSidebarData()['tags']
             ]);
@@ -282,7 +282,7 @@ class ViewController extends Controller
     {
         if ($request->session()->get('access_token') === null) {
             return view('component/register', [
-                'url' => $request->root(),
+                'url' => \env('APP_URL'),
                 'show' => $request->input('show') == 'register',
                 'intl' => $this->apps->intl()['register']
             ]);

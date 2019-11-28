@@ -198,7 +198,7 @@ class AuthController extends Controller
             }
             \Cache::store('redis')->put($code, $user['id'], 60);
 
-            dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, $request->root())));
+            dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, \env('APP_URL'))));
         } else {
             return response()->json([
                 'error_msg' => $this->intl['userNotExists']

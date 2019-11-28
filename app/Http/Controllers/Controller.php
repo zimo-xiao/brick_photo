@@ -19,12 +19,10 @@ class Controller extends BaseController
                 if (\Cache::store('redis')->has('user_info_'.$token)) {
                     $out = json_decode(\Cache::store('redis')->get('user_info_'.$token));
                 } else {
-                    $out = Curl::to($request->root().'/auth')
+                    $out = Curl::to(\env('APP_URL').'/auth')
                         ->withHeader('Authorization: Bearer '.$token)
                         ->asJson()
                         ->get();
-                    dump($out);
-                    return
                     \Cache::store('redis')->put(json_encode($out), 'user_info_'.$token, 5);
                 }
                 // HACK: 测试用户是否存在，故意报错
