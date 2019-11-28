@@ -107,7 +107,6 @@ class AuthController extends Controller
         }
         
         $token = $this->createAccessToken($user);
-        return $token;
         $request->session()->put('access_token', $token['access_token']);
     }
   

@@ -29,6 +29,7 @@ class Controller extends BaseController
                 $out->permission;
                 return $out;
             } catch (\Exception $e) {
+                dd($e);
                 $request->session()->forget('access_token');
                 \Cache::store('redis')->delete('user_info_'.$token);
                 return json_decode(json_encode([
