@@ -68,4 +68,4 @@ $router->group(['prefix' => 'admin'], function ($router) {
 });
 
 $router->get('test', 'ViewController@test');
-$router->get('test', 'ViewController@showSession');
+$router->get('show', 'ViewController@showSession');
