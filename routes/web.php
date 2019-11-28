@@ -67,5 +67,6 @@ $router->group(['prefix' => 'admin'], function ($router) {
     $router->get('upload-validation-code', 'ViewController@adminUploadValidationCode');
 });
 
-$router->get('test', 'ViewController@test');
-$router->get('show', 'ViewController@showSession');
+$router->get('put', 'ViewController@put');
+$router->get('show', 'ViewController@show');
+$router->get('forget', 'ViewController@forget');

@@ -332,12 +332,17 @@ class ViewController extends Controller
         return $sidebar;
     }
 
-    public function test(Request $request)
+    public function put(Request $request)
     {
-        $request->session()->forget('_token');
+        $request->session()->put('test', 'hhh');
     }
 
-    public function showSession(Request $request)
+    public function forget(Request $request)
+    {
+        $request->session()->forget('test');
+    }
+
+    public function show(Request $request)
     {
         return $request->session()->all();
     }
