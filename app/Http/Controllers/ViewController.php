@@ -332,7 +332,7 @@ class ViewController extends Controller
         return $sidebar;
     }
 
-    public function test($request)
+    public function test(Request $request)
     {
         return $request->cookie();
     }
