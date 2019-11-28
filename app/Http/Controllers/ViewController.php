@@ -334,6 +334,6 @@ class ViewController extends Controller
 
     public function test(Request $request)
     {
-        return $request->session()->get();
+        return $request->session()->all();
     }
 }
