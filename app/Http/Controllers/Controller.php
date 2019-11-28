@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     public function user($request)
     {
-        $token = $request->session()->get('token');
+        $token = $request->session()->get('access_token');
         if ($token != null) {
             try {
                 if (\Cache::store('redis')->has('user_info_'.$token)) {
@@ -29,7 +29,7 @@ class Controller extends BaseController
                 $out->permission;
                 return $out;
             } catch (\Exception $e) {
-                $request->session()->forget('token');
+                $request->session()->forget('access_token');
                 \Cache::store('redis')->delete('user_info_'.$token);
                 return json_decode(json_encode([
                     'name' => null,

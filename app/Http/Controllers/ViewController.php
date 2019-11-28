@@ -30,7 +30,7 @@ class ViewController extends Controller
         $sidebar = $this->getSidebarData();
         return $this->main($request, view('index', [
             'intl' => $this->apps->intl()['index'],
-            'token' => $request->session()->get('token'),
+            'token' => $request->session()->get('access_token'),
             'user' => $user,
             'query' => [
                 'tag' => $request->input('tag'),
@@ -59,7 +59,7 @@ class ViewController extends Controller
         $user = $this->user($request);
         return $this->main($request, view('upload', [
             'intl' => $intl,
-            'token' => $request->session()->get('token'),
+            'token' => $request->session()->get('access_token'),
             'user' => $user
         ]));
     }
@@ -73,7 +73,7 @@ class ViewController extends Controller
     {
         $user = $this->user($request);
         return $this->main($request, view('admin/upload-validation-code', [
-            'token' => $request->session()->get('token'),
+            'token' => $request->session()->get('access_token'),
             'intl' => $this->apps->intl()['admin_upload_validation_code'],
             'user' => $user
         ]));
@@ -121,7 +121,7 @@ class ViewController extends Controller
             'intl' => $this->apps->intl()['main'],
             'url' => $request->root(),
             'uri' => $request->path(),
-            'token' => $request->session()->get('token'),
+            'token' => $request->session()->get('access_token'),
             'user' => $user,
             'add_tags' => $this->addTags($request),
             'add_description' => $this->addDescription($request),
@@ -160,7 +160,7 @@ class ViewController extends Controller
 
         return view('component/header', [
             'intl' => $intl,
-            'token' => $request->session()->get('token'),
+            'token' => $request->session()->get('access_token'),
             'user' => $user,
             'url' => $request->root(),
             'uri' => $request->path()
@@ -174,7 +174,7 @@ class ViewController extends Controller
      */
     private function login($request)
     {
-        if ($request->session()->get('token') === null) {
+        if ($request->session()->get('access_token') === null) {
             return view('component/login', [
                 'url' => $request->root(),
                 'intl' => $this->apps->intl()['login']
@@ -189,7 +189,7 @@ class ViewController extends Controller
      */
     private function findPassword($request)
     {
-        if ($request->session()->get('token') === null) {
+        if ($request->session()->get('access_token') === null) {
             return view('component/find_password', [
                 'intl' => $this->apps->intl()['find_password']
             ]);
@@ -280,7 +280,7 @@ class ViewController extends Controller
      */
     private function register($request)
     {
-        if ($request->session()->get('token') === null) {
+        if ($request->session()->get('access_token') === null) {
             return view('component/register', [
                 'url' => $request->root(),
                 'show' => $request->input('show') == 'register',
@@ -296,7 +296,7 @@ class ViewController extends Controller
      */
     private function images($request)
     {
-        if ($request->session()->get('token') === null) {
+        if ($request->session()->get('access_token') === null) {
             return app(ImageController::class)->visitorView($request);
         } else {
             return app(ImageController::class)->userView($request);
@@ -310,7 +310,7 @@ class ViewController extends Controller
      */
     private function downloadBox($request)
     {
-        if ($request->session()->get('token') != null) {
+        if ($request->session()->get('access_token') != null) {
             return view('component/download_box', [
                 'intl' => $this->apps->intl()['download_box']
             ]);

@@ -36,7 +36,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            $request->session()->forget('token');
+            $request->session()->forget('access_token');
             return response()->json([
                 'error_msg' => '用户验证错误'
             ], 401);

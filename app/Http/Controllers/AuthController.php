@@ -76,7 +76,7 @@ class AuthController extends Controller
 
         $this->deleteGlobalCache();
         $token = $this->createAccessToken($user);
-        $request->session()->put('token', $token['access_token']);
+        $request->session()->put('access_token', $token['access_token']);
         $request->session()->put('permission', $user->permission);
     }
   
@@ -107,7 +107,7 @@ class AuthController extends Controller
         }
         
         $token = $this->createAccessToken($user);
-        $request->session()->put('token', $token['access_token']);
+        $request->session()->put('access_token', $token['access_token']);
     }
   
     /**
@@ -117,10 +117,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $token = $request->session()->get('token');
+        $token = $request->session()->get('access_token');
         \Cache::store('redis')->delete($token);
         $request->user()->token()->revoke();
-        $request->session()->forget('token');
+        $request->session()->forget('access_token');
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
