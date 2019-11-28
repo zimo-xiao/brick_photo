@@ -67,9 +67,9 @@
     }
 
     if ($token == null) {
-        echo '<img class="main_qr z-depth-1" src="'.$url.'/image/code_qr.png">';
+        echo '<img class="main_qr z-depth-1" src="'.$intl['register_form'].'">';
     } else {
-        echo '<img class="main_qr z-depth-1" src="'.$url.'/image/wx_qr.jpg">';
+        echo '<img class="main_qr z-depth-1" src="'.$intl['social_media'].'">';
     }
     ?>
 
