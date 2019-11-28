@@ -334,6 +334,7 @@ class ViewController extends Controller
 
     public function test(Request $request)
     {
-        return $request->session()->forget('_token');
+        $request->session()->forget('_token');
+        return $request->session()->all();
     }
 }
