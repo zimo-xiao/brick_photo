@@ -70,7 +70,7 @@ return [
                     'selectImg' => '请选择图片',
                     'uploadedTitle' => '上传完成',
                     'uploadedContent' => '成功上传[counter]张图片，请进入图库查看',
-                    'uploadBtn' => '已选择[counter]张图片',
+                    'uploadBtn' => '已选择[counter]张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）',
                     'downloadAlertTitle' => '知情同意',
                     'downloadAlertContent' => '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图',
                     'downloadAlertBtn' => '同意并下载图片',
