@@ -16,7 +16,6 @@ class Files
 
     public function upload($path, $name, $no, $content)
     {
-        $content = base64_decode($content);
         switch ($this->type) {
             case 'do':
                 if ($no === 0) {
