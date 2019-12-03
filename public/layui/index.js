@@ -52,7 +52,7 @@ layui.use(['layer', 'upload'], function () {
                     end: temp[temp.length - 1]
                   })
 
-                  $('#submit').text('已选择' + files.length + '张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）');
+                  $('#submit').text('已选择' + files.length / 2 + '张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）');
                 }
               },
               result);

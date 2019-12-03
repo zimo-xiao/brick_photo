@@ -22,7 +22,7 @@ class ImageController extends Controller
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['imageController'];
-        $this->file = new Files('go');
+        $this->file = new Files('do');
     }
 
     /**
