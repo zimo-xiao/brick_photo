@@ -30,7 +30,7 @@ class Files
 
     public function store($name, $end)
     {
-        $content = $this->do('tmp/'.$name);
+        $content = $this->get('tmp/'.$name);
 
         $content = explode('#**#', $content);
 
