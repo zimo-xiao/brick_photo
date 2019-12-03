@@ -58,12 +58,12 @@ class ImageController extends Controller
         }
 
         try {
-            $this->file->upload($type, $name, $index, $file);
+            $this->file->upload($name, $index, $file);
         } catch (\Exception $e) {
             return 'instruction:again';
         }
 
-        if ($total == ($index + 1) && $type == 'raw') {
+        if ($total == ($index + 1)) {
             $this->deleteGlobalCache();
             dispatch(new StoreNewImageJob($name, $end, $user));
         }
