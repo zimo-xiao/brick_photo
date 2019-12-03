@@ -33,7 +33,7 @@
         </ul>
         <div class="nav-header center">
             <h1><?=$intl['title']?></h1>
-            <div class="tagline"><?=$intl['tagline']?></div>
+            <div class="tagline" style="-2rem 0 40px 0"><?=$intl['tagline']?></div>
         </div>
     </div>
 

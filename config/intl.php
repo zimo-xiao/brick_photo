@@ -54,6 +54,7 @@ return [
         ],
         'main' => [
             'color' => '#e04e39',
+            'secondaryColor' => '#13294b',
             'title' => '红砖图库 - 附中的宝藏',
             'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',
             'register_form' => 'https://hong.zuggr.com/image/wx_qr.jpg',
@@ -212,8 +213,223 @@ return [
             'btn' => '删除'
         ]
     ],
-    // en
+    
+
+    //
+
+
+
     'en' => [
-        //
+        'email' => [
+            'siteName' => 'Illinium',
+            'siteColor' => '#e04e39',
+            'default' => [
+                'hello' => 'Hello',
+                'title' => 'A letter from the Illinium team',
+                'btn' => 'enter Illinium',
+                'thanks' => 'Thanks'
+            ]
+        ],
+        'authController' => [
+            'validationCodeError' => 'validation code error',
+            'usinExists' => 'usin exists',
+            'validationError' => 'validation error',
+            'passOrUsinError' => 'usin or password error',
+            'userNotExists' => 'user not exists',
+            'permissionDenied' => 'permission denied',
+            'allUserInfo' => 'all user information',
+            'email' => [
+                'welcome' => [
+                    'title' => 'Welcome, photographer!',
+                    'description' => '恭喜你成为红砖摄影师，现在传图权限已经为你开启啦！\n\n\n请退出账号重新登陆,传图等功能已为您开启，如遇到任何问题请及时联系我们。期待你可以把自己满意的作品传到红砖，为附中增添一份宝藏！\n\n\n如果在传图的过程中遇到问题，或者你有大量传图的需求，欢迎联系我们（微信：lrh20021108），我们会第一时间给予支持！'
+                ],
+                'resetPass' => [
+                    'title' => 'Find your password',
+                    'description' => 'click the link to reset you password (valid in 50 minutes): [url]'
+                ]
+            ]
+        ],
+        'downloadController' => [
+            'imgNotExits' => 'image not exists',
+            'imgProcessNotComplete' => 'image is still under process, please wait for 30 minutes',
+            'expiredDownloadSession' => 'expired download session',
+            'permissionDenied' => 'permission denied',
+            'downloadActivity' => 'download activity'
+        ],
+        'imageController' => [
+            'permissionDenied' => 'permission denied',
+            'visitorViewTag' => 'editor pick',
+            'imgNotExits' => 'image not exists'
+        ],
+        'validationCodeController' => [
+            'permissionDenied' => '你没有权限',
+            'excelFormatError' => 'Excel格式错误',
+            'uploadSuccess' => '上传成功',
+            'validationCodeEmail' => [
+                'title' => '发送激活码，邀请附中人加入',
+                'description' => "您的激活码是：**[code]**\n\n我们是红砖社团，很高兴向您发送这封邮件。我们将在以下介绍「红砖图库」，并向您发放注册激活码。如果您已熟知「红砖图库」，可以依照邮件末尾处的指示完成注册。\n\n\n### 一、「红砖图库」是什么？\n\n「红砖图库」(以下正文简称\"红砖\")是当前北京大学附属中学最大的图片库，面向全校同学和附中校友免费开放，并已有数十位摄影师入驻。我们的目的是以图片的形式收集北大附中的校园记忆，并在保证作者权益的情况下让这些图片得到合理的使用。\n\n\n### 二、「红砖图库」能带来什么？\n\n红砖保存上千张优质的附中照片。学校可以将这些照片用于校友活动；校内的社团和书院可以使用这些照片作为宣传用途；附中的普通同学也可以将这些图片设置成手机和电脑的壁纸。红砖使校内的学生团体宣传找图变得更加容易。\n\n\n### 三、「红砖图库」的注册流程\n\n「红砖图库」采用个人激活码注册，您的激活码是：**[code]**\n\n请访问[「红砖图库」](https://hong.zuggr.com)并于页面右上角完成注册。\n\n你可以点击右侧链接按照[我们的用户手册](https://shimo.im/docs/1Z7Xhh9IUhg51ym7/)中的指导来使用「红砖图库」。\n\n如有任何疑问，请联系微信：lrh20021108"
+            ],
+            'exportExcelTitle' => '未激活的激活码'
+        ],
+        'main' => [
+            'color' => '#e04e39',
+            'secondaryColor' => '#13294b',
+            'title' => 'Illinium - photography media source for Illinois',
+            'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',
+            'register_form' => 'https://hong.zuggr.com/image/wx_qr.jpg',
+            'social_media' => 'https://hong.zuggr.com/image/wx_qr.jpg',
+            'js' => [
+                'request' => [
+                    'resetPass' => '密码重置成功！请输入新密码重新登录',
+                    'noEmpty' => 'please leave no empty entries',
+                    'findPass' => '验证邮箱已发到该学号所绑定的邮箱中，请查收',
+                    'addTags' => '添加成功，请刷新查看',
+                    'permissionDenied' => '权限不正确',
+                    'addDescription' => '添加成功，请刷新查看',
+                    'samePass' => 'reenter password and password not match',
+                    'selectImg' => 'Please select image',
+                    'uploadedTitle' => 'Upload Success',
+                    'uploadedContent' => '成功上传[counter]张图片，请进入图库查看',
+                    'uploadBtn' => '已选择[counter]张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）',
+                    'downloadAlertTitle' => 'Agreement',
+                    'downloadAlertContent' => '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图',
+                    'downloadAlertBtn' => '同意并下载图片',
+                    'downloadRequireUsage' => '请填写下载用途',
+                    'admin' => [
+                        'deleteSuccess' => '删除成功，请刷新查看',
+                        'wantToDelete' => '请问你是否要删除这些图片？',
+                        'deleteBtn' => 'Delete',
+                        'deleteSuccess' => '删除成功，请刷新查看',
+                        'changePermissionSuccess' => '更改成功，请让用户退出登录再登录'
+                    ]
+                ]
+            ],
+            'dns' => [
+                'jquery' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
+                'axios' => 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js',
+                'vue' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'
+            ]
+        ],
+        'login' => [
+            'title' => 'Login',
+            'usin' => 'NetID',
+            'pass' => 'password',
+            'btn' => 'Login'
+        ],
+        'register' => [
+            'title' => 'Register',
+            'usin' => 'NetID',
+            'code' => 'validation code',
+            'pass' => 'password',
+            'reenter_pass' => 'reenter password',
+            'contract' => 'I understand and agree to the',
+            'btn' => 'Register'
+        ],
+        'download_box' => [
+            'alert' => '如要下载去水印图片，请微信联系：YangynAcpovaurox',
+            'usage' => 'Please describe the usage of the author\'s work',
+            'btn' => 'Download'
+        ],
+        'header' => [
+            'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assests/logo.png',
+            'bg_img' => 'https://hong.zuggr.com/image/background.gif',
+            'title' => '不倒的记忆，附中的宝藏',
+            'tagline' => '北大附中最大的图库，目前共藏[images]张摄影作品，共[users]位附中校友在红砖',
+            'admin_dropdown' => [
+                'name' => 'Admin Operations',
+                'upload_code' => 'Upload Activation Code',
+                'change_user_permission' => 'Change Permission',
+                'delete_image_batch' => 'Batch Delete Image',
+                'download_non_activated_codes' => '下载未激活码',
+                'all_user_info' => 'All User Info',
+                'image_download_activities' => 'Download Activity'
+            ],
+            'logout' => 'Logout',
+            'register' => 'Register',
+            'login' => 'Login',
+            'find_password' => 'Reset Password',
+            'index' => 'Gallery',
+            'upload' => 'Upload Photos',
+            'custom_menu_items' => [
+                [
+                    'name' => '协议',
+                    'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
+                ]
+            ]
+        ],
+        'index' => [
+            'left_menu_bar' => [
+                'all' => 'All',
+                'tags' => 'Tags',
+                'photographers' => 'Photographers',
+                'admins' => 'Admins'
+            ],
+            'order' => [
+                'update_desc' => 'Latest Active',
+                'created_desc' => 'Latest Upload',
+                'created_asc' => 'Oldest Upload'
+            ],
+            'about' => [
+                'title' => 'About Us',
+                'description' => '红砖是目前北大附中最大的图片库，面向全校同学和附中校友免费开放。我们',
+                'custom_menu_items' => [
+                    [
+                        'name' => '协议',
+                        'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
+                    ]
+                ]
+            ],
+            'image' => [
+                'author' => 'Author',
+                'download' => 'Download',
+                'add_tags' => 'Add Tags',
+                'add_description' => 'Add Description',
+                'no_description' => 'There is no description...',
+                'delete' => 'Delete',
+                'alert' => '侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者[author]」'
+            ]
+        ],
+        'reset_password' => [
+            'title' => 'Reset Password',
+            'pass' => 'Password',
+            'reenter_pass' => 'Reenter Password',
+            'btn' => 'Reset Password'
+        ],
+        'upload' => [
+            'instruction' => '将图片拖拽到此处，或点击选择文件，一次最多可上传40张图片',
+            'btn' => '上传中请稍后，请不要关闭离开页面...',
+            'selected' => '已选择[img_count]张图片'
+        ],
+        'admin_upload_validation_code' => [
+            'instruction' => '将Excel文件拖拽到此处，或点击选择文件，不可多选',
+            'btn' => 'Upload'
+        ],
+        'find_password' => [
+            'title' => 'Reset Password',
+            'usin' => 'NetID',
+            'btn' => 'Send reset link to associated email'
+        ],
+        'tags_box' => [
+            'btn' => 'Add Tags'
+        ],
+        'description_box' => [
+            'enter' => 'Enter photo description',
+            'btn' => 'Add Description'
+        ],
+        'change_permission' => [
+            'usin' => 'NetID',
+            'permission' => 'Permission(1 reader, 2 photographers, 3 Admin)',
+            'btn' => 'Change Permission'
+        ],
+        'delete_image' => [
+            'start' => 'Start ID 开始编号（删除时包括此图，要小于结束）',
+            'end' => '结束编号（删除时包括此图）',
+            'btn' => 'Delete'
+        ],
+        'delete_box' => [
+            'title' => 'Delete with caution',
+            'reason' => 'Please provide a reason',
+            'btn' => 'Delete'
+        ]
     ]
 ];

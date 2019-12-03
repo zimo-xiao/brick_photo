@@ -235,7 +235,7 @@ var redRequest = {
             redRequest.pop = layer.open({
               title: intl.request.downloadAlertTitle,
               btn: [],
-              content: intl.request.downloadAlert + '<br><br><a href="' + url + '" target="_blank" onclick="layer.close(redRequest.pop)" class="btn waves-effect waves-light" style="background-color: var(--color)">' + intl.request.downloadAlertBtn + '</a>'
+              content: intl.request.downloadAlertContent + '<br><br><a href="' + url + '" target="_blank" onclick="layer.close(redRequest.pop)" class="btn waves-effect waves-light" style="background-color: var(--color)">' + intl.request.downloadAlertBtn + '</a>'
             });
           })
           .catch(function (error) {

@@ -1,6 +1,6 @@
 <?php
 return [
-    'lang' => 'cn',
+    'lang' => 'en',
     'url' => 'hong.zuggr.com',
     'name' => '红砖图库',
     'logo' => 'https://hong.zuggr.com/image/logo.png',

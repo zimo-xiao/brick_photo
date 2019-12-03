@@ -24,6 +24,7 @@
     <style>
     body {
         --color: <?=$intl['color']?>;
+        --secondary-color: <?=$intl['secondaryColor']?>
     }
     </style>
 
