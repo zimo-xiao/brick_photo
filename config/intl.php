@@ -227,18 +227,18 @@ return [
             'default' => [
                 'hello' => 'Hello',
                 'title' => 'A letter from the Illinium team',
-                'btn' => 'enter Illinium',
+                'btn' => 'Enter Illinium',
                 'thanks' => 'Thanks'
             ]
         ],
         'authController' => [
-            'validationCodeError' => 'validation code error',
-            'usinExists' => 'usin exists',
-            'validationError' => 'validation error',
-            'passOrUsinError' => 'usin or password error',
-            'userNotExists' => 'user not exists',
-            'permissionDenied' => 'permission denied',
-            'allUserInfo' => 'all user information',
+            'validationCodeError' => 'Validation code error',
+            'usinExists' => 'NetID exists',
+            'validationError' => 'Validation error',
+            'passOrUsinError' => 'NetID or password error',
+            'userNotExists' => 'User not exists',
+            'permissionDenied' => 'Permission denied',
+            'allUserInfo' => 'All user information',
             'email' => [
                 'welcome' => [
                     'title' => 'Welcome, photographer!',
@@ -246,36 +246,36 @@ return [
                 ],
                 'resetPass' => [
                     'title' => 'Find your password',
-                    'description' => 'click the link to reset you password (valid in 50 minutes): [url]'
+                    'description' => 'Click the link to reset you password (valid in 50 minutes): [url]'
                 ]
             ]
         ],
         'downloadController' => [
-            'imgNotExits' => 'image not exists',
-            'imgProcessNotComplete' => 'image is still under process, please wait for 30 minutes',
-            'expiredDownloadSession' => 'expired download session',
-            'permissionDenied' => 'permission denied',
-            'downloadActivity' => 'download activity'
+            'imgNotExits' => 'Image not exists',
+            'imgProcessNotComplete' => 'Image is still under process, please wait for 30 minutes',
+            'expiredDownloadSession' => 'Expired download session',
+            'permissionDenied' => 'Permission denied',
+            'downloadActivity' => 'Download activity'
         ],
         'imageController' => [
-            'permissionDenied' => 'permission denied',
-            'visitorViewTag' => 'editor pick',
-            'imgNotExits' => 'image not exists'
+            'permissionDenied' => 'Permission denied',
+            'visitorViewTag' => "Editor's pick",
+            'imgNotExits' => 'Image not exists'
         ],
         'validationCodeController' => [
-            'permissionDenied' => '你没有权限',
-            'excelFormatError' => 'Excel格式错误',
-            'uploadSuccess' => '上传成功',
+            'permissionDenied' => 'Permission denied',
+            'excelFormatError' => 'Excel format error',
+            'uploadSuccess' => 'Upload success',
             'validationCodeEmail' => [
                 'title' => '发送激活码，邀请附中人加入',
                 'description' => "您的激活码是：**[code]**\n\n我们是红砖社团，很高兴向您发送这封邮件。我们将在以下介绍「红砖图库」，并向您发放注册激活码。如果您已熟知「红砖图库」，可以依照邮件末尾处的指示完成注册。\n\n\n### 一、「红砖图库」是什么？\n\n「红砖图库」(以下正文简称\"红砖\")是当前北京大学附属中学最大的图片库，面向全校同学和附中校友免费开放，并已有数十位摄影师入驻。我们的目的是以图片的形式收集北大附中的校园记忆，并在保证作者权益的情况下让这些图片得到合理的使用。\n\n\n### 二、「红砖图库」能带来什么？\n\n红砖保存上千张优质的附中照片。学校可以将这些照片用于校友活动；校内的社团和书院可以使用这些照片作为宣传用途；附中的普通同学也可以将这些图片设置成手机和电脑的壁纸。红砖使校内的学生团体宣传找图变得更加容易。\n\n\n### 三、「红砖图库」的注册流程\n\n「红砖图库」采用个人激活码注册，您的激活码是：**[code]**\n\n请访问[「红砖图库」](https://hong.zuggr.com)并于页面右上角完成注册。\n\n你可以点击右侧链接按照[我们的用户手册](https://shimo.im/docs/1Z7Xhh9IUhg51ym7/)中的指导来使用「红砖图库」。\n\n如有任何疑问，请联系微信：lrh20021108"
             ],
-            'exportExcelTitle' => '未激活的激活码'
+            'exportExcelTitle' => 'Not validated codes'
         ],
         'main' => [
             'color' => '#e04e39',
             'secondaryColor' => '#13294b',
-            'title' => 'Illinium - photography media source for Illinois',
+            'title' => 'Illinium - photography media bank for Illinois',
             'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',
             'register_form' => 'https://hong.zuggr.com/image/wx_qr.jpg',
             'social_media' => 'https://hong.zuggr.com/image/wx_qr.jpg',
@@ -284,24 +284,24 @@ return [
                     'resetPass' => '密码重置成功！请输入新密码重新登录',
                     'noEmpty' => 'please leave no empty entries',
                     'findPass' => '验证邮箱已发到该学号所绑定的邮箱中，请查收',
-                    'addTags' => '添加成功，请刷新查看',
-                    'permissionDenied' => '权限不正确',
-                    'addDescription' => '添加成功，请刷新查看',
+                    'addTags' => 'Upload success, please refresh',
+                    'permissionDenied' => 'permission denied',
+                    'addDescription' => 'Upload success, please refresh',
                     'samePass' => 'reenter password and password not match',
                     'selectImg' => 'Please select image',
                     'uploadedTitle' => 'Upload Success',
-                    'uploadedContent' => '成功上传[counter]张图片，请进入图库查看',
+                    'uploadedContent' => 'Successfully uploaded [counter] images, enter the gallery to check out',
                     'uploadBtn' => '已选择[counter]张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）',
                     'downloadAlertTitle' => 'Agreement',
                     'downloadAlertContent' => '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图',
-                    'downloadAlertBtn' => '同意并下载图片',
-                    'downloadRequireUsage' => '请填写下载用途',
+                    'downloadAlertBtn' => 'Agree and download',
+                    'downloadRequireUsage' => 'Please enter the usage of the author\'s work',
                     'admin' => [
-                        'deleteSuccess' => '删除成功，请刷新查看',
-                        'wantToDelete' => '请问你是否要删除这些图片？',
+                        'deleteSuccess' => 'Delete success, please refresh',
+                        'wantToDelete' => 'Do you want to delete?',
                         'deleteBtn' => 'Delete',
-                        'deleteSuccess' => '删除成功，请刷新查看',
-                        'changePermissionSuccess' => '更改成功，请让用户退出登录再登录'
+                        'deleteSuccess' => 'Delete success, please refresh',
+                        'changePermissionSuccess' => 'change permission success, please let user logout and login again'
                     ]
                 ]
             ],
@@ -309,7 +309,7 @@ return [
                 'jquery' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
                 'axios' => 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js',
                 'vue' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
-                'materialIcon' => 'https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'
+                'materialIcon' => 'https://unpkg.com/material-design-icons@3.0.1/iconfont/material-icons.css'
             ]
         ],
         'login' => [
@@ -334,9 +334,10 @@ return [
         ],
         'header' => [
             'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/logo.png',
+            'logoWidth' => '120',
             'bg_img' => 'https://hong.zuggr.com/image/background.gif',
-            'title' => '不倒的记忆，附中的宝藏',
-            'tagline' => '北大附中最大的图库，目前共藏[images]张摄影作品，共[users]位附中校友在红砖',
+            'title' => 'Blue and Orange Never Fade',
+            'tagline' => 'Illinois\' largest photography media bank, with [images] images，and [users] Illinois student and faculties',
             'admin_dropdown' => [
                 'name' => 'Admin Operations',
                 'upload_code' => 'Upload Activation Code',

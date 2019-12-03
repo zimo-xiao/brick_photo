@@ -6,7 +6,7 @@
     </div>
     <div class="nav-wrapper container">
         <a href="<?=$url;?>">
-            <img src="<?=$intl['logo']?>" class="brand-logo" style="top:20px;width:80px" />
+            <img src="<?=$intl['logo']?>" class="brand-logo" style="top:20px;width:<?=$intl['logoWidth']?>px" />
         </a>
         <ul class="right hide-on-med-and-down">
             <?php
