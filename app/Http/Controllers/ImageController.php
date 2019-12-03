@@ -8,7 +8,6 @@ use App\Models\Download;
 use App\Models\Delete;
 use Illuminate\Http\Request;
 use App\Jobs\StoreNewImageJob;
-use App\Jobs\StoreWatermarkJob;
 use App\Jobs\SendMailJob;
 use App\Services\Apps;
 use App\Services\Files;
@@ -22,7 +21,7 @@ class ImageController extends Controller
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['imageController'];
-        $this->file = new Files('do');
+        $this->file = new Files(\env('APP_FILE_SYSTEM'));
     }
 
     /**
@@ -33,7 +32,6 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $this->validate($request, [
-            'type' => 'required',
             'end' => 'required',
             'file' => 'required',
             'total' => 'required',
@@ -41,7 +39,6 @@ class ImageController extends Controller
             'name' => 'required'
         ]);
 
-        $type = $request->input('type');
         $end = $request->input('end');
         $file = $request->input('file');
         $total = $request->input('total');
@@ -56,29 +53,19 @@ class ImageController extends Controller
         }
 
         // avoid duplication
-        if (app(Image::class)->where(['file_name' => $name])->first() && $type == 'raw') {
+        if (app(Image::class)->where(['file_name' => $name])->first()) {
             return;
         }
 
         try {
-            $this->file->upload($type, $name.'.'.$end, $index, $file);
+            $this->file->upload($type, $name, $index, $file);
         } catch (\Exception $e) {
             return 'instruction:again';
         }
 
         if ($total == ($index + 1) && $type == 'raw') {
-            app(Image::class)->insertTs([
-                'author_id' => $user->id,
-                'author_name' => $user->name,
-                'file_name' => $name,
-                'file_format' => $end,
-                'tags' => json_encode([]),
-                'path' => $this->file->getCloudUrl()
-            ]);
-
             $this->deleteGlobalCache();
-
-            dispatch(new StoreWatermarkJob($name.'.'.$end));
+            dispatch(new StoreNewImageJob($name, $end, $user));
         }
     }
 

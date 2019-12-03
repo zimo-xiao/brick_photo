@@ -187,8 +187,7 @@ var redRequest = {
         total: total,
         index: j,
         name: files[i].name,
-        end: files[i].end,
-        type: files[i].type
+        end: files[i].end
       })
       .then(function (response) {
         if ((j + 1) < total) {

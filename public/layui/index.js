@@ -36,23 +36,12 @@ layui.use(['layer', 'upload'], function () {
                   }
                 }
                 if (flag) {
-                  var tmpFile = base64Codes.split('#**#')
-
                   files.push({
-                    file: btoa(tmpFile[0].substr(tmpFile[0].indexOf(','))).match(/.{1,748576}/g),
-                    type: 'cache',
-                    name: filename,
-                    end: 'jpg'
-                  })
-
-                  files.push({
-                    file: btoa(tmpFile[1].substr(tmpFile[1].indexOf(','))).match(/.{1,748576}/g),
-                    type: 'raw',
+                    file: base64Codes,
                     name: filename,
                     end: temp[temp.length - 1]
                   })
-
-                  $('#submit').text(intl.request.uploadBtn.replace('[counter]', Math.floor(files.length / 2)));
+                  $('#submit').text(intl.request.uploadBtn.replace('[counter]', files.length));
                 }
               },
               result);
