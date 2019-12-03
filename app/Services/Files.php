@@ -52,7 +52,7 @@ class Files
     {
         switch ($this->type) {
             case 'do':
-                return env('DO_SPACES_ENDPOINT').'/'.env('DO_SPACES_BUCKET');
+                return \env('DO_SPACES_URL');
         }
     }
 

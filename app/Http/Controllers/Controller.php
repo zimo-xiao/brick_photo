@@ -56,7 +56,7 @@ class Controller extends BaseController
     public function responseImageFromPath($path, $dir, $image, $error = 'image not exists')
     {
         $isCloud = strpos($path, 'https://') !== false;
-        $path = $path.'/'.$dir.'/'.$image;
+        $path = $dir.'/'.$image;
 
         if ($isCloud) {
             try {
