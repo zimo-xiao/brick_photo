@@ -19,7 +19,7 @@ class Files
         $content = base64_decode($content);
         switch ($this->type) {
             case 'do':
-                if ($no === 1) {
+                if ($no === 0) {
                     Storage::put($path.'/'.$name, $content);
                 } else {
                     Storage::append($path.'/'.$name, $content);

@@ -41,7 +41,7 @@ class ImageController extends Controller
             'name' => 'required'
         ]);
 
-        $type = $request->input('end');
+        $type = $request->input('type');
         $end = $request->input('end');
         $file = $request->input('file');
         $total = $request->input('total');
