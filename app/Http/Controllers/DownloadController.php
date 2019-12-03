@@ -9,6 +9,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\Apps;
+use App\Services\Files;
 
 class DownloadController extends Controller
 {
