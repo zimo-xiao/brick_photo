@@ -37,7 +37,7 @@ layui.use(['layer', 'upload'], function () {
                 }
                 if (flag) {
                   files.push({
-                    file: base64Codes,
+                    file: base64Codes.match(/.{1,748576}/g),
                     name: filename,
                     end: temp[temp.length - 1]
                   })
