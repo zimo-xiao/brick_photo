@@ -42,6 +42,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?=$url;?>/layui/main/css/layui.css">
+    <link rel="stylesheet" href="<?=$intl['dns']['materialIcon']?>">
     <link href="<?=$url;?>/css/gallery-materialize.min.css" rel="stylesheet">
     <link href="<?=$url;?>/css/over-write.css" rel="stylesheet">
 </head>

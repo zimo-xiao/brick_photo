@@ -88,7 +88,8 @@ return [
             'dns' => [
                 'jquery' => 'https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js',
                 'axios' => 'https://unpkg.com/axios@0.18.0/dist/axios.min.js',
-                'vue' => 'https://unpkg.com/vue@2.6.10/dist/vue.min.js'
+                'vue' => 'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
+                'materialIcon' => 'https://unpkg.com/material-design-icons@3.0.1/iconfont/material-icons.css'
             ]
         ],
         'login' => [
@@ -307,7 +308,8 @@ return [
             'dns' => [
                 'jquery' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
                 'axios' => 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js',
-                'vue' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'
+                'vue' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
+                'materialIcon' => 'https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'
             ]
         ],
         'login' => [
@@ -331,7 +333,7 @@ return [
             'btn' => 'Download'
         ],
         'header' => [
-            'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assests/logo.png',
+            'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/logo.png',
             'bg_img' => 'https://hong.zuggr.com/image/background.gif',
             'title' => '不倒的记忆，附中的宝藏',
             'tagline' => '北大附中最大的图库，目前共藏[images]张摄影作品，共[users]位附中校友在红砖',
