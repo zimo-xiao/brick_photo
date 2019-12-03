@@ -12,4 +12,8 @@ class Image extends BaseModel
     protected $fillable = [
         'author_id', 'author_name','tags','description','file_name','file_format','path'
     ];
+
+    protected $casts = [
+        'is_cloud' => 'boolean'
+    ];
 }

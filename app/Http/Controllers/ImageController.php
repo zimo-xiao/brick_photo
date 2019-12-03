@@ -11,14 +11,18 @@ use App\Jobs\StoreNewImageJob;
 use App\Jobs\StoreWatermarkJob;
 use App\Jobs\SendMailJob;
 use App\Services\Apps;
+use App\Services\Files;
 
 class ImageController extends Controller
 {
     protected $intl;
 
+    protected $file;
+
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['imageController'];
+        $this->file = new Files('go');
     }
 
     /**
@@ -29,6 +33,7 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $this->validate($request, [
+            'type' => 'required',
             'end' => 'required',
             'file' => 'required',
             'total' => 'required',
@@ -36,7 +41,7 @@ class ImageController extends Controller
             'name' => 'required'
         ]);
 
-        // 图片片段信息
+        $type = $request->input('end');
         $end = $request->input('end');
         $file = $request->input('file');
         $total = $request->input('total');
@@ -44,77 +49,31 @@ class ImageController extends Controller
         $name = $request->input('name');
         $user = $request->user();
 
-        // 权限
         if ($user->permission != User::PERMISSION_WRITE && $user->permission != User::PERMISSION_ADMIN) {
             return response()->json([
                 'error_msg' => $this->intl['permissionDenied']
             ], 401);
         }
 
-        // 去重
-        if (count(app(Image::class)->where([
-            'file_name' => $name
-        ])->get()) > 0) {
-            // 如果图片已经上传，就不要管他了
+        // avoid duplication
+        if (app(Image::class)->where(['file_name' => $name])->first()) {
             return;
         }
 
-        // 系统信息
-        $imageDir = \env('IMAGE_DIR');
-        $tempImg = $imageDir.'/tmp/'.$name.'.tmp';
-
-        // 储存图片片段
-        if ($index == 0) {
-            if (!(\file_put_contents($tempImg, $file))) {
-                return 'instruction:again';
-            }
-        } else {
-            if (!(\file_put_contents($tempImg, $file, FILE_APPEND))) {
-                return 'instruction:again';
-            }
+        try {
+            $this->file->upload($type, $name.'.'.$end, $index, $file);
+        } catch (\Exception $e) {
+            return 'instruction:again';
         }
-        
-        chmod($tempImg, 0777);
 
         if ($total == ($index + 1)) {
-            dispatch(new StoreNewImageJob($end, $total, $index, $name, $user));
-        }
-    }
-
-    /**
-     * Process an image in queue
-     */
-    public function store($end, $total, $index, $name, $user)
-    {
-        // 系统信息
-        $imageDir = \env('IMAGE_DIR');
-        $tempImg = $imageDir.'/tmp/'.$name.'.tmp';
-
-        // 如果传输到结尾了
-        // 分割文件
-        $inputData = \explode('#**#', \file_get_contents($tempImg));
-        // 在文件中提取出预览图和原图
-        $cache = \base64_decode(substr($inputData[0], \strpos($inputData[0], ',') + 1));
-        $raw = \base64_decode(substr($inputData[1], \strpos($inputData[1], ',') + 1));
-        // 上传目录
-        $rawImgDir = $imageDir.'/raw/'.$name.'.'.$end;
-        $cacheImgDir = $imageDir.'/cache/'.$name.'.jpg';
-        // 上传文件
-        if (file_put_contents($rawImgDir, $raw) && file_put_contents($cacheImgDir, $cache)) {
-            // 删除临时文件
-            unlink($tempImg);
-
-            chmod($rawImgDir, 0777);
-            chmod($cacheImgDir, 0777);
-
-            // index
             app(Image::class)->insertTs([
                 'author_id' => $user->id,
                 'author_name' => $user->name,
                 'file_name' => $name,
                 'file_format' => $end,
                 'tags' => json_encode([]),
-                'path' => $imageDir
+                'path' => $this->file->getCloudUrl()
             ]);
 
             $this->deleteGlobalCache();

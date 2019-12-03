@@ -36,11 +36,22 @@ layui.use(['layer', 'upload'], function () {
                   }
                 }
                 if (flag) {
+                  tmpFile = tmpFile.split('#**#')
+
                   files.push({
-                    file: base64Codes.match(/.{1,748576}/g),
+                    file: tmpFile[0].match(/.{1,748576}/g),
+                    type: 'raw',
                     name: filename,
                     end: temp[temp.length - 1]
-                  });
+                  })
+
+                  files.push({
+                    file: tmpFile[1].match(/.{1,748576}/g),
+                    type: 'cache',
+                    name: filename,
+                    end: temp[temp.length - 1]
+                  })
+
                   $('#submit').text('已选择' + files.length + '张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）');
                 }
               },

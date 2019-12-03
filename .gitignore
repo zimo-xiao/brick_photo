@@ -17,3 +17,9 @@ jpush.log
 !/public/storage/images/watermark/.gitkeep
 /storage/upload/*
 !/storage/upload/.gitkeep
+/storage/oauth/*
+!/storage/oauth/.gitkeep
+!/storage/oauth/google-cloud.example.json
+node_modules
+/storage/oauth-private.key
+/storage/oauth-public.key

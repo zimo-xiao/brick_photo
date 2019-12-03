@@ -5,7 +5,7 @@ namespace App\Jobs;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 
-class SendMailJob extends Job
+class SendWeeklyMailJob extends Job
 {
     protected $tmp;
 

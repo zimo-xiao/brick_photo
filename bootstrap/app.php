@@ -38,6 +38,14 @@ $app->withEloquent();
 |
 */
 
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent(
+        'filesystems',
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        'filesystem'
+    );
+});
+
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
@@ -90,7 +98,6 @@ $app->configure('session');
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->configure('database');
 $app->configure('intl');
-$app->configure('bdfz');
 $app->configure('auth');
 $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(Laravel\Tinker\TinkerServiceProvider::class);
@@ -110,6 +117,7 @@ $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 $app->register(Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider::class);
+$app->configure('filesystems');
 
 /*
 |--------------------------------------------------------------------------

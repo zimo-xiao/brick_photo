@@ -14,9 +14,12 @@ class DownloadController extends Controller
 {
     protected $intl;
 
+    protected $file;
+
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['downloadController'];
+        $this->file = new Files('go');
     }
 
     public function view(Request $request, $id)
@@ -62,13 +65,9 @@ class DownloadController extends Controller
             if ($image) {
                 $name = $image->file_name.'.'.$image->file_format;
                 if ($user->permission === User::PERMISSION_ADMIN) {
-                    return $this->responseImageFromPath($image->path, 'raw', $name);
+                    return $this->responseImage($image->path, 'raw', $name);
                 } else {
-                    $path = $image->path.'/raw/'.$name;
-                    if (!File::exists($path)) {
-                        return $this->intl['imgProcessNotComplete'];
-                    }
-                    return $this->responseImageFromPath($image->path, 'watermark', $name);
+                    return $this->responseImage($image->path, 'watermark', $name, $this->intl['imgProcessNotComplete']);
                 }
             } else {
                 return $this->intl['imgNotExits'];

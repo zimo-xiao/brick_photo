@@ -53,17 +53,29 @@ class Controller extends BaseController
         return Keygen::numeric(8)->prefix(mt_rand(1, 9))->generate(true);
     }
 
-    public function responseImageFromPath($path, $dir, $image)
+    public function responseImageFromPath($path, $dir, $image, $error = 'image not exists')
     {
+        $isCloud = strpos($path, 'https://') !== false;
         $path = $path.'/'.$dir.'/'.$image;
-        if (!File::exists($path)) {
-            return response()->json([
-                'error_msg' => 'image not exists'
-            ], 404);
-        }
 
-        $file = File::get($path);
-        $type = File::mimeType($path);
+        if ($isCloud) {
+            try {
+                $file = $this->file->get($path);
+                $type = strpos($path, 'png') !== false ? 'image/png': 'image/jpeg';
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error_msg' => $error
+                ], 404);
+            }
+        } else {
+            if (!File::exists($path)) {
+                return response()->json([
+                    'error_msg' => $error
+                ], 404);
+            }
+            $file = File::get($path);
+            $type = File::mimeType($path);
+        }
         return (new Response($file, 200))->header('Content-Type', $type);
     }
 
