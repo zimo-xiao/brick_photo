@@ -56,7 +56,7 @@ class ImageController extends Controller
         }
 
         // avoid duplication
-        if (app(Image::class)->where(['file_name' => $name])->first()) {
+        if (app(Image::class)->where(['file_name' => $name])->first() && $type == 'raw') {
             return;
         }
 
@@ -66,7 +66,7 @@ class ImageController extends Controller
             return 'instruction:again';
         }
 
-        if ($total == ($index + 1)) {
+        if ($total == ($index + 1) && $type == 'raw') {
             app(Image::class)->insertTs([
                 'author_id' => $user->id,
                 'author_name' => $user->name,

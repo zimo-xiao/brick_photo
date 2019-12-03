@@ -40,14 +40,14 @@ layui.use(['layer', 'upload'], function () {
 
                   files.push({
                     file: tmpFile[0].match(/.{1,748576}/g),
-                    type: 'raw',
+                    type: 'cache',
                     name: filename,
-                    end: temp[temp.length - 1]
+                    end: 'jpg'
                   })
 
                   files.push({
                     file: tmpFile[1].match(/.{1,748576}/g),
-                    type: 'cache',
+                    type: 'raw',
                     name: filename,
                     end: temp[temp.length - 1]
                   })
