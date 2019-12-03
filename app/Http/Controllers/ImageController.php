@@ -66,6 +66,7 @@ class ImageController extends Controller
         if ($total == ($index + 1)) {
             $this->deleteGlobalCache();
             dispatch(new StoreNewImageJob($name, $end, $user));
+            return 1;
         }
     }
 
