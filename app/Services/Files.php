@@ -60,7 +60,7 @@ class Files
     {
         switch ($this->type) {
             case 'do':
-                return Storage::get($this->removeUrl($path));
+                return Storage::get(strpos($path, 'https://') !== false ? $this->removeUrl($path) : $path);
         }
     }
 
