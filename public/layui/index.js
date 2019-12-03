@@ -36,7 +36,7 @@ layui.use(['layer', 'upload'], function () {
                   }
                 }
                 if (flag) {
-                  tmpFile = tmpFile.split('#**#')
+                  var tmpFile = base64Codes.split('#**#')
 
                   files.push({
                     file: tmpFile[0].match(/.{1,748576}/g),
