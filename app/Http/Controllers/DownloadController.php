@@ -66,9 +66,9 @@ class DownloadController extends Controller
             if ($image) {
                 $name = $image->file_name.'.'.$image->file_format;
                 if ($user->permission === User::PERMISSION_ADMIN) {
-                    return $this->responseImage($image->path, 'raw', $name);
+                    return $this->responseImageFromPath($image->path, 'raw', $name);
                 } else {
-                    return $this->responseImage($image->path, 'watermark', $name, $this->intl['imgProcessNotComplete']);
+                    return $this->responseImageFromPath($image->path, 'watermark', $name, $this->intl['imgProcessNotComplete']);
                 }
             } else {
                 return $this->intl['imgNotExits'];
