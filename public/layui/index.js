@@ -39,14 +39,14 @@ layui.use(['layer', 'upload'], function () {
                   var tmpFile = base64Codes.split('#**#')
 
                   files.push({
-                    file: tmpFile[0].match(/.{1,748576}/g),
+                    file: btoa(tmpFile[0].substr(tmpFile[0].indexOf(','))).match(/.{1,748576}/g),
                     type: 'cache',
                     name: filename,
                     end: 'jpg'
                   })
 
                   files.push({
-                    file: tmpFile[1].match(/.{1,748576}/g),
+                    file: btoa(tmpFile[1].substr(tmpFile[1].indexOf(','))).match(/.{1,748576}/g),
                     type: 'raw',
                     name: filename,
                     end: temp[temp.length - 1]
