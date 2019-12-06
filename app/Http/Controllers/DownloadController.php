@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Excels\ExportDownloads;
 use App\Services\Apps;
 use App\Services\Files;
 
@@ -82,12 +83,7 @@ class DownloadController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            $users = app(Download::class)->all();
-            return Excel::create($this->intl['downloadActivity'], function ($excel) use ($users) {
-                $excel->sheet('Sheet 1', function ($sheet) use ($users) {
-                    $sheet->fromArray($users);
-                });
-            })->export('xls');
+            return Excel::download(new ExportUsers, $this->intl['downloadActivity'].'.xlsx');
         } else {
             return $this->intl['permissionDenied'];
         }
