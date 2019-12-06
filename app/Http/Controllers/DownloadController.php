@@ -83,7 +83,7 @@ class DownloadController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            return Excel::download(new ExportUsers, $this->intl['downloadActivity'].'.xlsx');
+            return Excel::download(new ExportDownloads, $this->intl['downloadActivity'].'.xlsx');
         } else {
             return $this->intl['permissionDenied'];
         }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Excels\ExportValidationCodes;
 use App\Services\Apps;
 
 class ValidationCodeController extends Controller
@@ -82,15 +83,7 @@ class ValidationCodeController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            $codes = app(ValidationCode::class)->all();
-            return Excel::create($this->intl['exportExcelTitle'], function ($excel) use ($codes) {
-                $excel->sheet('Sheet 1', function ($sheet) use ($codes) {
-                    foreach ($codes as $k => $u) {
-                        $codes[$k]['email'] = $this->blurText($u['email'], 4);
-                    }
-                    $sheet->fromArray($codes);
-                });
-            })->export('xls');
+            return Excel::download(new ExportValidationCodes, $this->intl['exportExcelTitle'].'.xlsx');
         } else {
             return $this->intl['permissionDenied'];
         }
