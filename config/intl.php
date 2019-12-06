@@ -281,9 +281,9 @@ return [
             'social_media' => 'https://hong.zuggr.com/image/wx_qr.jpg',
             'js' => [
                 'request' => [
-                    'resetPass' => '密码重置成功！请输入新密码重新登录',
+                    'resetPass' => 'Reset password success! Please login with you new password',
                     'noEmpty' => 'please leave no empty entries',
-                    'findPass' => '验证邮箱已发到该学号所绑定的邮箱中，请查收',
+                    'findPass' => 'Reset link sent to associated email, please check',
                     'addTags' => 'Upload success, please refresh',
                     'permissionDenied' => 'permission denied',
                     'addDescription' => 'Upload success, please refresh',
@@ -291,7 +291,7 @@ return [
                     'selectImg' => 'Please select image',
                     'uploadedTitle' => 'Upload Success',
                     'uploadedContent' => 'Successfully uploaded [counter] images, enter the gallery to check out',
-                    'uploadBtn' => '已选择[counter]张图片，点击上传（如数量和选择不符，请等待，图片正在压缩处理）',
+                    'uploadBtn' => 'Selected [counter], click to upload (if number doesn\'t match, please wait, it might be compressing)',
                     'downloadAlertTitle' => 'Agreement',
                     'downloadAlertContent' => '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图',
                     'downloadAlertBtn' => 'Agree and download',
@@ -337,13 +337,13 @@ return [
             'logoWidth' => '120',
             'bg_img' => 'https://hong.zuggr.com/image/background.gif',
             'title' => 'Blue and Orange Never Fade',
-            'tagline' => 'Illinois\' largest photography media bank, with [images] images，and [users] Illinois student and faculties',
+            'tagline' => 'Illinois\' largest photography media bank. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
             'admin_dropdown' => [
                 'name' => 'Admin Operations',
                 'upload_code' => 'Upload Activation Code',
                 'change_user_permission' => 'Change Permission',
                 'delete_image_batch' => 'Batch Delete Image',
-                'download_non_activated_codes' => '下载未激活码',
+                'download_non_activated_codes' => 'Download not activated codes',
                 'all_user_info' => 'All User Info',
                 'image_download_activities' => 'Download Activity'
             ],
@@ -400,8 +400,8 @@ return [
         ],
         'upload' => [
             'instruction' => '将图片拖拽到此处，或点击选择文件，一次最多可上传40张图片',
-            'btn' => '上传中请稍后，请不要关闭离开页面...',
-            'selected' => '已选择[img_count]张图片'
+            'btn' => 'uploading, please do not leave the page...',
+            'selected' => 'Selected [img_count] images'
         ],
         'admin_upload_validation_code' => [
             'instruction' => '将Excel文件拖拽到此处，或点击选择文件，不可多选',
@@ -425,8 +425,8 @@ return [
             'btn' => 'Change Permission'
         ],
         'delete_image' => [
-            'start' => 'Start ID 开始编号（删除时包括此图，要小于结束）',
-            'end' => '结束编号（删除时包括此图）',
+            'start' => 'Start ID (Include the ID of the deleted image)',
+            'end' => 'End ID (Include the ID of the deleted image)',
             'btn' => 'Delete'
         ],
         'delete_box' => [
