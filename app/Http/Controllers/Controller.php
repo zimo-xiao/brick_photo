@@ -84,13 +84,6 @@ class Controller extends BaseController
         \Cache::store('redis')->delete('header_counter');
         \Cache::store('redis')->delete('index_sidebar');
     }
-    
-    public function blurText($input, $save = 1)
-    {
-        $blurLen = mb_strlen($input) - $save;
-
-        return mb_substr($input, 0, $save).str_repeat('*', $blurLen);
-    }
 
     private function isValid($string)
     {

@@ -45,4 +45,11 @@ class Helpers
         }
         return $out;
     }
+
+    public static function blurText($input, $save = 1)
+    {
+        $blurLen = mb_strlen($input) - $save;
+
+        return mb_substr($input, 0, $save).str_repeat('*', $blurLen);
+    }
 }

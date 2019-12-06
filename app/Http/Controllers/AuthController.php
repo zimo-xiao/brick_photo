@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendMailJob;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Excels\ExportUsers;
 use App\Services\Apps;
 
 class AuthController extends Controller
@@ -210,15 +211,7 @@ class AuthController extends Controller
     {
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
-            $users = app(User::class)->all();
-            return Excel::create($this->intl['allUserInfo'], function ($excel) use ($users) {
-                $excel->sheet('Sheet 1', function ($sheet) use ($users) {
-                    foreach ($users as $k => $u) {
-                        $users[$k]['email'] = $this->blurText($u['email'], 4);
-                    }
-                    $sheet->fromArray($users);
-                });
-            })->export('xls');
+            return Excel::download(new ExportUsers, $this->intl['allUserInfo'].'.xlsx');
         } else {
             return $this->intl['permissionDenied'];
         }
