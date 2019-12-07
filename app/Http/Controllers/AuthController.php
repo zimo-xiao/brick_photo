@@ -119,7 +119,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $token = $request->session()->get('access_token');
-        \Cache::store('redis')->delete($token);
+        \Cache::store('redis')->delete('user_info_'.$token);
         $request->user()->token()->revoke();
         $request->session()->forget('access_token');
         return response()->json([
