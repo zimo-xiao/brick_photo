@@ -14,11 +14,6 @@ class Apps
         $this->intl = \config('intl')[$this->config['lang']];
     }
 
-    public function config()
-    {
-        return $this->config;
-    }
-
     public function intl()
     {
         return $this->intl;
