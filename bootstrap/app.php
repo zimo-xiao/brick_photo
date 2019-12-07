@@ -119,6 +119,8 @@ $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 $app->register(Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider::class);
 $app->configure('filesystems');
 
+$app->configure('bdfz');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
