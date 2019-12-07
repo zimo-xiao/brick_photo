@@ -32,9 +32,6 @@ class ValidationCodeController extends Controller
             ], 401);
         }
 
-        Excel::import(new ImportValidationCode, $request->file('file'));
-        return;
-
         try {
             Excel::import(new ImportValidationCode, $request->file('file'));
         } catch (\Exception $e) {
@@ -42,6 +39,10 @@ class ValidationCodeController extends Controller
                 'error_msg' => $this->intl['excelFormatError'],
             ], 401);
         }
+
+        return response()->json([
+            'msg' => $this->intl['uploadSuccess']
+        ]);
     }
 
     private function emailText($input)
