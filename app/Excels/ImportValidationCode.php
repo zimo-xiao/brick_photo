@@ -17,8 +17,8 @@ class ImportValidationCode implements ToModel
     {
         return new ValidationCode([
             'code' => app(ValidationCode::class)->generateCode(),
-            'name'     => $row[0],
-            'usin'    => $row[1],
+            'name' => $row[0],
+            'usin' => $row[1],
             'email' => $row[2],
         ]);
     }
