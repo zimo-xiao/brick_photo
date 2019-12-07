@@ -153,7 +153,7 @@
                                 v-bind:onclick='"$(\"#download_box\").show();$(\"#download_box_image_id\").val(\""+image.id+"\")"'
                                 class="waves-effect waves-light btn brick-red"><i
                                     class="material-icons left">file_download</i>
-                                {{image.download_count}}<?=$imageIntl['download']?>
+                                {{image.download_count}} <?=$imageIntl['download']?>
                             </span>
                             <span v-on:click="app_tags.selected_image_tags = image.tag"
                                 v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
