@@ -399,12 +399,12 @@ return [
             'btn' => 'Reset Password'
         ],
         'upload' => [
-            'instruction' => '将图片拖拽到此处，或点击选择文件，一次最多可上传40张图片',
+            'instruction' => 'Drag images here, or click to select files; at most 40 images are allowed in one upload',
             'btn' => 'uploading, please do not leave the page...',
             'selected' => 'Selected [img_count] images'
         ],
         'admin_upload_validation_code' => [
-            'instruction' => '将Excel文件拖拽到此处，或点击选择文件，不可多选',
+            'instruction' => 'Drag Excel file here, or click to select file',
             'btn' => 'Upload'
         ],
         'find_password' => [

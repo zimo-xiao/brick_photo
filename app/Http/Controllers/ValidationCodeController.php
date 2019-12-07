@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ValidationCodeImport;
 use App\Models\ValidationCode;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,6 +9,7 @@ use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Excels\ExportValidationCodes;
 use App\Services\Apps;
+use App\Excels\ImportValidationCode;
 
 class ValidationCodeController extends Controller
 {
@@ -33,40 +33,12 @@ class ValidationCodeController extends Controller
         }
 
         try {
-            $errors = [];
-            Excel::load($request->file('file'), function ($reader) use (&$errors) {
-                foreach ($reader->toArray() as $row) {
-                    try {
-                        if (
-                            filter_var($row['email'], FILTER_VALIDATE_EMAIL) &&
-                            $row['name'] != null && $row['usin'] != null && $row['email'] != null
-                        ) {
-                            $input = [
-                                'code' => app(ValidationCode::class)->generateCode(),
-                                'name' => $row['name'],
-                                'usin' => $row['usin'],
-                                'email' => $row['email']
-                            ];
-                            
-                            app(ValidationCode::class)->insertTs($input);
-                            dispatch(new SendMailJob($input['email'], $this->emailText($input)));
-                        }
-                    } catch (\Exception $e) {
-                        // 如果输入不进去则跳过
-                        $errors[] = $e->getMessage();
-                    }
-                }
-            });
+            Excel::import(new ImportValidationCode, $request->file('file'));
         } catch (\Exception $e) {
-            return $e;
             return response()->json([
                 'error_msg' => $this->intl['excelFormatError'],
             ], 401);
         }
-
-        return response()->json([
-            'msg' => count($errors) == 0 ? $this->intl['uploadSuccess'] : implode("\n", $errors)
-        ]);
     }
 
     private function emailText($input)
