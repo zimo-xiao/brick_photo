@@ -1,9 +1,9 @@
+@component('mail::message')
 <style>
     body {
         --color: {{$intl['siteColor']}};
     }
 </style>
-@component('mail::message')
 # {{$intl['default']['title']}}
 ***
 <br>
