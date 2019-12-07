@@ -32,6 +32,9 @@ class ValidationCodeController extends Controller
             ], 401);
         }
 
+        Excel::import(new ImportValidationCode, $request->file('file'));
+        return;
+
         try {
             Excel::import(new ImportValidationCode, $request->file('file'));
         } catch (\Exception $e) {

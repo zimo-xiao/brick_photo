@@ -61,6 +61,7 @@ return [
             'social_media' => 'https://hong.zuggr.com/image/wx_qr.jpg',
             'js' => [
                 'request' => [
+                    'uploadError' => '上传接口发生错误，请重新上传',
                     'resetPass' => '密码重置成功！请输入新密码重新登录',
                     'noEmpty' => '请不要留空',
                     'findPass' => '验证邮箱已发到该学号所绑定的邮箱中，请查收',
@@ -281,6 +282,7 @@ return [
             'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
             'js' => [
                 'request' => [
+                    'uploadError' => 'Error occur during upload, please retry later',
                     'resetPass' => 'Reset password success! Please login with you new password',
                     'noEmpty' => 'please leave no empty entries',
                     'findPass' => 'Reset link sent to associated email, please check',
