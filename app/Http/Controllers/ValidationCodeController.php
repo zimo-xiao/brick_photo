@@ -45,16 +45,6 @@ class ValidationCodeController extends Controller
         ]);
     }
 
-    private function emailText($input)
-    {
-        return [
-            'name' => $input['name'],
-            'description' => str_replace('[code]', $input['code'], $this->intl['validationCodeEmail']['description']),
-            'title' => $this->intl['validationCodeEmail']['title'],
-            'url' => \env('APP_URL').'/?show=register'
-        ];
-    }
-
     public function export(Request $request)
     {
         $user = $this->user($request);
