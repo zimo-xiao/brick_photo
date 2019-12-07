@@ -39,6 +39,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.'.$this->type.'.tmp')->subject($this->email['title'].' | '.$this->intl['siteName']);
+        return $this->markdown('emails.'.$this->type.'-tmp')->subject($this->email['title'].' | '.$this->intl['siteName']);
     }
 }
