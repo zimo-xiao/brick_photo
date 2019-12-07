@@ -14,7 +14,7 @@ class ValidationCode extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'code', 'usin', 'email'
+        'name', 'code', 'usin', 'email'
     ];
 
     public function generateCode()
