@@ -42,6 +42,8 @@ class StoreNewImageJob extends Job
             'path' => $file->getCloudUrl()
         ]);
 
-        dispatch(new StoreWatermarkJob($this->name.'.'.$this->end));
+        if (\env('USE_WATERMARK')) {
+            dispatch(new StoreWatermarkJob($this->name.'.'.$this->end));
+        }
     }
 }
