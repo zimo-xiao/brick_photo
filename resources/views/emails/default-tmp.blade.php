@@ -16,4 +16,4 @@
 @endcomponent
 {{$intl['default']['thanks']}},<br>
 {{$intl['siteName']}}
-@endcomponentt
+@endcomponent
