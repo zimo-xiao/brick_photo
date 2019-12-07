@@ -33,7 +33,7 @@ class ImportValidationCode implements ToModel
 
         $model = new ValidationCode($user);
 
-        dispatch(new SendMailJob($user['email'], $this->emailText($input)));
+        dispatch(new SendMailJob($user['email'], $this->emailText($user)));
 
         return $model;
     }
