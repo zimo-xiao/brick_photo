@@ -14,18 +14,18 @@ return [
         'passOrUsinError' => 'NetID or password error',
         'email' => [
             'welcome' => [
-                'title' => 'Welcome, photographer!',
-                'description' => 'Hello'
+                'title' => 'Hello Photographer! | Welcome to Illinium Photography',
+                'description' => 'Congratulation! Our team would like to welcome you to the Illinium Photography community. Your Illinium account now has permission to upload your photography work. If you are logged in, please logout and login again to make it effective.\n\n\nWe are looking forward to seeing your beautiful photos on our platform. If you have any questions, feel free to reach out to our team (email: zimox2@illinois.edu).'
             ]
         ]
     ],
     'imageController' => [
-        'visitorViewTag' => "Editor's pick",
+        'visitorViewTag' => "Editor's Pick",
     ],
     'validationCodeController' => [
         'validationCodeEmail' => [
-            'title' => 'Account Activation Code | Welcome to Illinium',
-            'description' => "Hello"
+            'title' => 'Your Account Activation Code | Welcome to Illinium Photography',
+            'description' => "Your account activation code is : **[code]** \n\n We have received your request for an Illinium account. We are delighted to invite you to create your account and explore the vast collections that our photographer community offers. Please visit our website and click register to create your account. \n\n ### About Us \n\n Illinium is the largest non-profit photography media library at UIUC, open to all students, alumni, and faculties. Our mission is to inspire academic work, community projects, and student activities with images of our beautiful campus, donated by an amazing community of campus photographers. Sign up for free! Our Illinium License provides free, non-profit-usage-only access for all members of UIUC. \n\n We are looking forward to your arrival. If you have any questions, feel free to reach out to our team (email: zimox2@illinois.edu)."
         ]
     ],
     'main' => [
