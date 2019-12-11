@@ -52,4 +52,17 @@ class Helpers
 
         return mb_substr($input, 0, $save).str_repeat('*', $blurLen);
     }
+
+    public static function mergeConfig($intl, $config)
+    {
+        $out = [];
+        foreach ($intl as $k => $i) {
+            if (!is_array($i)) {
+                $out[$k] = isset($config[$k]) ? $config[$k] : $i;
+            } else {
+                $out[$k] = isset($config[$k]) ? self::mergeConfig($intl[$k], $config[$k]) : $intl[$k];
+            }
+        }
+        return $out;
+    }
 }

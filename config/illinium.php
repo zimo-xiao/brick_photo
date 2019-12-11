@@ -32,7 +32,7 @@ return [
         'color' => '#e04e39',
         'secondaryColor' => '#13294b',
         'title' => 'Illinium - photography media bank for Illinois',
-        'pls_login' => 'Please login before download. 请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',
+        'pls_login' => 'Please login before download. 未注册请扫描右方 二维码 获取红砖账号',
         'register_form' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/register.jpg',
         'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
         'js' => [
