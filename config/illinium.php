@@ -62,6 +62,10 @@ return [
             [
                 'name' => 'Illinium License',
                 'url' => 'https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#'
+            ],
+            [
+                'name' => 'Become A Photographer',
+                'url' => 'https://forms.gle/ZQuoFHoEZieeCFjB9'
             ]
         ]
     ],
@@ -73,6 +77,10 @@ return [
                 [
                     'name' => 'Illinium License',
                     'url' => 'https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit?usp=sharing'
+                ],
+                [
+                    'name' => 'Become A Photographer',
+                    'url' => 'https://forms.gle/ZQuoFHoEZieeCFjB9'
                 ]
             ]
         ],
