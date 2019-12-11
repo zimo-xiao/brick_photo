@@ -172,7 +172,9 @@ return [
                 'no_description' => '暂时没有作品简介哦',
                 'delete' => '删除',
                 'alert' => '侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者[author]」'
-            ]
+            ],
+            'prev' => '上一页',
+            'next' => '下一页'
         ],
         'reset_password' => [
             'title' => '找回密码',
@@ -396,7 +398,9 @@ return [
                 'no_description' => 'There is no description...',
                 'delete' => 'Delete',
                 'alert' => '侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者[author]」'
-            ]
+            ],
+            'prev' => 'previous',
+            'next' => 'next'
         ],
         'reset_password' => [
             'title' => 'Reset Password',
