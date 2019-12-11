@@ -238,8 +238,8 @@ layui.use(['laypage'], function() {
         limit : 40,
         curr: urlParams.get('page'),
         layout: ['prev', 'page', 'next'],
-        prev: <?=$intl['prev']?>,
-        next: <?=$intl['next']?>,
+        prev: "<?=$intl['prev']?>",
+        next: "<?=$intl['next']?>",
         jump: (obj, first) => {
             if (!first) {
                 var u = new URL(window.location.href);
