@@ -32,12 +32,12 @@ return [
         'color' => '#e04e39',
         'secondaryColor' => '#13294b',
         'title' => 'Illinium - photography media library for Illinois',
-        'pls_login' => 'Please login before download. 未注册请扫描右方 二维码 获取红砖账号',
+        'pls_login' => 'Please login before download. Request account if you don\'t have an access',
         'register_form' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/register.jpg',
         'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
         'js' => [
             'request' => [
-                'downloadAlertContent' => '在下载图片时，本人同意将遵守「红砖平台使用协议」：用图署名作者，不在除声明用图场景外用图'
+                'downloadAlertContent' => 'I understand and agree with the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>, and will only use this photography work in nonprofit usage.'
             ]
         ]
     ],
@@ -46,7 +46,7 @@ return [
     ],
     'register' => [
         'usin' => 'NetID',
-        'contract' => 'I understand and agree to the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>'
+        'contract' => 'I understand and agree with the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>'
     ],
     'download_box' => [
         'alert' => 'Remember to credit the author! 😉',
@@ -77,7 +77,7 @@ return [
             ]
         ],
         'image' => [
-            'alert' => '侵权/不规范引用将要求删除并公开道歉。引用格式：「来自红砖，作者[author]」'
+            'alert' => 'Show appreciation with a simple credit: Photo by [author] on Illinium'
         ]
     ],
     'find_password' => [
