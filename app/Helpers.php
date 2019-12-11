@@ -61,7 +61,7 @@ class Helpers
                 $out[$k] = isset($config[$k]) ? $config[$k] : $i;
             } else {
                 if (self::isList($i)) {
-                    $out = $config;
+                    $out[$k] = $config[$k];
                 } else {
                     $out[$k] =  isset($config[$k]) ? self::mergeConfig($i, $config[$k]) : $i;
                 }
