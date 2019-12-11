@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Helpers;
+
 class Apps
 {
     protected $intl;
@@ -9,7 +11,7 @@ class Apps
     public function __construct($config)
     {
         $config = \config($config);
-        $this->intl = array_merge(\config('intl')[$config['lang']], $config);
+        $this->intl = Helpers::mergeConfig(\config('intl')[$config['lang']], $config);
     }
 
     public function intl()
