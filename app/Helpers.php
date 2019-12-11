@@ -60,7 +60,7 @@ class Helpers
             if (!is_array($i)) {
                 $out[$k] = isset($config[$k]) ? $config[$k] : $i;
             } else {
-                $out[$k] = isset($config[$k]) ? self::mergeConfig($intl[$k], $config[$k]) : $intl[$k];
+                $out[$k] = isset($config[$k]) ? is_numeric($k) ? $config[$k] : self::mergeConfig($intl[$k], $config[$k]) : $intl[$k];
             }
         }
         return $out;
