@@ -31,7 +31,7 @@ return [
     'main' => [
         'color' => '#e04e39',
         'secondaryColor' => '#13294b',
-        'title' => 'Illinium - photography media bank for Illinois',
+        'title' => 'Illinium - photography media library for Illinois',
         'pls_login' => 'Please login before download. 未注册请扫描右方 二维码 获取红砖账号',
         'register_form' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/register.jpg',
         'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
@@ -49,7 +49,7 @@ return [
         'contract' => 'I understand and agree to the'
     ],
     'download_box' => [
-        'alert' => '如要下载去水印图片，请微信联系：YangynAcpovaurox',
+        'alert' => 'Remember to credit the author! 😉',
     ],
     'header' => [
         'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/logo.png',
@@ -57,7 +57,7 @@ return [
         'bg_img' => 'https://hong.zuggr.com/image/background.gif',
         'title' => 'Blue and Orange Never Fade',
         'requestAccountForm' => 'https://forms.gle/2A5xHPiKVeCQgRbXA',
-        'tagline' => 'Illinois\' largest photography media bank. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
+        'tagline' => 'Illinois\' largest photography media library. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
         'custom_menu_items' => [
             [
                 'name' => 'Agreement',
@@ -72,11 +72,11 @@ return [
     'index' => [
         'about' => [
             'title' => 'About Us',
-            'description' => '红砖是目前北大附中最大的图片库，面向全校同学和附中校友免费开放。我们',
+            'description' => 'Illinium is the largest non-profit photography media library at UIUC, open to all students, alumni, and faculties. Our mission is to inspire academic work, community projects, and student activities with images of our beautiful campus, donated by an amazing community of campus photographers. Sign up for free! Our Illinium License provides free, non-profit-usage-only access for all members of UIUC.',
             'custom_menu_items' => [
                 [
-                    'name' => '协议',
-                    'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
+                    'name' => 'Illinium License',
+                    'url' => 'https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit?usp=sharing'
                 ]
             ]
         ],
