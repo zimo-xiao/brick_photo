@@ -46,7 +46,7 @@ return [
     ],
     'register' => [
         'usin' => 'NetID',
-        'contract' => 'I understand and agree to the'
+        'contract' => 'I understand and agree to the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>'
     ],
     'download_box' => [
         'alert' => 'Remember to credit the author! 😉',
@@ -60,12 +60,8 @@ return [
         'tagline' => 'Illinois\' largest photography media library. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
         'custom_menu_items' => [
             [
-                'name' => 'Agreement',
-                'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
-            ],
-            [
-                'name' => 'Agreement',
-                'url' => 'https://shimo.im/docs/bmH8eGUP7OEKRP1e'
+                'name' => 'Illinium License',
+                'url' => 'https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#'
             ]
         ]
     ],
