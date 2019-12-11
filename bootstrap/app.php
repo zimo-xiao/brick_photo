@@ -118,8 +118,8 @@ $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 $app->register(Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider::class);
 $app->configure('filesystems');
-
-$app->configure('bdfz');
+// schools
+$app->configure('illinium');
 
 /*
 |--------------------------------------------------------------------------

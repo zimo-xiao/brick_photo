@@ -14,7 +14,7 @@
                     echo "<li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>".$user->name."</a></li>";
                     echo "<ul id='feature-dropdown' class='dropdown-content'><li><a href='#' onclick='redRequest.logout()'>{$intl['logout']}</a></li></ul>";
                 } else {
-                    echo "<li><a onclick='$(\"#login\").show()'>{$intl['login']}</a></li><li><a onclick='$(\"#register\").show()'>{$intl['register']}</a></li><li><a onclick='$(\"#find_password\").show()'>{$intl['find_password']}</a></li>";
+                    echo "<li><a onclick='$(\"#login\").show()'>{$intl['login']}</a></li><li><a onclick='$(\"#register\").show()'>{$intl['register']}</a></li><li><a href='{$intl['requestAccountForm']}' target='_blank'>{$intl['requestAccount']}</a></li><li><a onclick='$(\"#find_password\").show()'>{$intl['find_password']}</a></li>";
                 }
 
                 if ($token != null && $user->permission === 3) {

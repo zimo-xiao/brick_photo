@@ -4,14 +4,12 @@ namespace App\Services;
 
 class Apps
 {
-    protected $config;
-
     protected $intl;
 
     public function __construct($config)
     {
-        $this->config = \config($config);
-        $this->intl = \config('intl')[$this->config['lang']];
+        $config = \config($config);
+        $this->intl = array_merge(\config('intl')[$config['lang']], $config);
     }
 
     public function intl()

@@ -133,6 +133,8 @@ return [
             'find_password' => '找回密码',
             'index' => '首页',
             'upload' => '上传图片',
+            'requestAccount' => '请求账号',
+            'requestAccountForm' => '',
             'custom_menu_items' => [
                 [
                     'name' => '协议',
@@ -339,6 +341,8 @@ return [
             'logoWidth' => '120',
             'bg_img' => 'https://hong.zuggr.com/image/background.gif',
             'title' => 'Blue and Orange Never Fade',
+            'requestAccount' => 'Request An Account',
+            'requestAccountForm' => '',
             'tagline' => 'Illinois\' largest photography media bank. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
             'admin_dropdown' => [
                 'name' => 'Admin Operations',
