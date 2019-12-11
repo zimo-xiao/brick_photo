@@ -60,9 +60,23 @@ class Helpers
             if (!is_array($i)) {
                 $out[$k] = isset($config[$k]) ? $config[$k] : $i;
             } else {
-                $out[$k] = isset($config[$k]) ? is_numeric($k) ? $config[$k] : self::mergeConfig($intl[$k], $config[$k]) : $intl[$k];
+                if (self::isList($i)) {
+                    $out = $config;
+                } else {
+                    $out[$k] =  isset($config[$k]) ? self::mergeConfig($i, $config[$k]) : $i;
+                }
             }
         }
         return $out;
+    }
+
+    public static function isList($list)
+    {
+        foreach ($list as $k => $i) {
+            if (!is_numeric($k)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
