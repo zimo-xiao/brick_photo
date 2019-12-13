@@ -171,7 +171,7 @@ class AuthController extends Controller
      */
     public function view(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json(\Auth::user());
     }
 
     /**
