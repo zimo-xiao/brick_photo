@@ -22,6 +22,7 @@ class Controller extends BaseController
                     $out = Curl::to(\env('APP_URL').'/auth')
                         ->withHeader('Authorization: Bearer '.$token)
                         ->asJson()
+                        ->withTimeout(10)
                         ->get();
                     $request->session()->put('user_info', json_encode($out), 5);
                 }

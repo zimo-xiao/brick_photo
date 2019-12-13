@@ -171,7 +171,7 @@ class AuthController extends Controller
      */
     public function view(Request $request)
     {
-        return response()->json(\Auth::user());
+        return response()->json($request->user());
     }
 
     /**
@@ -186,16 +186,13 @@ class AuthController extends Controller
         ]);
 
         $usin = strtolower($request->input('usin'));
-        $user = app(User::class)->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->get();
-        if (count($user) > 0) {
-            $user = $user[0];
-
+        $user = app(User::class)->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->first();
+        if ($user) {
             $code = 'pass_'.$this->generateNumericKey();
             while (\Cache::store('redis')->has($code)) {
                 $code = 'pass_'.$this->generateNumericKey();
             }
             \Cache::store('redis')->put($code, $user['id'], 60);
-
             dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, \env('APP_URL'))));
         } else {
             return response()->json([
