@@ -31,6 +31,7 @@ class Controller extends BaseController
             } catch (\Exception $e) {
                 $request->session()->forget('access_token');
                 \Cache::store('redis')->delete('user_info_'.$token);
+                // to obj
                 return json_decode(json_encode([
                     'name' => null,
                     'permission' => null,

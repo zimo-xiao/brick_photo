@@ -252,13 +252,7 @@ class AuthController extends Controller
     private function validateLogin($usin, $password)
     {
         $usin = strtolower($usin);
-        $query = app(User::class)->where(['password' => $this->encrypt($password)])->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->get();
-
-        if (count($query) > 0) {
-            return app(User::class)->find($query[0]['id']);
-        } else {
-            return false;
-        }
+        return app(User::class)->where(['password' => $this->encrypt($password)])->whereRaw('LOWER(usin) = ?', [$usin])->limit(1)->first();
     }
     
     /**
