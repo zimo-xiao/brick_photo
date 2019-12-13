@@ -260,7 +260,6 @@ class AuthController extends Controller
      */
     private function createAccessToken($user)
     {
-        $user = User::find($user->id);
         $tokenResult = $user->createToken('Personal Access Token');
         // 延长token过期时间
         $token = $tokenResult->token;
