@@ -16,21 +16,21 @@ class Controller extends BaseController
         $token = $request->session()->get('access_token');
         if ($token != null) {
             try {
-                if (\Cache::store('redis')->has('user_info_'.$token)) {
-                    $out = json_decode(\Cache::store('redis')->get('user_info_'.$token));
+                if ($user = $request->session()->get('user_info')) {
+                    $out = json_decode($user);
                 } else {
                     $out = Curl::to(\env('APP_URL').'/auth')
                         ->withHeader('Authorization: Bearer '.$token)
                         ->asJson()
                         ->get();
-                    \Cache::store('redis')->put('user_info_'.$token, json_encode($out), 5);
+                    $request->session()->put('user_info', json_encode($out), 5);
                 }
                 // HACK: 测试用户是否存在，故意报错
                 $out->permission;
                 return $out;
             } catch (\Exception $e) {
                 $request->session()->forget('access_token');
-                \Cache::store('redis')->delete('user_info_'.$token);
+                $request->session()->forget('user_info');
                 // to obj
                 return json_decode(json_encode([
                     'name' => null,

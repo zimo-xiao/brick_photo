@@ -111,7 +111,7 @@ class AuthController extends Controller
         $request->session()->put('access_token', $token['access_token']);
 
         return [
-            $user,
+            app(User::class)->find($user->id),
             $token
         ];
     }
@@ -123,9 +123,8 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $token = $request->session()->get('access_token');
-        \Cache::store('redis')->delete('user_info_'.$token);
         $request->user()->token()->revoke();
+        $request->session()->forget('user_info');
         $request->session()->forget('access_token');
         return response()->json([
             'message' => 'Successfully logged out'
