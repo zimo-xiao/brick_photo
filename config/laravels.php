@@ -48,8 +48,8 @@ return [
     'register_providers'       => [],
     'cleaners'                 => [
         // If you use the session/authentication/passport in your project
-        // Hhxsv5\LaravelS\Illuminate\Cleaners\SessionCleaner::class,
-        // Hhxsv5\LaravelS\Illuminate\Cleaners\AuthCleaner::class,
+        Hhxsv5\LaravelS\Illuminate\Cleaners\SessionCleaner::class,
+        Hhxsv5\LaravelS\Illuminate\Cleaners\AuthCleaner::class,
 
         // If you use the package "tymon/jwt-auth" in your project
         // Hhxsv5\LaravelS\Illuminate\Cleaners\SessionCleaner::class,
