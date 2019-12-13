@@ -78,7 +78,7 @@ class AuthController extends Controller
         $this->deleteGlobalCache();
         $token = $this->createAccessToken($user);
         $request->session()->put('access_token', $token['access_token']);
-        $request->session()->put('permission', $user->permission);
+        return $token;
     }
   
     /**
@@ -109,6 +109,8 @@ class AuthController extends Controller
         
         $token = $this->createAccessToken($user);
         $request->session()->put('access_token', $token['access_token']);
+
+        return $token;
     }
   
     /**
@@ -139,16 +141,12 @@ class AuthController extends Controller
         ]);
 
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
-            $user = app(User::class)->where(['usin' => $id])->get();
-            if (count($user) > 0) {
-                $user = $user[0];
+            $user = app(User::class)->where(['usin' => $id])->first();
+            if ($user) {
                 $sendPhotographerEmail = false;
-                $update = [];
-                if ($request->has('permission')) {
-                    $update['permission'] = $request->input('permission');
-                    if ($update['permission'] == User::PERMISSION_WRITE) {
-                        $sendPhotographerEmail = true;
-                    }
+                $update = ['permission' => $request->input('permission')];
+                if ($update['permission'] == User::PERMISSION_WRITE) {
+                    $sendPhotographerEmail = true;
                 }
                 app(User::class)->where(['usin' => $id])->limit(1)->updateTs($update);
                 $this->deleteGlobalCache();
