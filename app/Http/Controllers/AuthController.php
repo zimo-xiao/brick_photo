@@ -106,12 +106,14 @@ class AuthController extends Controller
                 'error_msg' => $this->intl['passOrUsinError']
             ], 401);
         }
-        return $user;
         
         $token = $this->createAccessToken($user);
         $request->session()->put('access_token', $token['access_token']);
 
-        return $token;
+        return [
+            $user,
+            $token
+        ];
     }
   
     /**
