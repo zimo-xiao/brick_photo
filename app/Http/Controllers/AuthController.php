@@ -106,7 +106,6 @@ class AuthController extends Controller
                 'error_msg' => $this->intl['passOrUsinError']
             ], 401);
         }
-        return $user;
         
         $token = $this->createAccessToken($user);
         $request->session()->put('access_token', $token['access_token']);
@@ -262,6 +261,7 @@ class AuthController extends Controller
      */
     private function createAccessToken($user)
     {
+        $user = app(User::class)->find($user->id);
         $tokenResult = $user->createToken('Personal Access Token');
         // 延长token过期时间
         $token = $tokenResult->token;
