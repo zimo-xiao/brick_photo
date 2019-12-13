@@ -29,7 +29,6 @@ class Controller extends BaseController
                 $out->permission;
                 return $out;
             } catch (\Exception $e) {
-                throw $e;
                 $request->session()->forget('access_token');
                 \Cache::store('redis')->delete('user_info_'.$token);
                 // to obj
