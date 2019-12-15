@@ -1,6 +1,9 @@
 <?php
 return [
     'cn' => [
+        'authenticate' => [
+            'credential_error' => '用户验证错误'
+        ],
         'email' => [
             'siteName' => '红砖图库',
             'siteColor' => '#e04e39',
@@ -220,12 +223,13 @@ return [
         ]
     ],
     
-
     //
 
 
-
     'en' => [
+        'authenticate' => [
+            'credential_error' => 'invalid credential'
+        ],
         'email' => [
             'siteName' => 'Illinium',
             'siteColor' => '#e04e39',
