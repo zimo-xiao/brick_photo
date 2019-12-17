@@ -38,6 +38,7 @@ class Authenticate
     {
         if ($this->auth->guard($guard)->guest()) {
             $request->session()->forget('access_token');
+            $request->session()->forget('user_info');
             $intl = app(Apps::class)->intl()['authenticate'];
             return response()->json([
                 'error_msg' => $intl['credential_error']
