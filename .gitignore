@@ -23,3 +23,5 @@ jpush.log
 node_modules
 /storage/oauth-private.key
 /storage/oauth-public.key
+storage/laravels.json
+storage/laravels.pid

@@ -11,7 +11,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Event::listen('laravels.received_request', function (\Illuminate\Http\Request $req, $app) {
+        \Event::listen('laravels.received_request', function (\Illuminate\Http\Request $req, $app) {
             Facade::clearResolvedInstance('auth');
         });
     }
