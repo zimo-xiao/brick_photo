@@ -45,7 +45,12 @@ return [
     ],
     'events'                   => [],
     'swoole_tables'            => [],
-    'register_providers'       => [],
+    'register_providers'       => [
+        Illuminate\Auth\AuthServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class
+    ],
     'cleaners'                 => [
         // If you use the session/authentication/passport in your project
         Hhxsv5\LaravelS\Illuminate\Cleaners\SessionCleaner::class,
