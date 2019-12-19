@@ -107,7 +107,7 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(App\Providers\QueryBuilderMacroProvider::class);
 $app->register(Illuminate\Session\SessionServiceProvider::class);
-$app->register(Illuminate\Session\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Sentry\Laravel\ServiceProvider::class);
