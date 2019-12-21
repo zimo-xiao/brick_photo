@@ -54,7 +54,7 @@ return [
     'header' => [
         'logo' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/logo.png',
         'logoWidth' => '120',
-        'bg_img' => 'https://hong.zuggr.com/image/background.gif',
+        'bg_img' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/bg.jpg',
         'title' => 'Blue and Orange Never Fade',
         'requestAccountForm' => 'https://forms.gle/2A5xHPiKVeCQgRbXA',
         'tagline' => 'Illinois\' largest photography media library. Proudly hosting [images] images，and sharing them with [users] Illinois student and faculties',
