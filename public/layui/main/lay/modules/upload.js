@@ -114,7 +114,7 @@ layui.define("layer", function (e) {
                             t++, d(e, i), u()
                         },
                         error: function () {
-                            n++, o.msg(intl.uploadError), m(e), u()
+                            n++, o.msg(intl.layui.uploadError), m(e), u()
                         }
                     })
                 })
