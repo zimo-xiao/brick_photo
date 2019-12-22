@@ -18,7 +18,7 @@
             <div class="input-field col s12">
                 <div class="input-field col s9" style="margin: 0px; padding-left: 0px">
                     <input id="register_code" type="text" class="validate" required>
-                    <label for="register_code"><?=$intl['code']?></label>
+                    <label for="register_code" style="left:0px"><?=$intl['code']?></label>
                 </div>
                 <button class="btn waves-effect waves-light col s3"><?=$intl['request_code']?></button>
             </div>
