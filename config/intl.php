@@ -106,6 +106,7 @@ return [
             'btn' => '登录'
         ],
         'register' => [
+            'request_code' => '请求',
             'email' => '电子邮箱地址',
             'title' => '注册',
             'usin' => '学号',
@@ -336,6 +337,7 @@ return [
             'btn' => 'Login'
         ],
         'register' => [
+            'request_code' => 'Request',
             'email' => 'Email',
             'title' => 'Register',
             'usin' => 'NetID',

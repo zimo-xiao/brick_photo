@@ -16,11 +16,11 @@
                 <label for="register_usin"><?=$intl['email']?></label>
             </div>
             <div class="input-field col s12">
-                <div class="input-field col s9" style="margin: 0px">
+                <div class="input-field col s9" style="margin: 0px; padding-left: 0px">
                     <input id="register_code" type="text" class="validate" required>
                     <label for="register_code"><?=$intl['code']?></label>
                 </div>
-                <button class="btn waves-effect waves-light col s3"/>
+                <button class="btn waves-effect waves-light col s3"><?=$intl['request_code']?></button>
             </div>
             <div class="input-field col s12">
                 <input id="register_usin" type="text" class="validate" required>
