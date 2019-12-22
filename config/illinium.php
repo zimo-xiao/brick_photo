@@ -45,6 +45,7 @@ return [
         'usin' => 'NetID'
     ],
     'register' => [
+        'email' => '@illinois Email (Request Account If Using Non-Illinois Address)',
         'usin' => 'NetID',
         'contract' => 'I understand and agree with the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>'
     ],
