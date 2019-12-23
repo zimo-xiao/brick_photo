@@ -56,7 +56,7 @@ class ValidationCodeController extends Controller
         if (strstr($email, $mustEndWith) != false) {
             $pastCode = app(ValidationCode::class)
                 ->where(['email' => $email])
-                ->whereDate('created_at', '>', Carbon::now()->subMinutes(5))
+                ->where('created_at', '>', Carbon::now()->subMinutes(1))
                 ->first();
 
             if ($pastCode) {
@@ -95,7 +95,7 @@ class ValidationCodeController extends Controller
     private function emailText($input)
     {
         return [
-            'name' => '',
+            'name' => ' ',
             'description' => str_replace('[code]', $input['code'], $this->intl['validationCodeEmail']['description']),
             'title' => $this->intl['validationCodeEmail']['title'],
             'url' => \env('APP_URL').'/?show=register'
