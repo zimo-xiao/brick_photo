@@ -73,16 +73,20 @@ class SendDownloadEmails extends Command
 
     private function emailText($name, $data)
     {
-        $content = '今天一共有'.count($data).'次图片下载';
+        $app = app(Apps::class)->intl()['sendDeleteEmails'];
+        $content = str_replace('[count]', count($data), $app['contentTitle']);
 
         foreach ($data as $d) {
-            $content .= "\n\n".$d['downloader_name'].'下载了你编号为**'.$d['image_id'].'**的图片，使用原因为：**'.$d['usage'].'**';
+            $tmp = str_replace('[id]', $d['image_id'], $app['contentItem']);
+            $tmp = str_replace('[name]', $d['downloader_name'], $tmp);
+            $tmp = str_replace('[usage]', $d['usage'], $tmp);
+            $content .= $tmp;
         }
         
         return [
             'name' => $name,
             'description' => $content,
-            'title' => '下载图片提醒'
+            'title' => $app['title']
         ];
     }
 }

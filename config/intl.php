@@ -4,6 +4,16 @@ return [
         'authenticate' => [
             'credential_error' => '用户验证错误'
         ],
+        'sendDownloadEmails' => [
+            'title' => '下载图片提醒',
+            'contentTitle' => '今天一共有[count]次图片下载',
+            'contentItem' => "\n\n[name]下载了你编号为**[id]**的图片，使用原因为：**[usage]**"
+        ],
+        'sendDeleteEmails' => [
+            'title' => '图片删除通知',
+            'contentTitle' => '有[count]张图片被管理员删除，如有疑问请联系：微信号lrh20021108',
+            'contentItem' => "\n\n编号为**[id]**的图片被管理员删除；原因：**[reason]**"
+        ],
         'email' => [
             'siteName' => '红砖图库',
             'siteColor' => '#e04e39',
@@ -243,6 +253,16 @@ return [
     'en' => [
         'authenticate' => [
             'credential_error' => 'invalid credential'
+        ],
+        'sendDownloadEmails' => [
+            'title' => 'Image Download Alert',
+            'contentTitle' => '[count] of your images where downloaded.',
+            'contentItem' => "\n\n[name] downloaded your image ID **[id]**. Usage: **[usage]**"
+        ],
+        'sendDeleteEmails' => [
+            'title' => 'Image Delete Alert',
+            'contentTitle' => '[count] of your images where deleted by admin',
+            'contentItem' => "\n\nImage ID **[id]** is deleted by admin. Reason: **[reason]**"
         ],
         'email' => [
             'siteName' => 'Illinium',

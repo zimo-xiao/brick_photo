@@ -15,6 +15,7 @@ use App\Jobs\SendMailJob;
 use App\Models\Delete;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Services\Apps;
 
 /**
  * Class UpdateStudentClassRank
@@ -69,16 +70,19 @@ class SendDeleteEmails extends Command
 
     private function emailText($name, $data)
     {
-        $content = '有'.count($data).'张图片被管理员删除，如有疑问请联系：微信号lrh20021108';
+        $app = app(Apps::class)->intl()['sendDeleteEmails'];
+        $content = str_replace('[count]', count($data), $app['contentTitle']);
 
         foreach ($data as $d) {
-            $content .= "\n\n编号为**".$d['image_id'].'**的图片被管理员删除；原因：**'.$d['reason'].'**';
+            $tmp = str_replace('[id]', $d['image_id'], $app['contentItem']);
+            $tmp = str_replace('[reason]', $d['reason'], $tmp);
+            $content .= $tmp;
         }
         
         return [
             'name' => $name,
             'description' => $content,
-            'title' => '图片删除通知'
+            'title' => $app['title']
         ];
     }
 }

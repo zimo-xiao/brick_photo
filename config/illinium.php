@@ -9,6 +9,9 @@ return [
             'btn' => 'Enter Illinium'
         ]
     ],
+    'sendDeleteEmails' => [
+        'contentTitle' => '[count] of your images where deleted by admin. If you have any question, please contact zimox2@illinois.edu'
+    ],
     'authController' => [
         'usinExists' => 'NetID exists',
         'passOrUsinError' => 'NetID or password error',
