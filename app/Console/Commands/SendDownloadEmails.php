@@ -16,6 +16,7 @@ use App\Models\Download;
 use App\Models\Image;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Services\Apps;
 
 /**
  * Class UpdateStudentClassRank

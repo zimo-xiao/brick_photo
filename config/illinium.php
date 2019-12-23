@@ -10,7 +10,7 @@ return [
         ]
     ],
     'sendDeleteEmails' => [
-        'contentTitle' => '[count] of your images where deleted by admin. If you have any question, please contact zimox2@illinois.edu'
+        'contentTitle' => '[count] of your images where deleted by admin. If you have any questions, please contact zimox2@illinois.edu'
     ],
     'authController' => [
         'usinExists' => 'NetID exists',
