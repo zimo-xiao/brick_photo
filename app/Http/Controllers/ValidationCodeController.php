@@ -56,7 +56,7 @@ class ValidationCodeController extends Controller
         if (strstr($email, $mustEndWith) != false) {
             $pastCode = app(ValidationCode::class)
                 ->where(['email' => $email])
-                ->whereDate('created_at', '>', Carbon::now()->subMinutes(1))
+                ->whereDate('created_at', '>', Carbon::now()->subMinutes(5))
                 ->first();
 
             if ($pastCode) {
@@ -64,13 +64,16 @@ class ValidationCodeController extends Controller
                     'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['frequentRequestError'])
                 ], 401);
             } else {
-                app(ValidationCode::class)->where(['email' => $email])->forceDelete();
-                app(ValidationCode::class)->insertTs([
+                $user = [
                     'code' => app(ValidationCode::class)->generateCode(),
                     'name' => 'isMustEndWith',
                     'usin' => app(ValidationCode::class)->generateCode(),
                     'email' => $email
-                ]);
+                ];
+                
+                app(ValidationCode::class)->where(['email' => $email])->forceDelete();
+                app(ValidationCode::class)->insertTs($user);
+                dispatch(new SendMailJob($user['email'], $this->emailText($user)));
             }
         } else {
             return response()->json([
@@ -87,5 +90,15 @@ class ValidationCodeController extends Controller
         } else {
             return $this->intl['permissionDenied'];
         }
+    }
+
+    private function emailText($input)
+    {
+        return [
+            'name' => '',
+            'description' => str_replace('[code]', $input['code'], $this->intl['validationCodeEmail']['description']),
+            'title' => $this->intl['validationCodeEmail']['title'],
+            'url' => \env('APP_URL').'/?show=register'
+        ];
     }
 }
