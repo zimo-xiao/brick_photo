@@ -61,9 +61,10 @@ class ValidationCodeController extends Controller
 
             if ($pastCode) {
                 return response()->json([
-                'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['frequentRequestError'])
-            ], 401);
+                    'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['frequentRequestError'])
+                ], 401);
             } else {
+                app(ValidationCode::class)->where(['email' => $email])->forceDelete();
                 app(ValidationCode::class)->insertTs([
                     'code' => app(ValidationCode::class)->generateCode(),
                     'name' => 'isMustEndWith',
