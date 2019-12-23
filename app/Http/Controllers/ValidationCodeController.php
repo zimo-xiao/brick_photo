@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\ValidationCode;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -53,12 +54,23 @@ class ValidationCodeController extends Controller
         $email = $request->input('email');
         $mustEndWith = $this->intl['mustEndWith'];
         if (strstr($email, '@'.$mustEndWith) != false) {
-            app(ValidationCode::class)->insertTs([
-                'code' => app(ValidationCode::class)->generateCode(),
-                'name' => 'isMustEndWith',
-                'usin' => 'isMustEndWith',
-                'email' => $email
-            ]);
+            $pastCode = app(ValidationCode::class)
+                ->where(['email' => $email])
+                ->whereDate('created_at', '>', Carbon::now()->subMinutes(1))
+                ->first();
+
+            if ($pastCode) {
+                return response()->json([
+                'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['frequentRequestError'])
+            ], 401);
+            } else {
+                app(ValidationCode::class)->insertTs([
+                    'code' => app(ValidationCode::class)->generateCode(),
+                    'name' => 'isMustEndWith',
+                    'usin' => 'isMustEndWith',
+                    'email' => $email
+                ]);
+            }
         } else {
             return response()->json([
                 'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['mustEndWithError'])

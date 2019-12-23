@@ -47,6 +47,7 @@ return [
         ],
         'validationCodeController' => [
             'mustEndWith' => '',
+            'frequentRequestError' => '请求过于频繁，请一分钟后重试',
             'mustEndWithError' => '请求验证码邮箱必须以[email]结尾，如果使用外部邮箱，请选择「请求账户」',
             'permissionDenied' => '你没有权限',
             'excelFormatError' => 'Excel格式错误',
@@ -286,6 +287,7 @@ return [
         ],
         'validationCodeController' => [
             'mustEndWith' => '',
+            'frequentRequestError' => 'Request too frequently, please try in a minute',
             'mustEndWithError' => 'Email must ends with [email]. If you are using an outside email, please request an account.',
             'permissionDenied' => 'Permission denied',
             'excelFormatError' => 'Excel format error',
