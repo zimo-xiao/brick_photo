@@ -39,6 +39,12 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
+        $code = $request->input('code');
+        $email = $request->input('email');
+        $usin = $request->input('usin');
+        $password = $request->input('password');
+        $name = $request->input('name');
+
         $validation = app(ValidationCode::class)->where([
             'code' => $code,
             'email' => $email
@@ -51,11 +57,11 @@ class AuthController extends Controller
         }
 
         $credentials = [
-            'usin' => strtolower($request->input('usin')),
-            'password' => $this->encrypt($request->input('password')),
-            'name' => $request->input('name'),
+            'usin' => strtolower($usin),
+            'password' => $this->encrypt($password),
+            'name' => $name,
             'permission' => User::PERMISSION_READ,
-            'email' => $request->input('email')
+            'email' => $email
         ];
 
         try {

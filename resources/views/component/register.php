@@ -20,7 +20,8 @@
                     <input id="register_code" type="text" class="validate" required>
                     <label for="register_code" style="left:0px"><?=$intl['code']?></label>
                 </div>
-                <button class="btn waves-effect waves-light col s3" onclick="redRequest.code()"><?=$intl['request_code']?></button>
+                <button class="btn waves-effect waves-light col s3"
+                    onclick="redRequest.code()"><?=$intl['request_code']?></button>
             </div>
             <div class="input-field col s12">
                 <input id="register_name" type="text" class="validate" required>
@@ -43,7 +44,7 @@
                 <span><?=$intl['contract']?></span>
             </div>
             <div class="input-field col s12">
-                <button onclick="$('#register').hide();redRequest.register()" class="btn waves-effect waves-light"
+                <button onclick="redRequest.register()" class="btn waves-effect waves-light"
                     style="background-color: var(--color)" type="button" name="action"><?=$intl['btn']?></button>
             </div>
         </div>

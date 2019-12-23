@@ -14,7 +14,7 @@
                     <label for="login_password"><?=$intl['pass']?></label>
                 </div>
                 <div class="input-field col s12">
-                    <button onclick="$('#login').hide();redRequest.login()" class="btn waves-effect waves-light"
+                    <button onclick="redRequest.login()" class="btn waves-effect waves-light"
                         style="background-color: var(--color)" type="button" name="action"><?=$intl['btn']?></button>
                 </div>
             </div>
