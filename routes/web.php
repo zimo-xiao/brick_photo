@@ -50,8 +50,12 @@ $router->group(['prefix' => 'image'], function ($router) {
 
 $router->group(['prefix' => 'validation-code'], function ($router) {
     $router->group(['middleware' => ['auth']], function ($router) {
-        $router->post('', 'ValidationCodeController@upload');
+        $router->post('upload', 'ValidationCodeController@upload');
     });
+    
+    $router->post('', 'ValidationCodeController@post');
+
+
     $router->get('', 'ValidationCodeController@export');
 });
 

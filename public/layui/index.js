@@ -61,7 +61,7 @@ layui.use(['layer', 'upload'], function () {
     upload.render({
       elem: '#up-validation-code',
       bindAction: "#code_submit",
-      url: THIS_URL + '/validation-code',
+      url: THIS_URL + '/validation-code/upload',
       headers: {
         'Authorization': 'Bearer ' + TOKEN
       },

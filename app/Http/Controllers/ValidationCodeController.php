@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ValidationCode;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ValidationCode;
 use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Excels\ExportValidationCodes;
@@ -43,6 +44,27 @@ class ValidationCodeController extends Controller
         return response()->json([
             'msg' => $this->intl['uploadSuccess']
         ]);
+    }
+
+    public function post(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+        ]);
+        $email = $request->input('email');
+        $mustEndWith = $this->intl['mustEndWith'];
+        if (strstr($email, '@'.$mustEndWith) != false) {
+            app(ValidationCode::class)->insertTs([
+                'code' => app(ValidationCode::class)->generateCode(),
+                'name' => 'isMustEndWith',
+                'usin' => 'isMustEndWith',
+                'email' => $email
+            ]);
+        } else {
+            return response()->json([
+                'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['mustEndWithError'])
+            ], 401);
+        }
     }
 
     public function export(Request $request)

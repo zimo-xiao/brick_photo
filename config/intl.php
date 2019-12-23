@@ -46,6 +46,8 @@ return [
             'imgNotExits' => '图片不存在'
         ],
         'validationCodeController' => [
+            'mustEndWith' => '',
+            'mustEndWithError' => '请求验证码邮箱必须以[email]结尾，如果使用外部邮箱，请选择「请求账户」',
             'permissionDenied' => '你没有权限',
             'excelFormatError' => 'Excel格式错误',
             'uploadSuccess' => '上传成功',
@@ -64,6 +66,11 @@ return [
             'social_media' => 'https://hong.zuggr.com/image/wx_qr.jpg',
             'js' => [
                 'request' => [
+                    'mustEndWith' => '',
+                    'codeSuccess' => '验证码已发送到指定[email]邮箱，请查收！',
+                    'noEmail' => '请输入邮箱地址',
+                    'mustEndWithError' => '请求验证码邮箱必须以[email]结尾，如果使用外部邮箱，请选择「请求账户」',
+                    'codeSendSuccess' => '验证码已发到你的邮箱中，请查收！',
                     'resetPass' => '密码重置成功！请输入新密码重新登录',
                     'noEmpty' => '请不要留空',
                     'findPass' => '验证邮箱已发到该学号所绑定的邮箱中，请查收',
@@ -108,6 +115,7 @@ return [
         'register' => [
             'request_code' => '请求',
             'email' => '电子邮箱地址',
+            'name' => '姓名',
             'title' => '注册',
             'usin' => '学号',
             'code' => '激活码',
@@ -277,6 +285,8 @@ return [
             'imgNotExits' => 'Image not exists'
         ],
         'validationCodeController' => [
+            'mustEndWith' => '',
+            'mustEndWithError' => 'Email must ends with [email]. If you are using an outside email, please request an account.',
             'permissionDenied' => 'Permission denied',
             'excelFormatError' => 'Excel format error',
             'uploadSuccess' => 'Upload success',
@@ -295,8 +305,13 @@ return [
             'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
             'js' => [
                 'request' => [
+                    'mustEndWith' => '',
+                    'noEmail' => 'Please enter your email address',
+                    'codeSuccess' => 'Validation code is send to your [email] email inbox. Please check!',
+                    'mustEndWithError' => 'Email must ends with [email]. If you are using an outside email, please request an account.',
+                    'codeSendSuccess' => 'Validation code is sent to your email, please check!',
                     'resetPass' => 'Reset password success! Please login with you new password',
-                    'noEmpty' => 'please leave no empty entries',
+                    'noEmpty' => 'Please leave no empty entries',
                     'findPass' => 'Reset link sent to associated email, please check',
                     'addTags' => 'Upload success, please refresh',
                     'permissionDenied' => 'permission denied',
@@ -339,6 +354,7 @@ return [
         'register' => [
             'request_code' => 'Request',
             'email' => 'Email',
+            'name' => 'Name',
             'title' => 'Register',
             'usin' => 'NetID',
             'code' => 'validation code',

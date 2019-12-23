@@ -23,6 +23,7 @@ return [
         'visitorViewTag' => "Editor's Pick",
     ],
     'validationCodeController' => [
+        'mustEndWith' => '@illinium.com',
         'validationCodeEmail' => [
             'title' => 'Your Account Activation Code | Welcome to Illinium Photography',
             'description' => "Your account activation code is : **[code]** \n\n We have received your request for an Illinium account. We are delighted to invite you to create your account and explore the vast collections that our photographer community offers. Please visit our website and click register to create your account. \n\n ### About Us \n\n Illinium is the largest non-profit photography media library at UIUC, open to all students, alumni, and faculties. Our mission is to inspire academic work, community projects, and student activities with images of our beautiful campus, donated by an amazing community of campus photographers. Sign up for free! Our Illinium License provides free, non-profit-usage-only access for all members of UIUC. \n\n We are looking forward to your arrival. If you have any questions, feel free to reach out to our team (email: zimox2@illinois.edu)."
@@ -37,6 +38,7 @@ return [
         'social_media' => 'https://illinium.nyc3.digitaloceanspaces.com/assets/follow.jpg',
         'js' => [
             'request' => [
+                'mustEndWith' => '@illinois.edu',
                 'downloadAlertContent' => 'I understand and agree with the <a target="_blank" href="https://docs.google.com/document/d/1E0vid7jMlINZ2n3bxVX3cLUp5aBKG-vzOtD4yoWBk74/edit#">Illinium Licence</a>, and will only use this photography work in nonprofit usage.'
             ]
         ]

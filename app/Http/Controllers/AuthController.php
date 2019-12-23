@@ -32,29 +32,30 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'usin' => 'required',
-            'code' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'usin' => 'required|string',
+            'code' => 'required|string',
             'password' => 'required|string'
         ]);
-        
-        $usin = strtolower($request->input('usin'));
-        $password = $request->input('password');
 
-        $code = $request->input('code');
+        $validation = app(ValidationCode::class)->where([
+            'code' => $code,
+            'email' => $email
+        ])->first();
 
-        $validation = app(ValidationCode::class)->where(['code' => $code])->whereRaw('LOWER(usin) = ?', [$usin])->get();
-        if (count($validation) === 0) {
+        if (!$validation) {
             return response()->json([
                 'error_msg' => $this->intl['validationCodeError']
             ], 401);
         }
 
         $credentials = [
-            'usin' => $usin,
-            'password' => $this->encrypt($password),
-            'name' => $validation[0]['name'],
+            'usin' => strtolower($request->input('usin')),
+            'password' => $this->encrypt($request->input('password')),
+            'name' => $request->input('name'),
             'permission' => User::PERMISSION_READ,
-            'email' => $validation[0]['email']
+            'email' => $request->input('email')
         ];
 
         try {
@@ -67,13 +68,6 @@ class AuthController extends Controller
         }
                 
         app(ValidationCode::class)->where(['code' => $code])->whereRaw('LOWER(usin) = ?', [$usin])->delete();
-
-        $user = $this->validateLogin($usin, $password);
-        if (!$user) {
-            return response()->json([
-                'error_msg' => $this->intl['validationError']
-            ], 401);
-        }
 
         $this->deleteGlobalCache();
         $token = $this->createAccessToken($user);

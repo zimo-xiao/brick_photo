@@ -12,15 +12,19 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="register_usin" type="text" class="validate" required>
-                <label for="register_usin"><?=$intl['email']?></label>
+                <input id="register_email" type="text" class="validate" required>
+                <label for="register_email"><?=$intl['email']?></label>
             </div>
             <div class="input-field col s12">
                 <div class="input-field col s9" style="margin: 0px; padding-left: 0px">
                     <input id="register_code" type="text" class="validate" required>
                     <label for="register_code" style="left:0px"><?=$intl['code']?></label>
                 </div>
-                <button class="btn waves-effect waves-light col s3"><?=$intl['request_code']?></button>
+                <button class="btn waves-effect waves-light col s3" onclick="redRequest.code()"><?=$intl['request_code']?></button>
+            </div>
+            <div class="input-field col s12">
+                <input id="register_name" type="text" class="validate" required>
+                <label for="register_name"><?=$intl['name']?></label>
             </div>
             <div class="input-field col s12">
                 <input id="register_usin" type="text" class="validate" required>

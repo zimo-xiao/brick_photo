@@ -116,6 +116,8 @@ var redRequest = {
 
   register: () => {
     var usin = $("#register_usin").val();
+    var name = $("#register_name").val();
+    var email = $("#register_email").val();
     var code = $("#register_code").val();
     var password = $("#register_password").val();
     var reenterPassword = $("#register_reenter_password").val();
@@ -124,8 +126,10 @@ var redRequest = {
       layer.msg(intl.request.samePass, {
         time: 2000
       });
-    } else if (password != '' && usin != '' && code != '') {
+    } else if (password != '' && usin != '' && code != '' && name != '' && email != '') {
       axios.post(THIS_URL + '/auth/register', {
+          name: name,
+          email: email,
           usin: usin,
           code: code,
           password: password
@@ -168,6 +172,35 @@ var redRequest = {
         });
     } else {
       layer.msg(intl.request.noEmpty, {
+        time: 2000
+      });
+    }
+  },
+
+  code: () => {
+    var email = $("#register_email").val();
+    if (email != '') {
+      if (!email.includes(intl.request.mustEndWith)) {
+        layer.msg(intl.request.mustEndWithError.replace('[email]', intl.request.mustEndWith), {
+          time: 2000
+        });
+      } else {
+        axios.post(THIS_URL + '/validation-code', {
+            email: email
+          })
+          .then(function (response) {
+            layer.msg(intl.request.codeSuccess.replace('[email]', intl.request.mustEndWith), {
+              time: 2000
+            });
+          })
+          .catch(function (error) {
+            layer.msg(error.response.data['error_msg'], {
+              time: 2000
+            });
+          });
+      }
+    } else {
+      layer.msg(intl.request.noEmail, {
         time: 2000
       });
     }
