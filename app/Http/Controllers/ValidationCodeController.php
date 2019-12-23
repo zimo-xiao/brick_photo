@@ -67,7 +67,7 @@ class ValidationCodeController extends Controller
                 app(ValidationCode::class)->insertTs([
                     'code' => app(ValidationCode::class)->generateCode(),
                     'name' => 'isMustEndWith',
-                    'usin' => 'isMustEndWith',
+                    'usin' => app(ValidationCode::class)->generateCode(),
                     'email' => $email
                 ]);
             }
