@@ -74,7 +74,7 @@ class SendDownloadEmails extends Command
 
     private function emailText($name, $data)
     {
-        $app = app(Apps::class)->intl()['sendDeleteEmails'];
+        $app = app(Apps::class)->intl()['sendDownloadEmails'];
         $content = str_replace('[count]', count($data), $app['contentTitle']);
 
         foreach ($data as $d) {
