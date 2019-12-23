@@ -6,7 +6,8 @@
     </div>
     <div class="nav-wrapper container">
         <a href="<?=$url;?>">
-            <img src="<?=$intl['logo']?>" class="brand-logo" style="top:20px;width:<?=$intl['logoWidth']?>px" />
+            <img class="brand-logo" src="<?=$intl['logo']?>" class="brand-logo"
+                style="top:20px;width:<?=$intl['logoWidth']?>px" />
         </a>
         <ul class="right hide-on-med-and-down">
             <?php
@@ -32,8 +33,8 @@
             ?>
         </ul>
         <div class="nav-header center">
-            <h1><?=$intl['title']?></h1>
-            <div class="tagline" style="-2rem 0 40px 0"><?=$intl['tagline']?></div>
+            <h1 class="header_title"><?=$intl['title']?></h1>
+            <div class="tagline" style="margin: -1em 0px 40px 0px"><?=$intl['tagline']?></div>
         </div>
     </div>
 
@@ -65,3 +66,53 @@
         </div>
     </div>
 </nav>
+
+<!-- mobile menu -->
+<ul class="sidenav" id="nav-mobile">
+    <?php
+        if (!$token) {
+            ?>
+    <li class="active">
+        <a onclick='$(".sidenav-overlay").click();$("#login").show()'>
+            <i class="material-icons">person_outline</i>
+            <?=$intl['login']?>
+        </a>
+    </li>
+    <li>
+        <a onclick='$(".sidenav-overlay").click();$("#register").show()'>
+            <i class="material-icons">control_point_duplicate</i>
+            <?=$intl['register']?>
+        </a>
+    </li>
+    <?php
+        } else {
+            ?>
+    <li>
+        <a onclick='$(".sidenav-overlay").click()'>
+            <i class="material-icons">account_circle</i>
+            <?=$user->name?>
+        </a>
+    </li>
+    <li>
+        <a onclick='redRequest.logout()'>
+            <i class="material-icons">exit_to_app</i>
+            <?=$intl['logout']?>
+        </a>
+    </li>
+    <?php
+        }
+        ?>
+</ul>
+
+<a href="#" data-target="nav-mobile" class="sidenav-trigger">
+    <div class="mobile-menu-btn z-depth-2 waves-effect waves-light">
+        <i class="material-icons" style="font-size: 6vh;float: left; margin: 2vh">menu</i>
+    </div>
+</a>
+<!-- mobile menu end -->
+
+<a href="#" data-target="nav-mobile" class="sidenav-trigger">
+    <div class="mobile-menu-btn z-depth-2 waves-effect waves-light">
+        <i class="material-icons" style="font-size: 6vh;float: left; margin: 2vh">menu</i>
+    </div>
+</a>

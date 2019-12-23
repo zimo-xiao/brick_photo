@@ -5,7 +5,7 @@
         echo '<div id="register" style="display:none">';
     }
 ?>
-<div class="cover card" style="top:14vh">
+<div class="cover card">
     <div class="inner">
         <div class="row">
             <h5 style="color: var(--color)"><?=$intl['title']?></h5>

@@ -12,8 +12,7 @@
 ?>
 
 <!-- 左边导航栏 -->
-<ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test"
-    style="position:fixed;display:inline-block;vertical-align:top;top:64px;border-radius:0px;left:0px;bottom:0px;width:15vw;overflow:auto">
+<ul class="layui-nav layui-nav-tree layui-bg-cyan index_sidebar" lay-filter="test">
     <li class="layui-nav-item layui-nav-itemed">
         <a href="<?=$url?>" onclick="<?=$url?>"><?=$intl['left_menu_bar']['all']?></a>
     </li>
@@ -77,7 +76,7 @@
 <!-- Gallery -->
 <div id="portfolio" class="section gray">
 
-    <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw;margin-top:10px;margin-bottom:10px;height:60px">
+    <div class="index_search">
         <div class="row">
             <div class="col s10"></div>
             <div class="col s2">
@@ -100,8 +99,7 @@
         </div>
     </div>
 
-    <div style="float:left;margin-top:0px;margin-left:16vw;width:82vw">
-
+    <div class="index_flow">
         <!-- 使用 Vue 来进行渲染 -->
         <div class="gallery row" id="index_images">
 

@@ -25,16 +25,6 @@ nav {
 	opacity: .6
 }
 
-.cover {
-	position: fixed;
-	left: 32%;
-	width: 36%;
-	top: 22%;
-	z-index: 110;
-	max-height: 70vh;
-	overflow-y: scroll
-}
-
 .cover .inner {
 	float: left;
 	margin-left: 5%;
@@ -116,4 +106,108 @@ select {
 	right: 0px;
 	top: 60vh;
 	height: 15vh;
+}
+
+.tagline {
+	line-height: 2.3em;
+}
+
+@media only screen and (min-width: 992px) {
+	.cover {
+		position: fixed;
+		left: 32%;
+		width: 36%;
+		top: 15vh;
+		z-index: 110;
+		max-height: 70vh;
+		overflow-y: scroll
+	}
+
+	.brand-logo {
+		top: 20px;
+		width: 80px;
+	}
+
+	.mobile-menu-btn {
+		display: none;
+	}
+
+	.index_search {
+		float: left;
+		margin-top: 0px;
+		margin-left: 16vw;
+		width: 82vw;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		height: 60px
+	}
+
+	.index_flow {
+		float: left;
+		margin-top: 0px;
+		margin-left: 16vw;
+		width: 82vw
+	}
+
+	.index_sidebar {
+		position: fixed;
+		display: inline-block;
+		vertical-align: top;
+		top: 64px;
+		border-radius: 0px;
+		left: 0px;
+		bottom: 0px;
+		width: 15vw;
+		overflow: auto
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.cover {
+		position: fixed;
+		left: 5%;
+		width: 90%;
+		top: 5vh;
+		z-index: 110;
+		max-height: 90vh;
+		overflow-y: scroll
+	}
+
+	.brand-logo {
+		top: 40px;
+		width: 80px;
+	}
+
+	.header_title {
+		font-size: 35px;
+		margin-top: 80px;
+	}
+
+	.index_sidebar {
+		display: none;
+	}
+
+	.mobile-menu-btn {
+		position: fixed;
+		z-index: 99;
+		top: 85vh;
+		right: 5vw;
+		width: 10vh;
+		height: 10vh;
+		border-radius: 50%;
+		color: white;
+		background-color: var(--color);
+	}
+
+	.index_search {
+		display: none;
+	}
+
+	.index_flow {
+		float: left;
+		margin-top: 0px;
+		margin-left: 0px;
+		width: 100%
+	}
+
 }
