@@ -2,7 +2,7 @@ nav {
 	background-color: var(--color)
 }
 
-.brick-red {
+.main-color {
 	background-color: var(--color)
 }
 
@@ -35,6 +35,10 @@ nav {
 #upok {
 	margin-top: 4em;
 	display: none
+}
+
+.index_btn {
+	margin-bottom: 5px;
 }
 
 .up-box {
@@ -100,19 +104,19 @@ select {
 	color: var(--color)
 }
 
-.main_qr {
-	position: fixed;
-	z-index: 80;
-	right: 0px;
-	top: 60vh;
-	height: 15vh;
-}
-
 .tagline {
 	line-height: 2.3em;
 }
 
 @media only screen and (min-width: 992px) {
+	.main_qr {
+		position: fixed;
+		z-index: 80;
+		right: 0px;
+		top: 60vh;
+		height: 15vh;
+	}
+
 	.cover {
 		position: fixed;
 		left: 32%;
@@ -190,13 +194,17 @@ select {
 	.mobile-menu-btn {
 		position: fixed;
 		z-index: 99;
-		top: 85vh;
+		top: 70vh;
 		right: 5vw;
 		width: 10vh;
 		height: 10vh;
 		border-radius: 50%;
 		color: white;
 		background-color: var(--color);
+	}
+
+	.main_qr {
+		display: none;
 	}
 
 	.index_search {

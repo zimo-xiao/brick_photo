@@ -105,7 +105,7 @@
 
             <!-- INFO -->
             <div class="col l4 m6 s12 gallery-item gallery-filter all">
-                <div class="card brick-red">
+                <div class="card main-color">
                     <div class="card-content white-text">
                         <span class="card-title"><?=$intl['about']['title']?></span>
                         <p><?=$intl['about']['description']?></p>
@@ -149,27 +149,27 @@
                         <p class="description" style="line-height:90%;">
                             <span
                                 v-bind:onclick='"$(\"#download_box\").show();$(\"#download_box_image_id\").val(\""+image.id+"\")"'
-                                class="waves-effect waves-light btn brick-red"><i
+                                class="index_btn waves-effect waves-light btn main-color"><i
                                     class="material-icons left">file_download</i>
                                 {{image.download_count}} <?=$imageIntl['download']?>
                             </span>
                             <span v-on:click="app_tags.selected_image_tags = image.tag"
                                 v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
                                 v-bind:onclick='"$(\"#tags_box\").show();$(\"#tags_box_image_id\").val(\""+image.id+"\")"'
-                                class="waves-effect waves-light btn brick-red"><i
+                                class="index_btn waves-effect waves-light btn main-color"><i
                                     class="material-icons left">turned_in_not</i>
                                 <?=$imageIntl['add_tags']?>
                             </span>
                             <span v-on:click="app_description.previous_msg = image.description"
                                 v-if="user.permission === 3 || (user.id === image.author_id && user.permission === 2)"
                                 v-bind:onclick='"$(\"#description_box\").show();$(\"#description_box_image_id\").val(\""+image.id+"\")"'
-                                class="waves-effect waves-light btn brick-red"><i
+                                class="index_btn waves-effect waves-light btn main-color"><i
                                     class="material-icons left">chat_bubble_outline</i>
                                 <?=$imageIntl['add_description']?>
                             </span>
                             <span v-if="user.permission === 3"
                                 v-bind:onclick='"$(\"#delete_box\").show();$(\"#delete_box_image_id\").val(\""+image.id+"\")"'
-                                class="waves-effect waves-light btn brick-red"><i
+                                class="index_btn waves-effect waves-light btn main-color"><i
                                     class="material-icons left">delete_forever</i>
                                 <?=$imageIntl['delete']?>
                             </span>
@@ -223,7 +223,7 @@ var app_images = new Vue({
         url: THIS_URL,
         user: USER,
         images: <?=json_encode($images)?> ,
-        app_tags : app_tags,
+        app_tags: app_tags,
         app_description: app_description
     }
 });
@@ -232,8 +232,8 @@ layui.use(['laypage'], function() {
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
         elem: 'pagination',
-        count: <?=$count?> ,
-        limit : 40,
+        count: <?=$count?>,
+        limit: 40,
         curr: urlParams.get('page'),
         layout: ['prev', 'page', 'next'],
         prev: "<?=$intl['prev']?>",
@@ -257,8 +257,7 @@ $('#index_select_order').change(function() {
         u.searchParams.set('order', $(this).val());
         jumpTo(u);
         ";
-    }
-    ?>
+    } ?>
 });
 
 // 当 img 加载后重新渲染 grid
