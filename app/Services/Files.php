@@ -7,25 +7,14 @@ use Illuminate\Support\Facades\Storage;
 
 class Files
 {
-    protected $type;
-
-    public function __construct($type)
-    {
-        $this->type = $type;
-    }
-
     public function upload($name, $no, $content)
     {
-        switch ($this->type) {
-            case 'do':
-                if ($no === 0) {
-                    Storage::put('tmp/'.$name, $content);
-                } else {
-                    Storage::append('tmp/'.$name, $content);
-                }
-                Storage::setVisibility('tmp/'.$name, 'private');
-                break;
+        if ($no === 0) {
+            Storage::put('tmp/'.$name, $content);
+        } else {
+            Storage::append('tmp/'.$name, $content);
         }
+        Storage::setVisibility('tmp/'.$name, 'private');
     }
 
     public function store($name, $end)
@@ -38,30 +27,20 @@ class Files
 
         $raw = \base64_decode(substr($content[1], \strpos($content[1], ',') + 1));
 
-        switch ($this->type) {
-            case 'do':
-                Storage::put('raw/'.$name.'.'.$end, $raw);
-                Storage::put('cache/'.$name.'.jpg', $cache);
-                Storage::setVisibility('tmp/'.$name, 'private');
-                Storage::delete('tmp/'.$name);
-                break;
-        }
+        Storage::put('raw/'.$name.'.'.$end, $raw);
+        Storage::put('cache/'.$name.'.jpg', $cache);
+        Storage::setVisibility('tmp/'.$name, 'private');
+        Storage::delete('tmp/'.$name);
     }
 
     public function getCloudUrl()
     {
-        switch ($this->type) {
-            case 'do':
-                return \env('DO_SPACES_URL');
-        }
+        return \env('FILESYSTEM_URL');
     }
 
     public function get($path)
     {
-        switch ($this->type) {
-            case 'do':
-                return Storage::get(strpos($path, 'https://') !== false ? $this->removeUrl($path) : $path);
-        }
+        return Storage::get(strpos($path, 'https://') !== false ? $this->removeUrl($path) : $path);
     }
 
     private function removeUrl($path)

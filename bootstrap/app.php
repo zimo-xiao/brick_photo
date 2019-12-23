@@ -111,6 +111,7 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Sentry\Laravel\ServiceProvider::class);
+$app->register(Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class);
 $app->configure('mail');
 $app->configure('laravels');
 $app->alias('mailer', Illuminate\Mail\Mailer::class);

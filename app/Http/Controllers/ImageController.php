@@ -21,7 +21,7 @@ class ImageController extends Controller
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['imageController'];
-        $this->file = new Files(\env('APP_FILE_SYSTEM'));
+        $this->file = new Files();
     }
 
     /**

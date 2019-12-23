@@ -30,7 +30,7 @@ class StoreNewImageJob extends Job
      */
     public function handle()
     {
-        $file = new Files(\env('APP_FILE_SYSTEM'));
+        $file = new Files();
         $file->store($this->name, $this->end);
 
         app(Image::class)->insertTs([

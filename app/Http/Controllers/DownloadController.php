@@ -21,7 +21,7 @@ class DownloadController extends Controller
     public function __construct()
     {
         $this->intl = app(Apps::class)->intl()['downloadController'];
-        $this->file = new Files(\env('APP_FILE_SYSTEM'));
+        $this->file = new Files();
     }
 
     public function view(Request $request, $id)
