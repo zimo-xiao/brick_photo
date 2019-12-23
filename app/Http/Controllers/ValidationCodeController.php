@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\ValidationCode;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\ValidationCode;
 use App\Jobs\SendMailJob;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Excels\ExportValidationCodes;
