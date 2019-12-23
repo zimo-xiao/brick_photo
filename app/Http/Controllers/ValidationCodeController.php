@@ -53,7 +53,7 @@ class ValidationCodeController extends Controller
         ]);
         $email = $request->input('email');
         $mustEndWith = $this->intl['mustEndWith'];
-        if (strstr($email, '@'.$mustEndWith) != false) {
+        if (strstr($email, $mustEndWith) != false) {
             $pastCode = app(ValidationCode::class)
                 ->where(['email' => $email])
                 ->whereDate('created_at', '>', Carbon::now()->subMinutes(1))
