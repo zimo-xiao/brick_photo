@@ -22,6 +22,12 @@ cp env-example .env
         - backend
       ports:
       - 5200:5200
-
 >>> 
+
+docker-compose exec workspace bash
+crontab -e
+>>>
+0 18 * * * cd ~/laradock && docker-compose exec workspace php /var/www/brick_photo/artisan send:download
+0 18 * * * cd ~/laradock && docker-compose exec workspace php /var/www/brick_photo/artisan send:delete
+>>>
 ```

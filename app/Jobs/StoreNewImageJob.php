@@ -32,7 +32,6 @@ class StoreNewImageJob extends Job
     {
         $file = new Files();
         $file->store($this->name, $this->end);
-        $couldUrl = $file->getCloudUrl();
 
         app(Image::class)->insertTs([
             'author_id' => $this->user->id,

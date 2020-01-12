@@ -38,11 +38,6 @@ class Files
         Storage::delete('tmp/'.$name);
     }
 
-    public function getCloudUrl()
-    {
-        return \env('FILESYSTEM_URL');
-    }
-
     public function get($path)
     {
         return Storage::get($path);
