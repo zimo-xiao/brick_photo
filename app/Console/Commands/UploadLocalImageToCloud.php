@@ -59,10 +59,10 @@ class UploadLocalImageToCloud extends Command
     {
         $files = new Files();
         $this->info('uploading '.$image.' to raw');
-        $files->path('raw/'.$image, (string) File::get($path.'raw/'.$image));
+        $files->save('raw/'.$image, (string) File::get($path.'raw/'.$image));
         $this->info('uploading '.$image.' to cache');
-        $files->path('raw/'.$image, (string) File::get($path.'cache/'.$image));
+        $files->save('raw/'.$image, (string) File::get($path.'cache/'.$image));
         $this->info('uploading '.$image.' to watermark');
-        $files->path('raw/'.$image, (string) File::get($path.'watermark/'.$image));
+        $files->save('raw/'.$image, (string) File::get($path.'watermark/'.$image));
     }
 }
