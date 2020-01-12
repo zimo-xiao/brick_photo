@@ -14,6 +14,7 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\Services\Files;
+use App\Models\Image;
 
 /**
  * Class UpdateStudentClassRank
@@ -44,26 +45,24 @@ class UploadLocalImageToCloud extends Command
      */
     public function handle()
     {
-        $path = '/home/brick_photo/public/storage/images/raw/';
-        $images = scandir($path);
-        $this->upload($path, 'raw', $images);
-        $path = '/home/brick_photo/public/storage/images/cache/';
-        $images = scandir($path);
-        $this->upload($path, 'cache', $images);
-        $path = '/home/brick_photo/public/storage/images/watermark/';
-        $images = scandir($path);
-        $this->upload($path, 'watermark', $images);
-    }
-
-    private function upload($path, $type, $images)
-    {
-        $files = new Files();
-        foreach ($images as $image) {
-            $lowerName = strtolower($image);
-            if (strpos($lowerName, '.png') || strpos($lowerName, '.jpg') || strpos($lowerName, '.jpeg')) {
-                $this->info('uploading '.$image.' to '.$type);
-                $files->path($type.'/'.$image, (string) File::get($path.$image));
+        $images = app(Image::class)->all();
+        foreach($images as $image) {
+            try {
+                $this->upload($image['path'], $image['file_name'].''.$image['file_format'], $images);
+            } catch(\Exception $e) {
+                $this->info('error when processing '.$image['file_name']);
             }
         }
+    }
+
+    private function upload($path, $name, $images)
+    {
+        $files = new Files();
+        $this->info('uploading '.$image.' to raw');
+        $files->path('raw/'.$image, (string) File::get($path.'raw/'.$image));
+        $this->info('uploading '.$image.' to cache');
+        $files->path('raw/'.$image, (string) File::get($path.'cache/'.$image));
+        $this->info('uploading '.$image.' to watermark');
+        $files->path('raw/'.$image, (string) File::get($path.'watermark/'.$image));
     }
 }

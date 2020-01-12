@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UploadImagesInBatch::class,
         Commands\SendDownloadEmails::class,
-        Commands\SendDeleteEmails::class
+        Commands\SendDeleteEmails::class,
+        Commands\UploadLocalImageToCloud::class
     ];
 
     /**
