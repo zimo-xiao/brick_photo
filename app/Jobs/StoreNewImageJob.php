@@ -32,18 +32,18 @@ class StoreNewImageJob extends Job
     {
         $file = new Files();
         $file->store($this->name, $this->end);
+        $couldUrl = $file->getCloudUrl();
 
         app(Image::class)->insertTs([
             'author_id' => $this->user->id,
             'author_name' => $this->user->name,
             'file_name' => $this->name,
             'file_format' => $this->end,
-            'tags' => json_encode([]),
-            'path' => $file->getCloudUrl()
+            'tags' => json_encode([])
         ]);
 
         if (\env('USE_WATERMARK')) {
-            dispatch(new StoreWatermarkJob($this->name.'.'.$this->end));
+            dispatch(new StoreWatermarkJob($this->name, $this->end));
         }
     }
 }

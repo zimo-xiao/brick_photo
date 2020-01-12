@@ -67,9 +67,9 @@ class DownloadController extends Controller
             if ($image) {
                 $name = $image->file_name.'.'.$image->file_format;
                 if ($user->permission === User::PERMISSION_ADMIN || !\env('USE_WATERMARK')) {
-                    return $this->responseImageFromPath($image->path, 'raw', $name);
+                    return $this->responseImageFromPath('raw', $name);
                 } else {
-                    return $this->responseImageFromPath($image->path, 'watermark', $name, $this->intl['imgProcessNotComplete']);
+                    return $this->responseImageFromPath('watermark', $name, $this->intl['imgProcessNotComplete']);
                 }
             } else {
                 return $this->intl['imgNotExits'];

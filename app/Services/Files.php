@@ -17,6 +17,11 @@ class Files
         Storage::setVisibility('tmp/'.$name, 'private');
     }
 
+    public function save($path, $content){
+        Storage::put($path, $content);
+        Storage::setVisibility($path, 'private');
+    }
+
     public function store($name, $end)
     {
         $content = $this->get('tmp/'.$name);
@@ -40,14 +45,6 @@ class Files
 
     public function get($path)
     {
-        return Storage::get(strpos($path, 'https://') !== false ? $this->removeUrl($path) : $path);
-    }
-
-    private function removeUrl($path)
-    {
-        $out = str_replace('https://', '', $path);
-        $out = explode('/', $out);
-        array_shift($out);
-        return implode('/', $out);
+        return Storage::get($path);
     }
 }

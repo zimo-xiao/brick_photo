@@ -66,7 +66,6 @@ class SendDownloadEmails extends Command
             }
             $indexedTodayDownload[$image->author_id]['data'][] = $t;
         }
-        
         foreach ($indexedTodayDownload as $k => $i) {
             dispatch(new SendMailJob($i['email'], $this->emailText($i['name'], $i['data'])));
         }

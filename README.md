@@ -1,25 +1,27 @@
-# set up
+# brick_photo
+A photography library for communities
+***
+# Docker
 ```
-// cd into the project
-composer install
+>>> clone laradock
+git clone https://github.com/laradock/laradock.git
+cp env-example .env
 
-// change env.example to .env and change things accordingly
-// create database for it & install redis
-// run the following to migrate
-php artisan migrate:fresh
+>>> config php-worker in docker-compose.yml
+    php-worker:
+      image: zimoxiao/php-worker:latest
+      restart: always
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+        - ./php-worker/supervisord.d:/etc/supervisord.d
+      depends_on:
+        - workspace
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
+      networks:
+        - backend
+      ports:
+      - 5200:5200
 
-// install laravel valet
-// install all the required dev stuff from: https://laravel.com/docs/5.7/valet
-composer global require laravel/valet
-valet install
-valet restart
-// goto the upper folder from your project and run
-valet park
-// now when you visit http://brick_photo.test, you will see the page
-
-// initiate your key with
-php artisan passport:client --personal
-// and enter Personal Access Client
-
-done!
+>>> 
 ```

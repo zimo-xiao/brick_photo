@@ -143,6 +143,6 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-ini_set('memory_limit', '100M');
+ini_set('memory_limit', '500M');
 
 return $app;

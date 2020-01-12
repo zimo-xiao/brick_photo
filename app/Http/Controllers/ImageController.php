@@ -194,7 +194,7 @@ class ImageController extends Controller
     {
         $image = app(Image::class)->find($id);
         if ($image) {
-            return $this->responseImageFromPath($image->path, 'cache', $image->file_name.'.jpg');
+            return $this->responseImageFromPath('cache', $image->file_name.'.jpg');
         } else {
             return response()->json([
                 'error_msg' => $this->intl['imgNotExits']
