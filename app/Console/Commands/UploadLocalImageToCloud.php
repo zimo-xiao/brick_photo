@@ -47,16 +47,19 @@ class UploadLocalImageToCloud extends Command
     {
         $images = app(Image::class)->all();
         foreach($images as $image) {
-            // try {
+            try {
                 $this->upload($image['path'], $image['file_name'].''.$image['file_format']);
-            // } catch(\Exception $e) {
-            //     $this->info('error when processing '.$image['file_name']);
-            // }
+            } catch(\Exception $e) {
+                $this->info('error when processing '.$image['file_name']);
+            }
         }
     }
 
     private function upload($path, $image)
     {
+        if(substr($path, -1) != '/') {
+            $path .= '/';
+        }
         $files = new Files();
         $this->info('uploading '.$image.' to raw');
         $files->save('raw/'.$image, (string) File::get($path.'raw/'.$image));
