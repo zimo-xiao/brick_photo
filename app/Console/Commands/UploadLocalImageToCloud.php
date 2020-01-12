@@ -48,24 +48,24 @@ class UploadLocalImageToCloud extends Command
         $images = app(Image::class)->all();
         foreach($images as $image) {
             try {
-                $this->upload($image['path'], $image['file_name'].'.'.$image['file_format']);
+                $this->upload($image['path'], $image['file_name'], $image['file_format']);
             } catch(\Exception $e) {
                 $this->info('error when processing '.$image['file_name'].': '.$e->getMessage());
             }
         }
     }
 
-    private function upload($path, $image)
+    private function upload($path, $name, $format)
     {
         if(substr($path, -1) != '/') {
             $path .= '/';
         }
         $files = new Files();
-        $this->info('uploading '.$image.' to raw');
-        $files->save('raw/'.$image, (string) File::get($path.'raw/'.$image));
-        $this->info('uploading '.$image.' to cache');
-        $files->save('cache/'.$image, (string) File::get($path.'cache/'.$image));
-        $this->info('uploading '.$image.' to watermark');
-        $files->save('watermark/'.$image, (string) File::get($path.'watermark/'.$image));
+        $this->info('uploading '.$name.' to raw');
+        $files->save('raw/'.$name.'.'.$format, (string) File::get($path.'raw/'.$name.'.'.$format));
+        $this->info('uploading '.$name.' to cache');
+        $files->save('cache/'.$name.'.jpg', (string) File::get($path.'cache/'.$name.'.jpg'));
+        $this->info('uploading '.$name.' to watermark');
+        $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format));
     }
 }
