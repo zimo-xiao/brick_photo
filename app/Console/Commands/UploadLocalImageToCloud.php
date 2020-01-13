@@ -61,11 +61,19 @@ class UploadLocalImageToCloud extends Command
             $path .= '/';
         }
         $files = new Files();
-        $this->info('uploading '.$name.' to raw');
-        $files->save('raw/'.$name.'.'.$format, (string) File::get($path.'raw/'.$name.'.'.$format));
-        $this->info('uploading '.$name.' to cache');
-        $files->save('cache/'.$name.'.jpg', (string) File::get($path.'cache/'.$name.'.jpg'));
-        $this->info('uploading '.$name.' to watermark');
-        $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format));
+        if(!$files->exists('raw/'.$name.'.'.$format)){
+            $this->info('uploading '.$name.' to raw');
+            $files->save('raw/'.$name.'.'.$format, (string) File::get($path.'raw/'.$name.'.'.$format));
+        }
+
+        if(!$files->exists('cache/'.$name.'.jpg')){
+            $this->info('uploading '.$name.' to cache');
+            $files->save('cache/'.$name.'.jpg', (string) File::get($path.'cache/'.$name.'.jpg'));
+        }
+
+        if (!$files->exists('watermark/'.$name.'.'.$format)) {
+            $this->info('uploading '.$name.' to watermark');
+            $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format));
+        }
     }
 }

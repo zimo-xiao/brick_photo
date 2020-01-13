@@ -38,6 +38,10 @@ class Files
         Storage::delete('tmp/'.$name);
     }
 
+    public function exists($path){
+        return Storage::exists($path);
+    }
+
     public function get($path)
     {
         return Storage::get($path);
