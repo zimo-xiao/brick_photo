@@ -51,7 +51,7 @@ class UploadLocalImageToCloud extends Command
                 $this->upload($image['path'], $image['file_name'], $image['file_format']);
             } catch(\Exception $s) {
                 try {
-                    $this->upload('home/brick_photo/public/storage/images/'.$image['path'], $image['file_name'], $image['file_format']);
+                    $this->upload('home/brick_photo/public/storage/images/'.$image['path'], $image['file_name'], $image['file_format'], $image);
                 } catch (\Exception $e) {
                     $this->info('error when processing '.$image['file_name'].': '.$e->getMessage());
                 }
@@ -59,7 +59,7 @@ class UploadLocalImageToCloud extends Command
         }
     }
 
-    private function upload($path, $name, $format)
+    private function upload($path, $name, $format, $image)
     {
         if(substr($path, -1) != '/') {
             $path .= '/';
@@ -78,6 +78,10 @@ class UploadLocalImageToCloud extends Command
         if (!$files->exists('watermark/'.$name.'.'.$format)) {
             $this->info('uploading '.$name.' to watermark');
             $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format));
+        }
+        
+        if($files->exists('watermark/'.$name.'.'.$format) && $files->exists('cache/'.$name.'.jpg') && $files->exists('raw/'.$name.'.'.$format)){
+            $image->delete();
         }
     }
 }
