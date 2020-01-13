@@ -142,6 +142,7 @@ return [
         ],
         'header' => [
             'logo' => 'https://hong.zuggr.com/image/logo.png',
+            'logoWidth' => '120',
             'bg_img' => 'https://hong.zuggr.com/image/background.gif',
             'title' => '不倒的记忆，附中的宝藏',
             'tagline' => '北大附中最大的图库，目前共藏[images]张摄影作品，共[users]位附中校友在红砖',
