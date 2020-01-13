@@ -121,6 +121,7 @@ $app->register(Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider::class);
 $app->configure('filesystems');
 // schools
 $app->configure('illinium');
+$app->configure('bdfz');
 
 /*
 |--------------------------------------------------------------------------
