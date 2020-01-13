@@ -49,8 +49,12 @@ class UploadLocalImageToCloud extends Command
         foreach($images as $image) {
             try {
                 $this->upload($image['path'], $image['file_name'], $image['file_format']);
-            } catch(\Exception $e) {
-                $this->info('error when processing '.$image['file_name'].': '.$e->getMessage());
+            } catch(\Exception $s) {
+                try {
+                    $this->upload('home/brick_photo/public/storage/images/'.$image['path'], $image['file_name'], $image['file_format']);
+                } catch (\Exception $e) {
+                    $this->info('error when processing '.$image['file_name'].': '.$e->getMessage());
+                }
             }
         }
     }
