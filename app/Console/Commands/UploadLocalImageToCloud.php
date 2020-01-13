@@ -48,7 +48,7 @@ class UploadLocalImageToCloud extends Command
         $images = app(Image::class)->all();
         foreach($images as $image) {
             try {
-                $this->upload($image['path'], $image['file_name'], $image['file_format']);
+                $this->upload($image['path'], $image['file_name'], $image['file_format'], $image);
             } catch(\Exception $s) {
                 try {
                     $this->upload('home/brick_photo/public/storage/images/'.$image['path'], $image['file_name'], $image['file_format'], $image);
