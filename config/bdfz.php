@@ -33,7 +33,7 @@ return [
         ]
     ],
     'main' => [
-        'color' => '#e04e39',
+        'color' => '#ea5662',
         'secondaryColor' => '#13294b',
         'title' => '红砖图库 - 附中的宝藏',
         'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',

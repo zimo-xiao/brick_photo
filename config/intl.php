@@ -16,7 +16,7 @@ return [
         ],
         'email' => [
             'siteName' => '红砖图库',
-            'siteColor' => '#e04e39',
+            'siteColor' => '#E63D52',
             'default' => [
                 'hello' => '你好',
                 'title' => '来自红砖图库的一封信',
@@ -69,7 +69,7 @@ return [
             'exportExcelTitle' => '未激活的激活码'
         ],
         'main' => [
-            'color' => '#e04e39',
+            'color' => '#E63D52',
             'secondaryColor' => '#13294b',
             'title' => '红砖图库 - 附中的宝藏',
             'pls_login' => '请在右上角登录；未注册请扫描右方 二维码 获取红砖账号',
