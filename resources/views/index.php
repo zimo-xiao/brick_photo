@@ -229,6 +229,8 @@ var app_images = new Vue({
     }
 });
 
+console.log(<?=json_encode($images)?>)
+
 layui.use(['laypage'], function() {
     const urlParams = new URLSearchParams(window.location.search);
     layui.laypage.render({
