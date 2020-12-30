@@ -252,7 +252,7 @@ class ImageController extends Controller
      */
     private function initModel($author, $tag)
     {
-        $image = app(Image::class)->select(['id', 'author_id', 'author_name', 'tags', 'description']);
+        $image = app(Image::class)->select(['id', 'author_id', 'author_name', 'tags', 'description', 'file_name']);
         if ($author != null) {
             $image = $image->where(['author_id' => $author]);
         }
