@@ -137,11 +137,11 @@ class ImageController extends Controller
             }
 
             $image->save();
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['permissionDenied']
-            ], 401);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['permissionDenied']
+        ], 401);
     }
 
     /**
@@ -166,11 +166,11 @@ class ImageController extends Controller
 
             $image->delete();
             $this->deleteGlobalCache();
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['permissionDenied']
-            ], 401);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['permissionDenied']
+        ], 401);
     }
 
     /**
@@ -183,11 +183,11 @@ class ImageController extends Controller
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             app(Image::class)->whereBetween('id', [$from, $to])->delete();
             $this->deleteGlobalCache();
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['permissionDenied']
-            ], 401);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['permissionDenied']
+        ], 401);
     }
 
     public function viewImageCache(Request $request, $id)
@@ -195,11 +195,11 @@ class ImageController extends Controller
         $image = app(Image::class)->find($id);
         if ($image) {
             return $this->responseImageFromPath('cache', $image->file_name.'.jpg');
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['imgNotExits']
-            ], 404);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['imgNotExits']
+        ], 404);
     }
 
     /**

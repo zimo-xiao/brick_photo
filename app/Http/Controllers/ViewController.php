@@ -298,9 +298,9 @@ class ViewController extends Controller
     {
         if ($request->session()->get('access_token') === null) {
             return app(ImageController::class)->visitorView($request);
-        } else {
-            return app(ImageController::class)->userView($request);
         }
+
+        return app(ImageController::class)->userView($request);
     }
 
     /**

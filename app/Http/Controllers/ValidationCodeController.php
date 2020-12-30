@@ -63,23 +63,23 @@ class ValidationCodeController extends Controller
                 return response()->json([
                     'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['frequentRequestError'])
                 ], 401);
-            } else {
-                $user = [
-                    'code' => app(ValidationCode::class)->generateCode(),
-                    'name' => 'isMustEndWith',
-                    'usin' => app(ValidationCode::class)->generateCode(),
-                    'email' => $email
-                ];
-                
-                app(ValidationCode::class)->where(['email' => $email])->forceDelete();
-                app(ValidationCode::class)->insertTs($user);
-                dispatch(new SendMailJob($user['email'], $this->emailText($user)));
             }
-        } else {
-            return response()->json([
-                'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['mustEndWithError'])
-            ], 401);
+
+            $user = [
+                'code' => app(ValidationCode::class)->generateCode(),
+                'name' => 'isMustEndWith',
+                'usin' => app(ValidationCode::class)->generateCode(),
+                'email' => $email
+            ];
+            
+            app(ValidationCode::class)->where(['email' => $email])->forceDelete();
+            app(ValidationCode::class)->insertTs($user);
+            dispatch(new SendMailJob($user['email'], $this->emailText($user)));
         }
+
+        return response()->json([
+            'error_msg' => str_replace('[email]', $mustEndWith, $this->intl['mustEndWithError'])
+        ], 401);
     }
 
     public function export(Request $request)
@@ -87,9 +87,9 @@ class ValidationCodeController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             return Excel::download(new ExportValidationCodes, $this->intl['exportExcelTitle'].'.xlsx');
-        } else {
-            return $this->intl['permissionDenied'];
         }
+
+        return $this->intl['permissionDenied'];
     }
 
     private function emailText($input)

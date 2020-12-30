@@ -17,9 +17,14 @@ class Files
         Storage::setVisibility('tmp/'.$name, 'private');
     }
 
-    public function save($path, $content){
+    public function save($path, $content, $isPublic = false){
         Storage::put($path, $content);
-        Storage::setVisibility($path, 'private');
+
+        if ($isPublic) {
+            Storage::setVisibility($path, 'public');
+        } else {
+            Storage::setVisibility($path, 'private');
+        }
     }
 
     public function store($name, $end)
@@ -33,7 +38,11 @@ class Files
         $raw = \base64_decode(substr($content[1], \strpos($content[1], ',') + 1));
 
         Storage::put('raw/'.$name.'.'.$end, $raw);
+        Storage::setVisibility('raw/'.$name.'.'.$end, 'private');
+
         Storage::put('cache/'.$name.'.jpg', $cache);
+        Storage::setVisibility('raw/'.$name.'.'.$end, 'public');
+
         Storage::setVisibility('tmp/'.$name, 'private');
         Storage::delete('tmp/'.$name);
     }

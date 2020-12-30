@@ -67,17 +67,17 @@ class UploadLocalImageToCloud extends Command
         $files = new Files();
         if(!$files->exists('raw/'.$name.'.'.$format)){
             $this->info('uploading '.$name.' to raw');
-            $files->save('raw/'.$name.'.'.$format, (string) File::get($path.'raw/'.$name.'.'.$format));
+            $files->save('raw/'.$name.'.'.$format, (string) File::get($path.'raw/'.$name.'.'.$format), false);
         }
 
         if(!$files->exists('cache/'.$name.'.jpg')){
             $this->info('uploading '.$name.' to cache');
-            $files->save('cache/'.$name.'.jpg', (string) File::get($path.'cache/'.$name.'.jpg'));
+            $files->save('cache/'.$name.'.jpg', (string) File::get($path.'cache/'.$name.'.jpg'), true);
         }
 
         if (!$files->exists('watermark/'.$name.'.'.$format)) {
             $this->info('uploading '.$name.' to watermark');
-            $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format));
+            $files->save('watermark/'.$name.'.'.$format, (string) File::get($path.'watermark/'.$name.'.'.$format), false);
         }
         
         if($files->exists('watermark/'.$name.'.'.$format) && $files->exists('cache/'.$name.'.jpg') && $files->exists('raw/'.$name.'.'.$format)){

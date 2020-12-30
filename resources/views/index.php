@@ -1,4 +1,5 @@
 <?php
+    $cacheBaseUrl = \env('IMAGE_BASE_URL');
     $expandClass = 'gallery-expand';
     $expand = true;
     $replaceShadow = '';
@@ -133,7 +134,7 @@
                 class="col l4 m6 s12 gallery-item <?=$expandClass;?> gallery-filter">
                 <div v-bind:id="'img_' + image.id" class="gallery-curve-wrapper" style="<?=$replaceShadow;?>">
                     <a class="gallery-cover gray">
-                        <img class="responsive-img" v-bind:lay-src="url + '/image/view/cache/' + image.id">
+                        <img class="responsive-img" v-bind:lay-src="'<?=$cacheBaseUrl;?>/cache/' + image.file_name + '.jpg'">
                     </a>
                     <div class="gallery-header">
                         <span># {{image.id}} · {{image.author_name}}</span>

@@ -40,7 +40,8 @@ class StoreWatermarkJob extends Job
         $orgImage = $orgImage->insert($watermarkImage, 'center')->stream();
         $this->file->save(
             'watermark/'.$this->fileName.'.'.$this->fileFormat,
-            $orgImage->__toString()
+            $orgImage->__toString(),
+            false
         );
     }
 }

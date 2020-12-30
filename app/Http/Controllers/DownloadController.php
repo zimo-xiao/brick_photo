@@ -68,15 +68,12 @@ class DownloadController extends Controller
                 $name = $image->file_name.'.'.$image->file_format;
                 if ($user->permission === User::PERMISSION_ADMIN || !\env('USE_WATERMARK')) {
                     return $this->responseImageFromPath('raw', $name);
-                } else {
-                    return $this->responseImageFromPath('watermark', $name, $this->intl['imgProcessNotComplete']);
                 }
-            } else {
-                return $this->intl['imgNotExits'];
+                return $this->responseImageFromPath('watermark', $name, $this->intl['imgProcessNotComplete']);
             }
-        } else {
-            return $this->intl['expiredDownloadSession'];
+            return $this->intl['imgNotExits'];
         }
+        return $this->intl['expiredDownloadSession'];
     }
 
     public function export(Request $request)
@@ -84,8 +81,7 @@ class DownloadController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             return Excel::download(new ExportDownloads, $this->intl['downloadActivity'].'.xlsx');
-        } else {
-            return $this->intl['permissionDenied'];
         }
+        return $this->intl['permissionDenied'];
     }
 }
