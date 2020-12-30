@@ -108,7 +108,7 @@ class AuthController extends Controller
         }
         
         $token = $this->createAccessToken($user);
-        $request->session()->put('access_token', $token['access_token']);
+        // $request->session()->put('access_token', $token['access_token']);
 
         return $token;
     }
@@ -152,16 +152,14 @@ class AuthController extends Controller
                 if ($sendPhotographerEmail) {
                     dispatch(new SendMailJob($user['email'], $this->welcomeEmailText($user['name'])));
                 }
-            } else {
-                return response()->json([
-                    'error_msg' => $this->intl['userNotExists']
-                ], 401);
             }
-        } else {
             return response()->json([
-                'error_msg' => $this->intl['permissionDenied']
+                'error_msg' => $this->intl['userNotExists']
             ], 401);
         }
+        return response()->json([
+            'error_msg' => $this->intl['permissionDenied']
+        ], 401);
     }
   
     /**
@@ -194,11 +192,11 @@ class AuthController extends Controller
             }
             \Cache::store('redis')->put($code, $user['id'], 60);
             dispatch(new SendMailJob($user['email'], $this->emailText($user['name'], $code, \env('APP_URL'))));
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['userNotExists']
-            ], 401);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['userNotExists']
+        ], 401);
     }
 
     public function export(Request $request)
@@ -206,9 +204,9 @@ class AuthController extends Controller
         $user = $this->user($request);
         if ($user->permission === User::PERMISSION_ADMIN) {
             return Excel::download(new ExportUsers, $this->intl['allUserInfo'].'.xlsx');
-        } else {
-            return $this->intl['permissionDenied'];
         }
+        
+        return $this->intl['permissionDenied'];
     }
 
     /**
@@ -229,11 +227,11 @@ class AuthController extends Controller
             $user->password = $this->encrypt($password);
             $user->save();
             \Cache::store('redis')->delete($code);
-        } else {
-            return response()->json([
-                'error_msg' => $this->intl['validationError']
-            ], 401);
         }
+
+        return response()->json([
+            'error_msg' => $this->intl['validationError']
+        ], 401);
     }
 
     /**
