@@ -152,6 +152,7 @@ class AuthController extends Controller
                 if ($sendPhotographerEmail) {
                     dispatch(new SendMailJob($user['email'], $this->welcomeEmailText($user['name'])));
                 }
+                return;
             }
             return response()->json([
                 'error_msg' => $this->intl['userNotExists']

@@ -137,6 +137,7 @@ class ImageController extends Controller
             }
 
             $image->save();
+            return;
         }
 
         return response()->json([
@@ -166,6 +167,7 @@ class ImageController extends Controller
 
             $image->delete();
             $this->deleteGlobalCache();
+            return;
         }
 
         return response()->json([
@@ -183,6 +185,7 @@ class ImageController extends Controller
         if ($request->user()->permission === User::PERMISSION_ADMIN) {
             app(Image::class)->whereBetween('id', [$from, $to])->delete();
             $this->deleteGlobalCache();
+            return;
         }
 
         return response()->json([
